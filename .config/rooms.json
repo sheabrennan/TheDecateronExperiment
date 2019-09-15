@@ -1,0 +1,14 @@
+{
+  "roomList": [
+        { 
+            "name": "for kicks", 
+            "size": [],
+            "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+            "gravity": "direction?",
+            "badguys": "link or other config ref?",
+            "nokey": true,
+            "exit": true,
+            "color": "maybe we want to pin certain rooms for _theme_?"
+        },
+    ]
+}
