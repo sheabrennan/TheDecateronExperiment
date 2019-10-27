@@ -1,39 +1,44 @@
 {
-    "cellTemplate": {
-        "id": "an index for reference?",
-        "name": "don't really need this",
-        "color": "ambient light for all rooms in this cell, differentiates same room in different cells",
-        "roomList": {
-            "north": 1,
-            "top": 2
-        },
-        "key": "who has it?, if null, still up for grabs"
-    },
+    "notes": "5-cube is 10 cells, 40 rooms, each room exists in 2 cells.  6-cube is a whole other thing.  it's 60 cells, 160 rooms, but reflected across what is essentially *12* instances of the 5-cube. it'd require a new dimension/factor to differentiate... beyond scope right now...",
     "roomTemplate": {
+        "_note": "this is copied for each room instance",
         "id": "some number",
         "description": "long text ",
         "position": "from orientation list",
         "type": "from type list",
-        "cells": [1,2],
+        "cells": null,
         "doorList": [{},{},{}],
         "visited": false
     },
-    "positionList": ["NORTH","TOP","WEST","INNER","EAST","OUTER","SOUTH","BOTTOM"],
-    "cellList": [0,1,2,3,4,5,6,7,8,9,"maybe these should be 'names'?"],
+    "roomPositionList": ["NORTH","TOP","WEST","INNER","EAST","OUTER","SOUTH","BOTTOM"],
     "colorList": ["red","orange","yellow","green","blue","violet","white","pink","sky","brown"],
+    "cellCount": 10,
     "roomCount": 40,
     "cellRoomCount": 2,
     "minPath": "4? dfs minimum for 'valid' setup",
+    "cellTemplate": {
+        "id": "an index for reference?",
+        "name": "don't really need this",
+        "color": "ambient light for all rooms in this cell, differentiates same room in different cells",
+        "roomList": null,
+        "key": "who has it?, if null, still up for grabs"
+    },
     "cellMap": [
-        {"North":	["Inner","West","Outer","East","Bottom","Top"]},  
-        {"Top":	["South","West","North","East","Inner","Outer"]},
-        {"West":	["South","Outer","North","Inner","Bottom","Top"]},
-        {"Inner":	["South","West","North","East","Bottom","Top"]},
-        {"East":	["South","Inner","North","Outer","Bottom","Top"]},
-        {"Outer":	["North","East","South","West","Top","Bottom"]},
-        {"South":	["Outer","West","Inner","East","Bottom","Top"]},
-        {"Bottom":	["South","West","North","East","Outer","Inner"]}
+        { "position": "North", "doors":     ["Inner","West","Outer","East","Bottom","Top"]},  
+        { "position": "Top", "doors":	    ["South","West","North","East","Inner","Outer"]},
+        { "position": "West", "doors":	    ["South","Outer","North","Inner","Bottom","Top"]},
+        { "position": "Inner", "doors":	    ["South","West","North","East","Bottom","Top"]},
+        { "position": "East", "doors":	    ["South","Inner","North","Outer","Bottom","Top"]},
+        { "position": "Outer", "doors":	    ["North","East","South","West","Top","Bottom"]},
+        { "position": "South", "doors":	    ["Outer","West","Inner","East","Bottom","Top"]},
+        { "position": "Bottom", "doors":	["South","West","North","East","Outer","Inner"]}
     ],
+    "initer": {
+        "cells": [],
+        "rooms": [],
+        "name": null,
+        "currentLocation":null
+    },
     "currentLocation":{
         "room": "x",
         "cell": "1",

@@ -1,14 +1,47 @@
 {
+  "_template": {
+    "name": "for kicks",
+    "size": [
+      100,
+      100,
+      100
+    ],
+    "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+    "gravity": "direction?",
+    "badguys": "link or other config ref?",
+    "key": true,
+    "exit": true,
+    "color": "maybe we want to pin certain rooms for _theme_?"
+  },
   "roomList": [
-        { 
-            "name": "for kicks", 
-            "size": [],
-            "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-            "gravity": "direction?",
-            "badguys": "link or other config ref?",
-            "nokey": true,
-            "exit": true,
-            "color": "maybe we want to pin certain rooms for _theme_?"
-        },
-    ]
+    {
+      "name": "Darkness For All",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": "",
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": true,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    {
+      "name": "for kicks",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": "direction?",
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": true,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    }
+  ]
 }
