@@ -1,21 +1,28 @@
 {
   "_template": {
-    "name": "for kicks",
+    "name": "only necessary for 'managing' them",
     "size": [
       100,
       100,
-      100
+      100,
+      "this isn't actually used for anything yet.  probably should be an 'object' with a 'shape' or something"
     ],
     "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-    "gravity": "direction?",
+    "altdescription": "if you want stronger differentiation between cells, provide a different set",
+    "gravity": {
+      "type": "normal/random/special",
+      "gravity": null,
+      "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+    },
     "badguys": "link or other config ref?",
     "key": true,
     "exit": true,
+    "orientationDC": "target to beat or you're not sure which door you came in?",
     "color": "maybe we want to pin certain rooms for _theme_?"
   },
-  "roomList": [
-    {
-      "name": "Darkness For All",
+  "roomList": {
+    "0": {
+      "name": "Room 0",
       "size": [
         150,
         150,
@@ -23,25 +30,737 @@
       ],
       "description": "Doors",
       "mechanics": "",
-      "gravity": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
       "badguys": "link or other config ref?",
       "key": true,
       "exit": true,
       "color": "maybe we want to pin certain rooms for _theme_?"
     },
-    {
-      "name": "for kicks",
+    "1": {
+      "name": "Room 1",
       "size": [
         100,
         100,
         100
       ],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": "direction?",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 4,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
       "badguys": "link or other config ref?",
       "key": true,
-      "exit": true,
+      "exit": false,
+      "start": true,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "2": {
+      "name": "Room 2",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "same",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "3": {
+      "name": "Room 3",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "4": {
+      "name": "Room 4",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "random",
+        "gravity": 0,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "5": {
+      "name": "Room 5",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "6": {
+      "name": "Room 6",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 4,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "7": {
+      "name": "Room 7",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "same",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "8": {
+      "name": "Room 8",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "random",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "9": {
+      "name": "Room 9",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 0,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "10": {
+      "name": "Room 10",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 5,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "11": {
+      "name": "Room 11",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "12": {
+      "name": "Room 12",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "special",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "13": {
+      "name": "Room 13",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 4,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "14": {
+      "name": "Room 14",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "15": {
+      "name": "Room 15",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "special",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "16": {
+      "name": "Room 16",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "17": {
+      "name": "Room 17",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "18": {
+      "name": "Room 18",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "special",
+        "gravity": 5,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "19": {
+      "name": "Room 19",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 5,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "20": {
+      "name": "Room 20",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "random",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "21": {
+      "name": "Room 21",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 5,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "22": {
+      "name": "Room 22",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "random",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "23": {
+      "name": "Room 23",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "random",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "24": {
+      "name": "Room 24",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "25": {
+      "name": "Room 25",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "special",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "26": {
+      "name": "Room 26",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 4,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "27": {
+      "name": "Room 27",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "special",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "28": {
+      "name": "Room 28",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "random",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "29": {
+      "name": "Room 29",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "special",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "30": {
+      "name": "Room 30",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 5,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "31": {
+      "name": "Room 31",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 0,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "32": {
+      "name": "Room 32",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 4,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "33": {
+      "name": "Room 33",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "special",
+        "gravity": 0,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "34": {
+      "name": "Room 34",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "35": {
+      "name": "Room 35",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "random",
+        "gravity": 0,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "36": {
+      "name": "Room 36",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 1,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "37": {
+      "name": "Room 37",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 5,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "38": {
+      "name": "Room 38",
+      "size": [
+        150,
+        150,
+        150
+      ],
+      "description": "Doors",
+      "mechanics": "",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 3,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
+      "color": "maybe we want to pin certain rooms for _theme_?"
+    },
+    "39": {
+      "name": "Room 39",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "gravity": {
+        "type": "fixed",
+        "gravity": 2,
+        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
+      },
+      "badguys": "link or other config ref?",
+      "key": true,
+      "exit": false,
       "color": "maybe we want to pin certain rooms for _theme_?"
     }
-  ]
+  }
 }
