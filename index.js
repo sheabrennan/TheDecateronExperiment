@@ -17,13 +17,10 @@ prompts([
   .then(gameName => {
     let game = new Store(gameName.game, { base: "./.config/games" });
     if (!game.get("name")) {
-      return generate(gameName.game, init, initRooms.get("roomList"));
+      return play(generate(gameName.game, init, initRooms.get("roomList")),true);
     } else {
-      return game;
+      return play(game);
     }
-  })
-  .then(game => {
-    play(game, true);
   });
 
 function generate(name, init, rooms) {
@@ -143,14 +140,11 @@ async function play(game, initGame = false) {
   let gameDetails = game.get("gameDetails");
 
   if (initGame) {
-    //init pick a random entry and gravity if it doesn't work
     gameDetails.currentEntry = gameDetails.currentEntry || 0;
     gameDetails.gravity = gravitron();
     gameDetails.currentDoors = lexicalMapper();
-
-    //addLog();
-    console.log("Welcome to: " + game.name);
-    display();
+    //it makes sense to run this before a new game is started
+    trace();
     initGame = false;
   }
 
@@ -161,14 +155,11 @@ async function play(game, initGame = false) {
       await preview(gameDetails);
       break;
     case "move":
-      move();
-      display();
+      move() ? display() : console.log("\n");
       break;
     case "display":
       display();
       break;
-    case "undo":
-      back();
     case "review":
       reviewLog(10)
         .reverse()
@@ -179,34 +170,12 @@ async function play(game, initGame = false) {
       display();
       break;
     case "trace":
-      //TODO: add some fun here
-      //  simulate from current location?
-      //  incorporate weighted logic by rooms already seen
-      //  'allow' random reteat (ie: out the entry door)
-      let ticker = [];
-      for (let t = 50000; t > 0; t--) {
-        process.stdout.write("    " + t + " Simulations left.\r");
-        gameDetails.ticks = 1;
-        trace();
-        ticker.push(gameDetails.ticks);
-        //reset our init
-        gameDetails.currentCell = gameDetails.startCell;
-        gameDetails.currentRoom = gameDetails.startRoom;
-      }
-      console.log("\nDone!");
-      //Min of 1 is a single step win. _ s c a r y _
-      //these don't mean anything really, just fun.
-      console.log("Min: " + Math.min(...ticker));
-      console.log("Max: " + Math.max(...ticker));
-      console.log(
-        "Avg: " + Math.ceil(ticker.reduce((a, b) => a + b, 0) / ticker.length)
-      );
-
-      initGame = true;
+      trace();
       break;
     case "back":
       //need to unwind a step
       back();
+      display();
       break;
     case "exit":
       return "exit";
@@ -240,34 +209,77 @@ async function play(game, initGame = false) {
     //    Key/Item    - Probably doesn't need to be seperate from mechanics, but can be.
     //    Bad Guys    - just a quick url link to the things. TODO: roll20?!?
     //    Exit        - We need to show this when they're in the right room.  the Mechanics will explain, but this is _the warning_
-    console.log(`                  
-            \\ - - - - - - - - - - - - - \\
-            | \\                     up  | \\
+
+    console.log(`
+                           ${(
+                             "Up " +
+                             (gameDetails.currentEntry ==
+                             gameDetails.currentDoors.indexOf("Up")
+                               ? "(E)"
+                               : "")
+                           ).padEnd(8, " ")}
+            - - - - - - - - - - - - - - -
+            | \\                         | \\
             |   \\                       |   \\
             |     \\                     |     \\
-            |       \\     front         |       \\
+            |       \\       ${(
+              "Front " +
+              (gameDetails.currentEntry ==
+              gameDetails.currentDoors.indexOf("Front")
+                ? "(E)"
+                : "")
+            ).padEnd(8, " ")}    |       \\
             |         \\                 |         \\
             |           - - - - - - - - - - - - - - -
             |           |               |           |
             |           |               |           |
-            |   left    |               |   right   |
+            |  ${(
+              "Left " +
+              (gameDetails.currentEntry ==
+              gameDetails.currentDoors.indexOf("Left")
+                ? "(E)"
+                : "")
+            ).padEnd(8, " ")} |               |  ${(
+      "Right " +
+      (gameDetails.currentEntry == gameDetails.currentDoors.indexOf("Right")
+        ? "(E)"
+        : "")
+    ).padEnd(8, " ")} |
             |           |               |           |
             |           |               |           |
             |           |               |           |
-            \\- - - - - -| - - - - - - - \\           |
+            - - - - - - | - - - - - - - -           |
               \\         |                 \\         |
                 \\       |                   \\       |
-                  \\     |        back         \\     |
+                  \\     |      ${(
+                    "Back " +
+                    (gameDetails.currentEntry ==
+                    gameDetails.currentDoors.indexOf("Back")
+                      ? "(E)"
+                      : "")
+                  ).padEnd(8, " ")}       \\     |
                     \\   |                       \\   |
-                      \\ |  down                   \\ |
+                      \\ |                         \\ |
                         - - - - - - - - - - - - - - -
-`)
-    console.log("Current Cell: " + gameDetails.currentCell);
-    console.log("Current Room: " + gameDetails.currentRoom);
-    console.log("Entry Door: " + gameDetails.currentDoors[gameDetails.currentEntry] + " ("+gameDetails.currentEntry+")");
-    console.log("CurrentDoors: "+ gameDetails.currentDoors);
-    console.log("Gravity: " + (gameDetails.currentDoors[gameDetails.gravity]?gameDetails.currentDoors[gameDetails.gravity]:"\n     "+rooms[gameDetails.currentRoom].gravity.desc)+" ("+gameDetails.gravity+")");
-    console.log("Open Door: " + gameDetails.currentDoors[gameDetails.currentOpenDoor]);
+                                     ${(
+                                       "Down " +
+                                       (gameDetails.currentEntry ==
+                                       gameDetails.currentDoors.indexOf("Down")
+                                         ? "(E)"
+                                         : "")
+                                     ).padEnd(8, " ")}
+`);
+    console.log(
+      "Cell:Room " + gameDetails.currentCell + ":" + gameDetails.currentRoom
+    );
+    if (gameDetails.gravity < 0) {
+      console.log(
+        "Special Gravity: " + rooms[gameDetails.currentRoom].gravity.desc
+      );
+    }
+    console.log(
+      "Open Door: " + gameDetails.currentDoors[gameDetails.currentOpenDoor]
+    );
     console.log("Details:");
     console.log(room);
   }
@@ -308,16 +320,16 @@ async function play(game, initGame = false) {
             );
 
       gameDetails.currentDoors = lexicalMapper();
-      
+
       //i know we're closing this immediately.  but _maybe_ we need it somehow...
       gameDetails.currentOpenDoor = gameDetails.currentEntry;
 
-      
-
       //naratively, doors close when you say.  programmatically, it closes as soon as possible.
       close();
+      return true;
     } else {
       console.log("No open door!");
+      return false;
     }
   }
 
@@ -325,18 +337,18 @@ async function play(game, initGame = false) {
     gravityTuple = [gameDetails.currentEntry, gameDetails.gravity]
   ) {
     //'special' gravity is lame.. why do i do this...
-    gravityTuple[1] = gravityTuple[1]>=0?gravityTuple[1]:0;
+    gravityTuple[1] = gravityTuple[1] >= 0 ? gravityTuple[1] : 0;
 
     //this whole thing is garbagea and while it works, i'm sorry.
     var identityTuple = gameDetails.lexicalMap.entryGravityTuple.map(m => {
       return m[0] == gravityTuple[0] && m[1] == gravityTuple[1] ? 1 : 0;
     });
+
     var orientation;
     if (identityTuple.indexOf(1) >= 0) {
       let orientationIndex = identityTuple.indexOf(1);
       orientation = gameDetails.lexicalMap.orientations[orientationIndex];
     }
-
     return orientation;
   }
 
@@ -344,7 +356,6 @@ async function play(game, initGame = false) {
     room = gameDetails.currentRoom,
     entry = gameDetails.currentEntry
   ) {
-
     //since gravity is room specific we'll count on the description to clarify
     // weirdness comes across
     switch (rooms[room].gravity.type) {
@@ -355,9 +366,11 @@ async function play(game, initGame = false) {
         //every entry to this room will (potentially) be different
         return Math.floor(Math.random() * 6);
       case "same":
+        //TODO: actually implement this.  need some way to show the gravity is different than the last time.
+
         //every entry to this room will (potentially) be different
         //have to dump special gravity, just default to zero cause
-        return gameDetails.gravity>=0?gameDetails.gravity:0;
+        return gameDetails.gravity >= 0 ? gameDetails.gravity : 0;
       case "special":
         //we can't set details gravity to a string, we need numeric for orientation
         return -1;
@@ -365,13 +378,41 @@ async function play(game, initGame = false) {
         return rooms[room].gravity.gravity;
     }
   }
+  function trace(count = 50000){
+      //TODO: add some fun here
+      //  simulate from current location?
+      //  incorporate weighted logic by rooms already seen
+      //  'allow' random reteat (ie: out the entry door)
+      let ticker = [];
+      for (let t = count; t > 0; t--) {
+        process.stdout.write("    " + t + " Simulations left.\r");
+        gameDetails.ticks = 1;
+        walk();
+        ticker.push(gameDetails.ticks);
+        //reset our init
+        gameDetails.currentCell = gameDetails.startCell;
+        gameDetails.currentRoom = gameDetails.startRoom;
+      }
+      console.log("\nDone!");
+      //Min of 1 is a single step win. _ s c a r y _
+      //these don't mean anything really, just fun.
+      console.log("Min: " + Math.min(...ticker) + " (_definitely want more than 1_)");
+      console.log("Max: " + Math.max(...ticker)) + " (doesn't actually matter)";
+      console.log(
+        "Avg: " + Math.ceil(ticker.reduce((a, b) => a + b, 0) / ticker.length) + " (80+ is normal)"
+      );
 
-  function trace() {
+      gameDetails.currentEntry = gameDetails.currentEntry || 0;
+      gameDetails.gravity = gravitron();
+      gameDetails.currentDoors = lexicalMapper();
+
+  }
+  function walk() {
     //this is a 'random' walk out.
 
     // TODO: consider an optimized version that tracks visited rooms
     //        it isn't unreasonable to allow players to keep track of
-    //        of rooms visited.  _maybe_ require some kind of DC
+    //        of rooms visited.
 
     //game current location cell/room
     //   get door list
@@ -437,7 +478,7 @@ async function play(game, initGame = false) {
 
     //TODO: this isn't TCO and i _think_ it's the nested closure/promise resolution for our async play
     //but i don't actually understand JS (especially this async stuff)
-    return trace();
+    return walk();
   }
 
   function playPrompt() {
@@ -510,7 +551,16 @@ async function play(game, initGame = false) {
 
       if (i == gameDetails.currentEntry) door.title += " (Entry)";
       if (i == gameDetails.gravity) door.title += " (Gravity)";
-      if (i == gameDetails.currentOpenDoor) door.title += " (Open)";
+
+      if (
+        checkLog({
+          currentCell: nextCell,
+          currentRoom:
+            cells[nextCell].linkedCells[gameDetails.currentRoom].doors[i]
+        })
+      ) {
+        door.title += "(V)";
+      }
 
       return door;
     });
@@ -558,12 +608,119 @@ async function play(game, initGame = false) {
         gameDetails.currentOpenDoorGravity
       ]);
 
-      console.log("Open Cell: " + gameDetails.currentOpenDoorCell);
-      console.log("Open Room: " + gameDetails.currentOpenDoorRoom);
-      //this _should_ be the lexical name of the 'otherside' of the open door.
-      console.log("Open Door Entry: " + openDoorEntryDoors[openDoorEntryId] + " (" + openDoorEntryId +")");
-      console.log("Openn Current Doors: "+ openDoorEntryDoors);
-      console.log("Open Door Gravity: " + (openDoorEntryDoors[gameDetails.currentOpenDoorGravity]?openDoorEntryDoors[gameDetails.currentOpenDoorGravity]:"\n     "+rooms[gameDetails.currentOpenDoorRoom].gravity.desc)+" ("+gameDetails.currentOpenDoorGravity+")");
+      console.log(`
+                           ${(gameDetails.currentOpenDoor ==
+                           gameDetails.currentDoors.indexOf("Up")
+                             ? "(O)"
+                             : " "
+                           ).padEnd(8, " ")}
+            - - - - - - - - - - - - - - -
+            | \\                         | \\
+            |   \\                       |   \\
+            |     \\                     |     \\
+            |       \\       ${(gameDetails.currentOpenDoor ==
+            gameDetails.currentDoors.indexOf("Front")
+              ? "(O)"
+              : ""
+            ).padEnd(8, " ")}    |       \\
+            |         \\                 |         \\
+            |           - - - - - - - - - - - - - - -
+            |           |               |           |
+            |           |               |           |
+            |  ${(gameDetails.currentOpenDoor ==
+            gameDetails.currentDoors.indexOf("Left")
+              ? "(O)"
+              : ""
+            ).padEnd(
+              8,
+              " "
+            )} |               |  ${(gameDetails.currentOpenDoor ==
+      gameDetails.currentDoors.indexOf("Right")
+        ? "(O)"
+        : ""
+      ).padEnd(8, " ")} |
+            |           |               |           |
+            |           |               |           |
+            |           |               |           |
+            - - - - - - | - - - - - - - -           |
+              \\         |                 \\         |
+                \\       |                   \\       |
+                  \\     |      ${(gameDetails.currentOpenDoor ==
+                  gameDetails.currentDoors.indexOf("Back")
+                    ? "(O)"
+                    : ""
+                  ).padEnd(8, " ")}       \\     |
+                    \\   |                       \\   |
+                      \\ |                         \\ |
+                        - - - - - - - - - - - - - - -
+                                     ${(gameDetails.currentOpenDoor ==
+                                     gameDetails.currentDoors.indexOf("Down")
+                                       ? "(O)"
+                                       : ""
+                                     ).padEnd(8, " ")}
+`);
+
+      console.log(`
+                         ${(
+                           (gameDetails.currentOpenDoorGravity == 5
+                             ? "(G)"
+                             : " ") +
+                           (gameDetails.openDoorEntryId == 5 ? "(O)" : " ")
+                         ).padEnd(8, " ")}
+            - - - - - - - - - - - - - - -
+            | \\                         | \\
+            |   \\                       |   \\
+            |     \\                     |     \\
+            |       \\       ${(
+              (gameDetails.currentOpenDoorGravity == 3 ? "(G)" : " ") +
+              (openDoorEntryId == 3 ? "(E)" : "")
+            ).padEnd(8, " ")}    |       \\
+            |         \\                 |         \\
+            |           - - - - - - - - - - - - - - -
+            |           |               |           |
+            |           |               |           |
+            |  ${(
+              (gameDetails.currentOpenDoorGravity == 1 ? "(G)" : " ") +
+              (openDoorEntryId == 1 ? "(E)" : "")
+            ).padEnd(8, " ")} |               |  ${(
+        (gameDetails.currentOpenDoorGravity == 4 ? "(G)" : " ") +
+        (openDoorEntryId == 4 ? "(E)" : "")
+      ).padEnd(8, " ")} |
+            |           |               |           |
+            |           |               |           |
+            |           |               |           |
+            - - - - - - | - - - - - - - -           |
+              \\         |                 \\         |
+                \\       |                   \\       |
+                  \\     |      ${(
+                    (gameDetails.currentOpenDoorGravity == 0 ? "(G)" : " ") +
+                    (openDoorEntryId == 0 ? "(E)" : "")
+                  ).padEnd(8, " ")}       \\     |
+                    \\   |                       \\   |
+                      \\ |                         \\ |
+                        - - - - - - - - - - - - - - -
+                              ${(
+                                (gameDetails.currentOpenDoorGravity == 2
+                                  ? "(G)"
+                                  : " ") + (openDoorEntryId == 2 ? "(E)" : "")
+                              ).padEnd(8, " ")}
+`);
+
+      console.log(
+        "Open Cell:Room " +
+          gameDetails.currentOpenDoorCell +
+          ":" +
+          gameDetails.currentOpenDoorRoom
+      );
+      console.log(
+        "Open Door Gravity: " +
+          (openDoorEntryDoors[gameDetails.currentOpenDoorGravity]
+            ? openDoorEntryDoors[gameDetails.currentOpenDoorGravity]
+            : "\n     " + rooms[gameDetails.currentOpenDoorRoom].gravity.desc) +
+          " (" +
+          gameDetails.currentOpenDoorGravity +
+          ")"
+      );
       console.log("Open Door Details:");
       console.log(rooms[nextRoom].description);
     }
@@ -586,18 +743,18 @@ async function play(game, initGame = false) {
   function back(count = 1) {
     //this is _unwinding_ what we did.
     //if count is > gameLog, it's a reset.
-    //if there's only one element, it
 
     //close whatever door was open, if any
     close();
-    console.log("B: " + gameDetails.gameLog);
+    //cut the requested number of elements, pull out the lastmost one
     let newCurrent = gameDetails.gameLog
       .splice(
         0,
         count > gameDetails.gameLog.length ? gameDetails.gameLog.length : count
       )
       .pop();
-    console.log("A: " + gameDetails.gameLog);
+    //direct remap log properties onto game details.
+    //this is convenient, but a _little_ dangerous :D
     for (let k in newCurrent) {
       gameDetails[k] = newCurrent[k];
     }
@@ -607,14 +764,13 @@ async function play(game, initGame = false) {
     gameDetails.currentDoors = lexicalMapper();
   }
 
-  function addLog(
-    log = {
-      currentCell: gameDetails.currentCell,
-      currentRoom: gameDetails.currentRoom,
-      currentEntry: gameDetails.currentEntry,
-      currentGravity: gameDetails.gravity
-    }
-  ) {
+  function addLog(log = {}) {
+    //this isn't the _best_ way probably, but we'll always need these
+    log.currentCell = gameDetails.currentCell;
+    log.currentRoom = gameDetails.currentRoom;
+    log.currentEntry = gameDetails.currentEntry;
+    log.currentGravity = gameDetails.gravity;
+
     //things aboout the log
     // stores cell/room combos.  this is enough to 'replay' the whole deal.
     // session?
@@ -623,6 +779,17 @@ async function play(game, initGame = false) {
 
     //should we guard against pushing the same entry?
     gameDetails.gameLog.unshift(log);
+  }
+
+  function checkLog(log = {}) {
+    //how do logs work? do we need to class/object them?
+    return gameDetails.gameLog.filter(f => {
+      return (
+        f.currentCell == log.currentCell && f.currentRoom == log.currentRoom
+      );
+    }).length > 0
+      ? true
+      : false;
   }
 
   function reviewLog(count = 1) {
