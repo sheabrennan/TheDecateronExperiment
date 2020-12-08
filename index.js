@@ -1,9 +1,15 @@
-"use strict";
+/*TODO:  
+  verify room structure, 
+    description, badguys have changed
+    new keys (ie: nokey) for preventing
+  
+*/
 
 var Store = require("data-store");
 var init = new Store("default", { base: "./.config" }); //used to build a new one
 var initRooms = new Store("rooms", { base: "./.config" });
 var prompts = require("prompts");
+const chalk = require("chalk");
 
 prompts.override(require("yargs").argv);
 
@@ -11,17 +17,16 @@ prompts([
   {
     type: "text",
     name: "game",
-    message: "What's your game called?"
+    message: "What's your game called?",
+  },
+]).then((gameName) => {
+  let game = new Store(gameName.game, { base: "./.config/games" });
+  if (!game.get("name")) {
+    return play(generate(gameName.game, init, initRooms.get("roomList")), true);
+  } else {
+    return play(game);
   }
-])
-  .then(gameName => {
-    let game = new Store(gameName.game, { base: "./.config/games" });
-    if (!game.get("name")) {
-      return play(generate(gameName.game, init, initRooms.get("roomList")),true);
-    } else {
-      return play(game);
-    }
-  });
+});
 
 function generate(name, init, rooms) {
   //we reinitialize with the defaults now that we know it doesn't exist
@@ -40,19 +45,20 @@ function generate(name, init, rooms) {
   let cellList = [...Array(init.get("cellCount")).keys()];
 
   //flavor, cells get colors
-  let colors = shuffle(init.get("colorList"));
+  let keyList = init.get("keyList")
+  let colors = shuffle(keyList.keys());
 
   //keys will be room Ids used in cells
   // values will be instances of 'room' objects
   let roomList = {};
 
   //build a list of cell templates
-  cellList.forEach(cell => {
+  cellList.forEach((cell) => {
     let newCell = { ...init.get("cellTemplate") };
     newCell.linkedCells = {};
     newCell.color = colors.shift();
     newCell.roomMap = JSON.parse(JSON.stringify(init.get("cellMap")));
-
+    newCell.key = keyList[newCell.color]
     cells[cell] = newCell;
   });
 
@@ -60,7 +66,7 @@ function generate(name, init, rooms) {
   //  drop the cell from the cell list (we only go through once)
   //  create a temp array of remaining cellList, this'll source our 2nd referenced cell
   //  for our current cell, loop through *every* entry in 'roomMap'
-  Object.keys(cells).forEach(c => {
+  Object.keys(cells).forEach((c) => {
     //we're filling this cell, no circular maps
     cellList.shift();
     let cellsToFill = [...cellList];
@@ -68,7 +74,7 @@ function generate(name, init, rooms) {
     //keys are strings here, need int initially, the rest works.
     let intc = parseInt(c);
 
-    cells[c].roomMap.forEach(rm => {
+    cells[c].roomMap.forEach((rm) => {
       //this is the id in our decateron
       let roomId = roomDefault.pop();
 
@@ -91,7 +97,6 @@ function generate(name, init, rooms) {
       cells[randomCell].linkedCells[roomId] = otherCellRoom;
 
       //technically the start room is in 2 cells, here we just pick the current cell to start.
-      //TODO: is there a way to eliminate single step victories... probably not here..
       if (roomList[roomId].start && !build.get("gameDetails.cell")) {
         let gameDetails = build.get("gameDetails");
 
@@ -104,8 +109,8 @@ function generate(name, init, rooms) {
 
       if (roomList[roomId].exit && !build.get("gameDetails.cell")) {
         let gameDetails = build.get("gameDetails");
-        gameDetails.endCell = intc;
-        gameDetails.endRoom = roomId;
+        gameDetails.exitCell = intc;
+        gameDetails.exitRoom = roomId;
       }
     });
     //just cruft now
@@ -114,12 +119,12 @@ function generate(name, init, rooms) {
 
   //now that cells are all filled, populate doors list with _roomID_
   //  position in array defines which door is which, room maps to current cell
-  Object.keys(cells).forEach(c => {
+  Object.keys(cells).forEach((c) => {
     let cell = cells[c];
-    Object.keys(cell.linkedCells).forEach(lc => {
+    Object.keys(cell.linkedCells).forEach((lc) => {
       let linkCell = cell.linkedCells[lc];
       linkCell.doors.forEach((d, i) => {
-        linkCell.doors[i] = Object.keys(cell.linkedCells).filter(f => {
+        linkCell.doors[i] = Object.keys(cell.linkedCells).filter((f) => {
           return cell.linkedCells[f].position == d;
         })[0];
       });
@@ -131,10 +136,6 @@ function generate(name, init, rooms) {
 }
 
 async function play(game, initGame = false) {
-  //get current cell and room
-  //display room show doors, highlight entry door.  room details
-  //list of zork-style actions
-
   let cells = game.get("cells");
   let rooms = game.get("rooms");
   let gameDetails = game.get("gameDetails");
@@ -143,7 +144,6 @@ async function play(game, initGame = false) {
     gameDetails.currentEntry = gameDetails.currentEntry || 0;
     gameDetails.gravity = gravitron();
     gameDetails.currentDoors = lexicalMapper();
-    //it makes sense to run this before a new game is started
     trace();
     initGame = false;
   }
@@ -151,11 +151,14 @@ async function play(game, initGame = false) {
   let resp = await playPrompt();
 
   switch (resp.location) {
+    //lets you 'open' a door.
     case "preview":
       await preview(gameDetails);
       break;
     case "move":
       move() ? display() : console.log("\n");
+      console.log('avg outs: ' + trace(1000,true).avg);
+      console.dir(gameDetails.shortestPath)
       break;
     case "display":
       display();
@@ -163,14 +166,14 @@ async function play(game, initGame = false) {
     case "review":
       reviewLog(10)
         .reverse()
-        .forEach(l => console.log(l));
+        .forEach((l) => console.log(l));
       break;
     case "close":
       close();
       display();
       break;
     case "trace":
-      trace();
+      console.dir(trace(20000, true));
       break;
     case "back":
       //need to unwind a step
@@ -180,27 +183,16 @@ async function play(game, initGame = false) {
     case "exit":
       return "exit";
   }
+
   //there's a better way to do this...
   save();
   play(game, initGame);
 
-  //TODO: better destructing here...
   function display(
     color = cells[gameDetails.currentCell].color,
     room = rooms[gameDetails.currentRoom]
   ) {
-    //TODO figure out display enrichment
-
-    // this is just flavor for the people
-    // some games may tie it to a thing (ie: keys, items, elements)
     room.color = color;
-
-    //what do we need to see:
-    // Current Cell - Doesn't tell us anything, maybe troubleshootig
-    // Current Room - Ditto
-    // Entry Door - this is orientation key #1.  should be lexical ref from currentDoors not an id
-    // Gravity - this is orientation key #1, should be lexital ref OR description
-    // Open Door - this only matters because preview resets it.
 
     //Room Details:
     //    Description - Narative of the room.  short, descriptive and 'enough'
@@ -210,7 +202,10 @@ async function play(game, initGame = false) {
     //    Bad Guys    - just a quick url link to the things. TODO: roll20?!?
     //    Exit        - We need to show this when they're in the right room.  the Mechanics will explain, but this is _the warning_
 
-    console.log(`
+    console.log(gameDetails.currentCell + ":" + gameDetails.currentRoom);
+
+    console.log(
+      chalk.keyword(color)(`
                            ${(
                              "Up " +
                              (gameDetails.currentEntry ==
@@ -240,11 +235,11 @@ async function play(game, initGame = false) {
                 ? "(E)"
                 : "")
             ).padEnd(8, " ")} |               |  ${(
-      "Right " +
-      (gameDetails.currentEntry == gameDetails.currentDoors.indexOf("Right")
-        ? "(E)"
-        : "")
-    ).padEnd(8, " ")} |
+        "Right " +
+        (gameDetails.currentEntry == gameDetails.currentDoors.indexOf("Right")
+          ? "(E)"
+          : "")
+      ).padEnd(8, " ")} |
             |           |               |           |
             |           |               |           |
             |           |               |           |
@@ -268,20 +263,17 @@ async function play(game, initGame = false) {
                                          ? "(E)"
                                          : "")
                                      ).padEnd(8, " ")}
-`);
-    console.log(
-      "Cell:Room " + gameDetails.currentCell + ":" + gameDetails.currentRoom
+`)
     );
-    if (gameDetails.gravity < 0) {
-      console.log(
-        "Special Gravity: " + rooms[gameDetails.currentRoom].gravity.desc
-      );
-    }
-    console.log(
-      "Open Door: " + gameDetails.currentDoors[gameDetails.currentOpenDoor]
-    );
-    console.log("Details:");
-    console.log(room);
+
+    console.log(`
+    ${chalk.keyword(color)("Name:" + room.name + "  (" + color + ")")}
+    Size: ${room.size.join(" x ")}
+    ${gameDetails.gravity < 0 ? "Special Gravity: " + room.gravity.desc : ""}
+    Description: ${room.description}
+    Bad Guys: ${room.badguys}
+    
+          `);
   }
 
   function move() {
@@ -296,6 +288,7 @@ async function play(game, initGame = false) {
       gameDetails.lastCurrentRoom = gameDetails.currentRoom;
 
       //set current cell, room, entry
+      
       gameDetails.currentCell = gameDetails.currentOpenDoorCell;
       gameDetails.currentRoom = gameDetails.currentOpenDoorRoom;
       //we can't gravitron, since random would change...
@@ -303,7 +296,7 @@ async function play(game, initGame = false) {
 
       //use the currentCell/Room to figure out which door we just came through
       // if the room is in our currentCell door list, that's our entry
-      // otherwise the room is in otherCell dool list (hopefully)
+      // otherwise the room is in otherCell door list (hopefully)
       gameDetails.currentEntry =
         cells[gameDetails.currentCell].linkedCells[
           gameDetails.currentRoom
@@ -324,6 +317,7 @@ async function play(game, initGame = false) {
       //i know we're closing this immediately.  but _maybe_ we need it somehow...
       gameDetails.currentOpenDoor = gameDetails.currentEntry;
 
+      gameDetails.rested = false;
       //naratively, doors close when you say.  programmatically, it closes as soon as possible.
       close();
       return true;
@@ -340,7 +334,7 @@ async function play(game, initGame = false) {
     gravityTuple[1] = gravityTuple[1] >= 0 ? gravityTuple[1] : 0;
 
     //this whole thing is garbagea and while it works, i'm sorry.
-    var identityTuple = gameDetails.lexicalMap.entryGravityTuple.map(m => {
+    var identityTuple = gameDetails.lexicalMap.entryGravityTuple.map((m) => {
       return m[0] == gravityTuple[0] && m[1] == gravityTuple[1] ? 1 : 0;
     });
 
@@ -366,10 +360,8 @@ async function play(game, initGame = false) {
         //every entry to this room will (potentially) be different
         return Math.floor(Math.random() * 6);
       case "same":
-        //TODO: actually implement this.  need some way to show the gravity is different than the last time.
-
-        //every entry to this room will (potentially) be different
-        //have to dump special gravity, just default to zero cause
+        //every entry to this room will (potentially) be different gravity, but it matches the previous room
+        //except special, because that's well, special  visited rooms off the opportunity to bring this into the narrative
         return gameDetails.gravity >= 0 ? gameDetails.gravity : 0;
       case "special":
         //we can't set details gravity to a string, we need numeric for orientation
@@ -378,107 +370,109 @@ async function play(game, initGame = false) {
         return rooms[room].gravity.gravity;
     }
   }
-  function trace(count = 50000){
-      //TODO: add some fun here
-      //  simulate from current location?
-      //  incorporate weighted logic by rooms already seen
-      //  'allow' random reteat (ie: out the entry door)
-      let ticker = [];
-      for (let t = count; t > 0; t--) {
-        process.stdout.write("    " + t + " Simulations left.\r");
-        gameDetails.ticks = 1;
-        walk();
-        ticker.push(gameDetails.ticks);
-        //reset our init
-        gameDetails.currentCell = gameDetails.startCell;
-        gameDetails.currentRoom = gameDetails.startRoom;
+
+  function trace(count = 20000, checkVisited = false) {
+    let ticker = [];
+    var shortestPath = [];
+    var tmpStartRoom = gameDetails.currentRoom;
+    var tmpStartCell = gameDetails.currentCell;
+
+    for (let t = count; t > 0; t--) {
+      process.stdout.write("    " + t + " Simulations left.\r");
+      gameDetails.ticks = 1;
+      let originalLog = [...gameDetails.gameLog];
+
+      walk({ checkVisited: checkVisited, allowEntryExit: true });
+
+      let currentPath = gameDetails.gameLog.slice(originalLog.length);
+      if(shortestPath.length == 0 || currentPath.length < shortestPath.length ){
+        shortestPath = [...currentPath];
       }
-      console.log("\nDone!");
-      //Min of 1 is a single step win. _ s c a r y _
-      //these don't mean anything really, just fun.
-      console.log("Min: " + Math.min(...ticker) + " (_definitely want more than 1_)");
-      console.log("Max: " + Math.max(...ticker)) + " (doesn't actually matter)";
-      console.log(
-        "Avg: " + Math.ceil(ticker.reduce((a, b) => a + b, 0) / ticker.length) + " (80+ is normal)"
-      );
 
-      gameDetails.currentEntry = gameDetails.currentEntry || 0;
-      gameDetails.gravity = gravitron();
-      gameDetails.currentDoors = lexicalMapper();
+      ticker.push(gameDetails.ticks);
 
+      //reset our init
+      gameDetails.currentCell = tmpStartCell;
+      gameDetails.currentRoom = tmpStartRoom;
+
+      gameDetails.gameLog = [...originalLog];
+    }
+    console.log("\nDone!");
+    //Min of 1 is a single step win. _ s c a r y _
+
+    gameDetails.currentEntry = gameDetails.currentEntry || 0;
+    gameDetails.gravity = gravitron();
+    gameDetails.currentDoors = lexicalMapper();
+    gameDetails.shortestPath = shortestPath;
+
+    return {
+    min:  `${Math.min(...ticker)}`,
+    max:  `${Math.max(...ticker)}`,
+    avg:  `${Math.ceil(ticker.reduce((a, b) => a + b, 0) / ticker.length)}`
+    }
   }
-  function walk() {
-    //this is a 'random' walk out.
 
-    // TODO: consider an optimized version that tracks visited rooms
-    //        it isn't unreasonable to allow players to keep track of
-    //        of rooms visited.
+  function walk(params = { allowEntryExit: false, checkVisited: true }) {
+    //allowEntryExit lets the walk go out the in door
+    //checkVisited looks at the log to see if we've been to the room before, and skips it if we have
 
-    //game current location cell/room
-    //   get door list
-    //   remove entry from list
-    //   randomly pick door and cell for it
-    //   get room
-    //   is it exit room/cell?
-    //      y - done.
-    //      n - set current cell/room
-    //          recall
+    //if the room's an exit, we're done.
+    if (
+      rooms[gameDetails.currentRoom].exit &&
+      gameDetails.exitCell == gameDetails.currentCell
+    ) {
+      return true;
+    }
 
     let doors = shuffle([...gameDetails.currentDoors.keys()]);
-    let nextDoor = doors.pop();
-    //check if we randomly found our entry door, take the next option
-    if (gameDetails.currentDoors[nextDoor] == gameDetails.currentEntry)
-      nextDoor = doors.pop();
 
-    //take a random cell.  it's either the current cell or the 'other' cell this room exists in
-    let nextCell = shuffle([
-      gameDetails.currentCell,
-      cells[gameDetails.currentCell].linkedCells[gameDetails.currentRoom]
-        .otherCell
-    ]).pop();
+    for (var door in doors) {
+      var nextDoor = doors.splice(door, 1).pop();
 
-    //despite being in cell:room, *doors* can still be 'through' the other cell's instance.
-    // because 'nextDoor' is positional to the array, we get the right room regardles off
-    // which cell is chosen
-    let nextRoom =
-      cells[nextCell].linkedCells[gameDetails.currentRoom].doors[nextDoor];
+      //don't go out the in unless we said it's ok
+      if (
+        gameDetails.currentDoors[nextDoor] == gameDetails.currentEntry &&
+        !params.allowEntryExit
+      )
+        continue;
+
+      //take a random cell.  it's either the current cell or the 'other' cell this room exists in
+      var nextCell = shuffle([
+        gameDetails.currentCell,
+        cells[gameDetails.currentCell].linkedCells[gameDetails.currentRoom]
+          .otherCell,
+      ]).pop();
+
+      var nextRoom =
+        cells[nextCell].linkedCells[gameDetails.currentRoom].doors[nextDoor];
+
+      if (!params.checkVisited || doors.length == 0) {
+        //we can charge ahead randomly, or go out the last door (if we've visited everything...)
+        break;
+      } else {
+        if (checkLog({ currentCell: nextCell, currentRoom: nextRoom })) {
+          continue;
+        } else {
+          break;
+        }
+      }
+    }
+
+    //track where we've been
+    addLog();
 
     //load our details up for next pass
     gameDetails.currentCell = nextCell;
     gameDetails.currentRoom = nextRoom;
     gameDetails.currentEntry = nextDoor;
     gameDetails.gravity = gravitron();
-
-    //play() _does_ update this, but we're recusing here, so have to do it ourselves
     gameDetails.currentDoors = lexicalMapper([nextDoor, gameDetails.gravity]);
 
-    // console.log(
-    //   "Cell:Room: " +
-    //     nextCell +
-    //     ":" +
-    //     nextRoom +
-    //     " door!: " +
-    //     nextDoor +
-    //     " g: " +
-    //     gameDetails.gravity +
-    //     " t: " +
-    //     gameDetails.ticks
-    // );
-
-    //if the room's an exit, we're done.
-    if (
-      rooms[gameDetails.currentRoom].exit &&
-      gameDetails.endCell == gameDetails.currentCell
-    ) {
-      //console.log("WE DID IT!!!!");
-      return true;
-    }
     //ticks track a path length.
     gameDetails.ticks++;
 
-    //TODO: this isn't TCO and i _think_ it's the nested closure/promise resolution for our async play
-    //but i don't actually understand JS (especially this async stuff)
-    return walk();
+    //TODO: this isn't TCO right? and i _think_ it's the nested closure/promise resolution for our async play
+    return walk(params);
   }
 
   function playPrompt() {
@@ -490,78 +484,114 @@ async function play(game, initGame = false) {
         choices: [
           {
             title: "Preview",
-            value: "preview"
+            description: "Display doors, allow selection, display what's on the other side.",
+            value: "preview",
           },
           {
             title: "Move",
-            value: "move"
-          },
-          {
-            title: "Close",
-            value: "close"
+            description: "Moves through current open door (from preview)",
+            value: "move",
           },
           {
             title: "Display",
-            value: "display"
+            description: "(Re)print the details for the current room.",
+            value: "display",
+          },
+          {
+            title: "Rest",
+            description: "Use if the party rests, might trigger an event",
+            value: "rest"
+          },
+          {
+            title: "Close",
+            description: "Closes the currently open door.",
+            value: "close",
           },
           {
             title: "Review",
-            value: "review"
+            description: "Displays last 10 rooms.  (needs work)",
+            value: "review",
           },
           {
             title: "Trace",
-            value: "trace"
+            description: "Run 20000 context-aware paths from the current location.  (mostly just fun)",
+            value: "trace",
           },
           {
             title: "Back",
-            value: "back"
+            description: "Progromatic 'back', use only for 'mistakes'",
+            value: "back",
           },
           {
             title: "Exit",
-            value: "exit"
-          }
-        ]
-      }
+            description: "See the tin",
+            value: "exit",
+          },
+        ],
+      },
     ]);
   }
 
   async function preview() {
-    //prompt doors list
-    //randomize cell for room selected
-    //set current open door room/cellto prompetd
-    //  show room in correct orientation
-    //display
-
-    //if there's already a door open, close it.
-    //this might feel weird but it's easier.  use close yourself naratively
-    if (gameDetails.currentOpenDoor >= 0) close();
-
-    // a random cell, either current or 'other'
+    //we assign only 1 cell here.  it's not _actually_ less randomness, since we regenerate this everytime preview is called,
+    //but it does mean all the doors will lead to the same cell once preview is loaded
     let nextCell = shuffle([
       gameDetails.currentCell,
       cells[gameDetails.currentCell].linkedCells[gameDetails.currentRoom]
-        .otherCell
+        .otherCell,
     ]).pop();
 
     var respChoices = gameDetails.currentDoors.map((d, i) => {
       let door = {
         title: d,
-        value: i
+        value: i,
       };
 
       if (i == gameDetails.currentEntry) door.title += " (Entry)";
       if (i == gameDetails.gravity) door.title += " (Gravity)";
 
+      // it might be fun to have the ability to have an item/ability/narrative device that lets
+      // people know if they've been through a door/'finished' a room, etc.
       if (
         checkLog({
           currentCell: nextCell,
           currentRoom:
-            cells[nextCell].linkedCells[gameDetails.currentRoom].doors[i]
+            cells[nextCell].linkedCells[gameDetails.currentRoom].doors[i],
         })
       ) {
-        door.title += "(V)";
+        door.title = "(V)   " + door.title;
+      } else {
+        door.title = "      " + door.title;
       }
 
+      //shortest path is a rough guess at the 'fastest path out'
+      // only works if we picked the right cell above
+
+      let nextRoom = cells[nextCell].linkedCells[gameDetails.currentRoom].doors[i];
+
+    //this gives us the positional index of the 'other side' of the door.
+    // Ie: where is the door we came through in the other room.
+    let openDoorEntryId =
+      cells[nextCell].linkedCells[
+        nextRoom
+      ].doors.indexOf(String(gameDetails.currentRoom)) >= 0
+        ? cells[nextCell].linkedCells[
+            nextRoom
+          ].doors.indexOf(String(gameDetails.currentRoom))
+        : cells[
+            cells[nextCell].linkedCells[
+              nextRoom
+            ].otherCell
+          ].linkedCells[gameDetails.currentRoom].doors.indexOf(
+            String(gameDetails.currentRoom)
+          )
+
+
+      if(gameDetails.shortestPath[gameDetails.shortestPath.length] && gameDetails.shortestPath[gameDetails.shortestPath.length].currentCell == nextCell && gameDetails.shortestPath[gameDetails.shortestPath.length].currentEntry == openDoorEntryId ){
+        door.title += " -> Shortest Path";
+      }
+
+      door.title = chalk.keyword(cells[nextCell].color)(door.title);
       return door;
     });
 
@@ -570,11 +600,17 @@ async function play(game, initGame = false) {
         type: "select",
         name: "door",
         message: "Which door?",
-        choices: [...respChoices, { title: "Exit", value: -1 }]
-      }
+        choices: [...respChoices, { title: "Exit", value: -1 }],
+      },
     ]);
 
     if (resp.door >= 0) {
+      //if a door is already open, close it.
+      if (gameDetails.currentOpenDoor >= 0) close();
+      
+      // keep track of the number of times any door is opened for... reasons?.
+      gameDetails.doorCounter++;
+
       let nextRoom =
         cells[nextCell].linkedCells[gameDetails.currentRoom].doors[resp.door];
 
@@ -605,10 +641,11 @@ async function play(game, initGame = false) {
       //entry door index + gravity gives us the lexical map of door positions.
       let openDoorEntryDoors = lexicalMapper([
         openDoorEntryId,
-        gameDetails.currentOpenDoorGravity
+        gameDetails.currentOpenDoorGravity,
       ]);
-
-      console.log(`
+      console.dir(openDoorEntryDoors);
+      console.log(
+        chalk.keyword(cells[gameDetails.currentCell].color)(`
                            ${(gameDetails.currentOpenDoor ==
                            gameDetails.currentDoors.indexOf("Up")
                              ? "(O)"
@@ -635,10 +672,10 @@ async function play(game, initGame = false) {
               8,
               " "
             )} |               |  ${(gameDetails.currentOpenDoor ==
-      gameDetails.currentDoors.indexOf("Right")
-        ? "(O)"
-        : ""
-      ).padEnd(8, " ")} |
+        gameDetails.currentDoors.indexOf("Right")
+          ? "(O)"
+          : ""
+        ).padEnd(8, " ")} |
             |           |               |           |
             |           |               |           |
             |           |               |           |
@@ -657,15 +694,15 @@ async function play(game, initGame = false) {
                                      gameDetails.currentDoors.indexOf("Down")
                                        ? "(O)"
                                        : ""
-                                     ).padEnd(8, " ")}
-`);
+                                     ).padEnd(8, " ")}`)
+      );
 
-      console.log(`
+      console.log(
+        chalk.keyword(cells[nextCell].color)(`
                          ${(
                            (gameDetails.currentOpenDoorGravity == 5
                              ? "(G)"
-                             : " ") +
-                           (gameDetails.openDoorEntryId == 5 ? "(O)" : " ")
+                             : " ") + (openDoorEntryId == 5 ? "(E)" : " ")
                          ).padEnd(8, " ")}
             - - - - - - - - - - - - - - -
             | \\                         | \\
@@ -683,9 +720,9 @@ async function play(game, initGame = false) {
               (gameDetails.currentOpenDoorGravity == 1 ? "(G)" : " ") +
               (openDoorEntryId == 1 ? "(E)" : "")
             ).padEnd(8, " ")} |               |  ${(
-        (gameDetails.currentOpenDoorGravity == 4 ? "(G)" : " ") +
-        (openDoorEntryId == 4 ? "(E)" : "")
-      ).padEnd(8, " ")} |
+          (gameDetails.currentOpenDoorGravity == 4 ? "(G)" : " ") +
+          (openDoorEntryId == 4 ? "(E)" : "")
+        ).padEnd(8, " ")} |
             |           |               |           |
             |           |               |           |
             |           |               |           |
@@ -703,8 +740,8 @@ async function play(game, initGame = false) {
                                 (gameDetails.currentOpenDoorGravity == 2
                                   ? "(G)"
                                   : " ") + (openDoorEntryId == 2 ? "(E)" : "")
-                              ).padEnd(8, " ")}
-`);
+                              ).padEnd(8, " ")}`)
+      );
 
       console.log(
         "Open Cell:Room " +
@@ -732,6 +769,7 @@ async function play(game, initGame = false) {
     gameDetails.currentOpenDoor = -1;
     gameDetails.currentOpenDoorRoom = -1;
     gameDetails.currentOpenDoorCell = -1;
+    gameDetails.currentOpenDoorGravity = -1;
   }
 
   function save() {
@@ -746,6 +784,7 @@ async function play(game, initGame = false) {
 
     //close whatever door was open, if any
     close();
+
     //cut the requested number of elements, pull out the lastmost one
     let newCurrent = gameDetails.gameLog
       .splice(
@@ -769,7 +808,10 @@ async function play(game, initGame = false) {
     log.currentCell = gameDetails.currentCell;
     log.currentRoom = gameDetails.currentRoom;
     log.currentEntry = gameDetails.currentEntry;
-    log.currentGravity = gameDetails.gravity;
+    log.gravity = gameDetails.gravity;
+
+    //this isn't _perfect_ but should be good enough for backing out
+    log.doorCounter = gameDetails.doorCounter;
 
     //things aboout the log
     // stores cell/room combos.  this is enough to 'replay' the whole deal.
@@ -777,13 +819,20 @@ async function play(game, initGame = false) {
     // day/long rest?
     // notes? - probably just for tracking the 'state' between sessions, maybe _major_ events
 
-    //should we guard against pushing the same entry?
-    gameDetails.gameLog.unshift(log);
+    if (
+      gameDetails.gameLog.length > 0 &&
+      log.currentRoom == gameDetails.gameLog[0].currentRoom &&
+      log.currentCell == gameDetails.gameLog[0].currentCell
+    ) {
+      //don't double up, but maybe allow 'upsert'.  we'd need to filter out stuff..
+    } else {
+      gameDetails.gameLog.unshift(log);
+    }
   }
 
   function checkLog(log = {}) {
     //how do logs work? do we need to class/object them?
-    return gameDetails.gameLog.filter(f => {
+    return gameDetails.gameLog.filter((f) => {
       return (
         f.currentCell == log.currentCell && f.currentRoom == log.currentRoom
       );

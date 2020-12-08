@@ -1,14 +1,33 @@
 {
   "notes": "5-cube is 10 cells, 40 rooms, each room exists in 2 cells.  6-cube is a whole other thing.  it's 60 cells, 160 rooms, but reflected across what is essentially *12* instances of the 5-cube. it'd require a new dimension/factor to differentiate... beyond scope right now...",
   "roomTemplate": {
-    "_note": "this is copied for each room instance",
-    "id": "some number",
-    "description": "long text ",
-    "position": "can't use this, because it's almost certainly in 2 positions",
-    "type": "obviated.  room specific stuff is in the rooms.json",
-    "cells": null,
-    "doorList": "this is absorbed to cellMap. ",
-    "visited": "this should be consolidated somehow.  cell specific visiting is necessary"
+    "name": "only necessary for 'managing' them, we'll put it in the 'logs' so unique names will help DMs",
+    "size": [
+      100,
+      100,
+      100,
+      "not actually used for anything, could be textual description or array of dimessions, both, whatever"
+    ],
+    "description":{
+      "default": "Narrative description for the room. ",
+      "rest": "optional  if party rests in this room, what happens during/after the rest.",
+      "disabled": "if party posseses the key for this room"
+    }, 
+    "mechanics": "Explinations for the DM, room and/or battle descriptions, ",
+    "gravity": {
+      "type": "enum{fixed/random/same/special} required",
+      "gravity": "integer[0-5] required for fixed type, ignored for others",
+      "desc": "details for anything weird, but largely just for 'special' gravity"
+    },
+    "badguys": [{
+      "link": "link(s) to the enemy deets",
+      "count": "1-??",
+      "notes": "conditions for appearing, strategies, equipment/modifications, etc "
+    }],
+    "nokey": "true/false defaults to false.  used to keep keys out of these rooms. ie: start, end, or some special condition",
+    "start": "true/false should only be one, but i _think_ it'll pick the first one",
+    "exit": "true/false should oly be one, but i think it'll pick the first one",
+    "orientationDC": "optional DC target to not get 'disoriented' after entering a room.",
   },
   "roomPositionList": [
     "NORTH",
@@ -20,22 +39,22 @@
     "SOUTH",
     "BOTTOM"
   ],
-  "colorList": [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "violet",
-    "white",
-    "pink",
-    "sky",
-    "brown"
-  ],
+  "keyList": {
+    "red": null,
+    "orange": null,
+    "yellow": null,
+    "lime": null,
+    "lightblue": null,
+    "violet": null,
+    "white": null,
+    "pink": null,
+    "skyblue":null,
+    "tan":null
+  }
+  ,
   "cellCount": 10,
   "roomCount": 40,
   "cellRoomCount": 2,
-  "minPath": "4? dfs minimum for valid setup",
   "roomCellDistro": "even",
   "cellTemplate": {
     "id": "an index for reference?",
@@ -96,6 +115,7 @@
       "currentOpenDoorRoom": null,
       "currentOpenDoorCell": null,
       "currentDoors": [],
+      "doorCounter": 0,
       "rested": false,
       "steps": 0,
       "lastCurrentCell": null,

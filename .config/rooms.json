@@ -1,97 +1,67 @@
 {
-  "_template": {
-    "name": "only necessary for 'managing' them",
-    "size": [
-      100,
-      100,
-      100,
-      "this isn't actually used for anything yet.  probably should be an 'object' with a 'shape' or something"
-    ],
-    "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-    "altdescription": "if you want stronger differentiation between cells, provide a different set",
-    "gravity": {
-      "type": "normal/random/special",
-      "gravity": null,
-      "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-    },
-    "badguys": "link or other config ref?",
-    "key": true,
-    "exit": true,
-    "orientationDC": "target to beat or you're not sure which door you came in?",
-    "color": "maybe we want to pin certain rooms for _theme_?"
-  },
   "roomList": {
     "0": {
-      "name": "Room 0",
+      "name": "Will'o,what?",
       "size": [
-        150,
-        150,
-        150
+        500,
+        500,
+        500
       ],
-      "description": "Doors",
-      "mechanics": "",
+      "description": "An almost impercepibly pale glow (of color) eminates sourcelessly in this room.  Try as you might, your eyes find no contrast, no texture to the space.  The darkness seems almost to consume the light streaming in from the open door.  Even the faint sounds around you seem to disapper in the dark.  Briefly, a bright point of light appears some indederminent distance away and wiggles an irregular path before blinking out again.  Waiting, you see another distant light appear, drift, and wink out again.  Exploring the room, the floor is littered with broken furniture and dust.  The walls are solid, mortarless stone construction, of not specific stonemason tradition.",
+      "mechanics": "The will-o'-wisp(s) here are _also_ blinded by the darkness.  They are trapped, against their will, and will fight to survive but could be convinced the party will aid them (Persuasion/Intimidaiton DC14+#of wisps).  Sound draws them in (Stealth DC11+# of wisps or magic to negate), they single move only, attacking first with incorporeal movement, to ensure the target is both real and vulnerable.",
+      "gravity": {
+        "type": "random",
+        "gravity": 2
+      },
+      "badguys": "https://roll20.net/compendium/dnd5e/Will-o'-Wisp#content",
+      "key": false,
+      "exit": false
+    },
+    "1": {
+      "name": "No, Not that way!",
+      "size": [
+        1000,
+        10,
+        1
+      ],
+      "description": "A pristine ebony cobblestone, 5 feet wide path extends as far as you can see in either direction, flanking the path is a disturbingly uninterrupted field of {color} tinted light, so pure it may very well be perfect walls 1 foot or 1 mile from the pathway.. An eirey tingle creeps across your skin. Staring after the cobblestone path, you can see it extend impossibly far, but it appears straight and uninterrupted in both directions.  Inset into the cobblestone, a few steps away, is a large wooden hatch.  The wood and iron appear in good repair, almost new. ",
+      "mechanics": "~20' from any door they see another door on the horizon.  Any attempt to move 'off' the cobblestone is fruitless.  Nothing (no magic, no ammunition, etc) goes past the cobblestone edge.  Things hurled, propelled, thrown, don't break/explode/travel.  It's as though they were simply 'set' at the edge of the path.  Randomn start door is fine because there's no context.  'up'(re: 2d) doors should be offset from the start for impact.",
+      "gravity": {
+        "type": "special",
+        "gravity": 3,
+        "desc": "Gravity is 'down' always.  As room is '2d', doors are only up(2) or down(4)."
+      },
+      "start": true,
+    },
+    "2": {
+      "name": "Are you Chicken?",
+      "size": [
+        60,
+        60,
+        60
+      ],
+      "description": "Daylight streams through 4 huge glass paned windows into a large, oppulant bed chamber.  A huge 4-poster bed draped in sheer {color} cloth occupies one corner, in another a large fireplace is flanked by 2 large {color} chairs and a small table. Every surface of the room is covered with a manajery of chickens.  The heavy wooden rafters, the small bookshelves on the wall, floor, desk, windowsills all bare chickens.  They seem normal, if out of place, and healthy.",
+      "mechanics": "Nothing much. There's probably a magic item here?",
       "gravity": {
         "type": "fixed",
         "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": true,
-      "color": "maybe we want to pin certain rooms for _theme_?"
-    },
-    "1": {
-      "name": "Room 1",
-      "size": [
-        100,
-        100,
-        100
-      ],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 4,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "start": true,
-      "color": "maybe we want to pin certain rooms for _theme_?"
-    },
-    "2": {
-      "name": "Room 2",
-      "size": [
-        150,
-        150,
-        150
-      ],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "same",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      }
     },
     "3": {
-      "name": "Room 3",
+      "name": "Boggles the mind",
       "size": [
         100,
         100,
         100
       ],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
+      "description": "",
+      "mechanics": "The boggles hide",
       "gravity": {
         "type": "fixed",
         "gravity": 3,
         "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
       },
-      "badguys": "link or other config ref?",
+      "badguys": "https://jsigvard.com/dnd/monster.php?m=Boggle",
       "key": true,
       "exit": false,
       "color": "maybe we want to pin certain rooms for _theme_?"
