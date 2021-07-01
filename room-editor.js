@@ -35,3 +35,11 @@ var prompts = require("prompts");
 const chalk = require("chalk");
 
 prompts.override(require("yargs").argv);
+
+//if rooms file is provided, use it
+//otherwise copy default-rooms
+
+
+//we need 40 rooms exactly
+//go through each room in file, display all the *template* parameters and show current
+

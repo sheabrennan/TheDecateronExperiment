@@ -8,26 +8,28 @@
       100,
       "not actually used for anything, could be textual description or array of dimessions, both, whatever"
     ],
-    "description":{
+    "description": {
       "default": "Narrative description for the room. ",
       "rest": "optional  if party rests in this room, what happens during/after the rest.",
       "disabled": "if party posseses the key for this room"
-    }, 
+    },
     "mechanics": "Explinations for the DM, room and/or battle descriptions, ",
     "gravity": {
       "type": "enum{fixed/random/same/special} required",
       "gravity": "integer[0-5] required for fixed type, ignored for others",
       "desc": "details for anything weird, but largely just for 'special' gravity"
     },
-    "badguys": [{
-      "link": "link(s) to the enemy deets",
-      "count": "1-??",
-      "notes": "conditions for appearing, strategies, equipment/modifications, etc "
-    }],
+    "badguys": [
+      {
+        "link": "link(s) to the enemy deets",
+        "count": "1-??",
+        "notes": "conditions for appearing, strategies, equipment/modifications, etc "
+      }
+    ],
     "nokey": "true/false defaults to false.  used to keep keys out of these rooms. ie: start, end, or some special condition",
     "start": "true/false should only be one, but i _think_ it'll pick the first one",
     "exit": "true/false should oly be one, but i think it'll pick the first one",
-    "orientationDC": "optional DC target to not get 'disoriented' after entering a room.",
+    "orientationDC": "optional DC target to not get 'disoriented' after entering a room."
   },
   "roomPositionList": [
     "NORTH",
@@ -48,10 +50,9 @@
     "violet": null,
     "white": null,
     "pink": null,
-    "skyblue":null,
-    "tan":null
-  }
-  ,
+    "skyblue": null,
+    "tan": null
+  },
   "cellCount": 10,
   "roomCount": 40,
   "cellRoomCount": 2,
@@ -126,6 +127,7 @@
       "exitRoom": null,
       "ticks": 0,
       "gameLog": [],
+      "shortestPath": [],
       "lexicalMap": {
         "entryGravityTuple": [
           [0, 0],

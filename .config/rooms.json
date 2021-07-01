@@ -2,11 +2,7 @@
   "roomList": {
     "0": {
       "name": "Will'o,what?",
-      "size": [
-        500,
-        500,
-        500
-      ],
+      "size": [500, 500, 500],
       "description": "An almost impercepibly pale glow (of color) eminates sourcelessly in this room.  Try as you might, your eyes find no contrast, no texture to the space.  The darkness seems almost to consume the light streaming in from the open door.  Even the faint sounds around you seem to disapper in the dark.  Briefly, a bright point of light appears some indederminent distance away and wiggles an irregular path before blinking out again.  Waiting, you see another distant light appear, drift, and wink out again.  Exploring the room, the floor is littered with broken furniture and dust.  The walls are solid, mortarless stone construction, of not specific stonemason tradition.",
       "mechanics": "The will-o'-wisp(s) here are _also_ blinded by the darkness.  They are trapped, against their will, and will fight to survive but could be convinced the party will aid them (Persuasion/Intimidaiton DC14+#of wisps).  Sound draws them in (Stealth DC11+# of wisps or magic to negate), they single move only, attacking first with incorporeal movement, to ensure the target is both real and vulnerable.",
       "gravity": {
@@ -19,11 +15,7 @@
     },
     "1": {
       "name": "No, Not that way!",
-      "size": [
-        1000,
-        10,
-        1
-      ],
+      "size": [1000, 10, 1],
       "description": "A pristine ebony cobblestone, 5 feet wide path extends as far as you can see in either direction, flanking the path is a disturbingly uninterrupted field of {color} tinted light, so pure it may very well be perfect walls 1 foot or 1 mile from the pathway.. An eirey tingle creeps across your skin. Staring after the cobblestone path, you can see it extend impossibly far, but it appears straight and uninterrupted in both directions.  Inset into the cobblestone, a few steps away, is a large wooden hatch.  The wood and iron appear in good repair, almost new. ",
       "mechanics": "~20' from any door they see another door on the horizon.  Any attempt to move 'off' the cobblestone is fruitless.  Nothing (no magic, no ammunition, etc) goes past the cobblestone edge.  Things hurled, propelled, thrown, don't break/explode/travel.  It's as though they were simply 'set' at the edge of the path.  Randomn start door is fine because there's no context.  'up'(re: 2d) doors should be offset from the start for impact.",
       "gravity": {
@@ -31,29 +23,21 @@
         "gravity": 3,
         "desc": "Gravity is 'down' always.  As room is '2d', doors are only up(2) or down(4)."
       },
-      "start": true,
+      "start": true
     },
     "2": {
       "name": "Are you Chicken?",
-      "size": [
-        60,
-        60,
-        60
-      ],
+      "size": [60, 60, 60],
       "description": "Daylight streams through 4 huge glass paned windows into a large, oppulant bed chamber.  A huge 4-poster bed draped in sheer {color} cloth occupies one corner, in another a large fireplace is flanked by 2 large {color} chairs and a small table. Every surface of the room is covered with a manajery of chickens.  The heavy wooden rafters, the small bookshelves on the wall, floor, desk, windowsills all bare chickens.  They seem normal, if out of place, and healthy.",
       "mechanics": "Nothing much. There's probably a magic item here?",
       "gravity": {
         "type": "fixed",
-        "gravity": 2,
+        "gravity": 2
       }
     },
     "3": {
       "name": "Boggles the mind",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "",
       "mechanics": "The boggles hide",
       "gravity": {
@@ -68,11 +52,7 @@
     },
     "4": {
       "name": "Room 4",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -87,11 +67,7 @@
     },
     "5": {
       "name": "Room 5",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -105,11 +81,7 @@
     },
     "6": {
       "name": "Room 6",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -124,11 +96,7 @@
     },
     "7": {
       "name": "Room 7",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "same",
@@ -142,11 +110,7 @@
     },
     "8": {
       "name": "Room 8",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -161,11 +125,7 @@
     },
     "9": {
       "name": "Room 9",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -179,11 +139,7 @@
     },
     "10": {
       "name": "Room 10",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -193,16 +149,12 @@
       },
       "badguys": "link or other config ref?",
       "key": true,
-      "exit": false,
+      "exit": true,
       "color": "maybe we want to pin certain rooms for _theme_?"
     },
     "11": {
       "name": "Room 11",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -216,11 +168,7 @@
     },
     "12": {
       "name": "Room 12",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -235,11 +183,7 @@
     },
     "13": {
       "name": "Room 13",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -253,11 +197,7 @@
     },
     "14": {
       "name": "Room 14",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -272,11 +212,7 @@
     },
     "15": {
       "name": "Room 15",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "special",
@@ -290,11 +226,7 @@
     },
     "16": {
       "name": "Room 16",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -309,11 +241,7 @@
     },
     "17": {
       "name": "Room 17",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -327,11 +255,7 @@
     },
     "18": {
       "name": "Room 18",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -346,11 +270,7 @@
     },
     "19": {
       "name": "Room 19",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -364,11 +284,7 @@
     },
     "20": {
       "name": "Room 20",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -383,11 +299,7 @@
     },
     "21": {
       "name": "Room 21",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -401,11 +313,7 @@
     },
     "22": {
       "name": "Room 22",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -420,11 +328,7 @@
     },
     "23": {
       "name": "Room 23",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "random",
@@ -438,11 +342,7 @@
     },
     "24": {
       "name": "Room 24",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -457,11 +357,7 @@
     },
     "25": {
       "name": "Room 25",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "special",
@@ -475,11 +371,7 @@
     },
     "26": {
       "name": "Room 26",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -494,11 +386,7 @@
     },
     "27": {
       "name": "Room 27",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "special",
@@ -512,11 +400,7 @@
     },
     "28": {
       "name": "Room 28",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -531,11 +415,7 @@
     },
     "29": {
       "name": "Room 29",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "special",
@@ -549,11 +429,7 @@
     },
     "30": {
       "name": "Room 30",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -568,11 +444,7 @@
     },
     "31": {
       "name": "Room 31",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -586,11 +458,7 @@
     },
     "32": {
       "name": "Room 32",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -605,11 +473,7 @@
     },
     "33": {
       "name": "Room 33",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "special",
@@ -623,11 +487,7 @@
     },
     "34": {
       "name": "Room 34",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -642,11 +502,7 @@
     },
     "35": {
       "name": "Room 35",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "random",
@@ -660,11 +516,7 @@
     },
     "36": {
       "name": "Room 36",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -679,11 +531,7 @@
     },
     "37": {
       "name": "Room 37",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
@@ -697,11 +545,7 @@
     },
     "38": {
       "name": "Room 38",
-      "size": [
-        150,
-        150,
-        150
-      ],
+      "size": [150, 150, 150],
       "description": "Doors",
       "mechanics": "",
       "gravity": {
@@ -716,11 +560,7 @@
     },
     "39": {
       "name": "Room 39",
-      "size": [
-        100,
-        100,
-        100
-      ],
+      "size": [100, 100, 100],
       "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
       "gravity": {
         "type": "fixed",
