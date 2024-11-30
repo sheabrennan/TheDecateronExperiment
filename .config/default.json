@@ -43,15 +43,15 @@
   ],
   "keyList": {
     "red": null,
-    "orange": null,
+    "grey": null,
     "yellow": null,
-    "lime": null,
-    "lightblue": null,
-    "violet": null,
+    "green": null,
+    "cyan": null,
+    "blue": null,
     "white": null,
-    "pink": null,
-    "skyblue": null,
-    "tan": null
+    "magenta": null,
+    "yellowBright": null,
+    "redBright": null
   },
   "cellCount": 10,
   "roomCount": 40,
