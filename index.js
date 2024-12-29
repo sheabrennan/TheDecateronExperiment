@@ -60,8 +60,13 @@ function generate(name, init, rooms) {
   const cells = build.get("cells");
 
   // a randomized list of room indexes 0-'roomCount'
-  const roomDefault = shuffle([...Array(init.get("roomCount")).keys()]);
-
+  const roomDefault = shuffle([...Array(init.get("roomCount")).keys()])
+  //extract which rooms have keys
+  const keyRooms = shuffle(Object.keys(rooms).filter( r => rooms[r].key))
+  
+  //drop the rooms with keys from the list of room indexes to use
+  //keyRooms.forEach( k => roomDefault.splice(roomDefault.indexOf(parseInt(k)),1))
+  
   // indexes for cells
   const cellList = [...Array(init.get("cellCount")).keys()];
 
@@ -79,26 +84,43 @@ function generate(name, init, rooms) {
     newCell.linkedCells = {};
     newCell.color = colors.shift();
     newCell.roomMap = JSON.parse(JSON.stringify(init.get("cellMap")));
-    newCell.key = keyList[newCell.color];
+    newCell.key = null
     cells[cell] = newCell;
   });
-
+let processed = []
   // For each cell in the template
   //  drop the cell from the cell list (we only go through once)
   //  create a temp array of remaining cellList, this'll source our 2nd referenced cell
   //  for our current cell, loop through *every* entry in 'roomMap'
   Object.keys(cells).forEach((c) => {
+    console.log("Cell: "+ c)
+    console.log("KeyRooms: "+ keyRooms)
     // we're filling this cell, no circular maps
     cellList.shift();
     const cellsToFill = [...cellList];
 
+    let keyed = false
+    cells[c].key = parseInt(keyRooms.pop())
     // keys are strings here, need int initially, the rest works.
     const intc = parseInt(c);
-
+  
     cells[c].roomMap.forEach((rm) => {
-      // this is the id in our decateron
-      const roomId = roomDefault.pop();
-
+      console.log("\tPosition:("+keyed+")"+rm.position)
+    // this is the id in our decateron
+    console.log("\tRoomDefault: "+roomDefault)
+    let roomId = null
+    if(!keyed){
+      roomId = cells[c].key
+      roomDefault.splice(roomDefault.indexOf(cells[c].key),1)
+      keyed = true
+    }else{
+      let nextNonKey = roomDefault.filter( r => !rooms[r].key ).pop()
+      roomId = roomDefault.splice(roomDefault.indexOf(nextNonKey),1).pop()
+    }
+    console.log("\tRoomDefault: "+roomDefault)
+    console.log("\tRoomid: "+roomId)
+    processed.push(roomId)
+      
       // currently this only supports roomCount rooms
       // more randomness could be applied if we could ensure
       // start and end are included
@@ -116,6 +138,10 @@ function generate(name, init, rooms) {
       // save the room map object
       cells[c].linkedCells[roomId] = rm;
       cells[randomCell].linkedCells[roomId] = otherCellRoom;
+
+      console.log("\t\tRoom: "+roomId)
+      console.log("\t\t Other Cell: "+randomCell)
+      console.log("\t\t\t")
 
       // technically the start room is in 2 cells, here we just pick the current cell to start.
       if (roomList[roomId].start && !build.get("gameDetails.cell")) {
@@ -138,7 +164,6 @@ function generate(name, init, rooms) {
     //initialize stuff
     const gameDetails = build.get("gameDetails");
     gameDetails.notes = {}
-
     // just cruft now
     delete cells[c].roomMap;
   });
@@ -157,6 +182,8 @@ function generate(name, init, rooms) {
     });
   });
 
+  console.log("roomList: "+Object.keys(roomList).length)
+
   build.set("rooms", roomList);
   return build;
 }
@@ -171,7 +198,7 @@ async function play(game, initGame = false) {
     gameDetails.gravity = gravitron();
     gameDetails.currentDoors = lexicalMapper();
     console.log(gameDetails.currentCell + "-" + gameDetails.currentRoom);
-    trace();
+    //trace();
     initGame = false;
   }
 
@@ -204,7 +231,7 @@ async function play(game, initGame = false) {
       );
       break;
     case "trace":
-      console.dir(trace(25000, true));
+      console.dir(trace(20000, true));
       break;
     case "back":
       // need to unwind a step
@@ -238,18 +265,20 @@ async function play(game, initGame = false) {
 
     console.log(`
       ${chalk[color]("Name:" + room.name + "  ("+gameDetails.currentCell+" - " + color + ")")}
-      Size: ${room.size.join(" x ")}
+      Size: ${room.size ? room.size.join(" x ") : "see Roll20"}
       Gravity: ${
         gameDetails.gravity < 0
           ? room.gravity.desc
           : rooms[gameDetails.currentRoom].gravity.type
       }
       Description: ${room.description}
+      Mechanics: ${room.mechanics}
+      Key: ${room.key}
       Bad Guys: ${room.badguys}
 
             `);
     console.log("Notes: "+gameDetails.notes[gameDetails.currentRoom])
-    console.log("Display open doors -"+gameDetails.currentDoors)
+    //console.log("Display open doors -"+gameDetails.currentDoors)
     console.log(
       chalk[color](`
                            ${(
@@ -346,16 +375,16 @@ async function play(game, initGame = false) {
             ].linkedCells[gameDetails.currentRoom].doors.indexOf(
               String(gameDetails.lastCurrentRoom)
             );
-      console.log("move current entry: "+gameDetails.currentEntry)
-      console.log("move gravity - "+gameDetails.gravity)
-      console.log("move currentEntry Decision - cells[gameDetails.currentCell].linkedCells[gameDetails.currentRoom].doors.indexOf(String(gameDetails.lastCurrentRoom)) :"+cells[gameDetails.currentCell].linkedCells[
-        gameDetails.currentRoom
-      ].doors.indexOf(String(gameDetails.lastCurrentRoom)))
+      // console.log("move current entry: "+gameDetails.currentEntry)
+      // console.log("move gravity - "+gameDetails.gravity)
+      // console.log("move currentEntry Decision - cells[gameDetails.currentCell].linkedCells[gameDetails.currentRoom].doors.indexOf(String(gameDetails.lastCurrentRoom)) :"+cells[gameDetails.currentCell].linkedCells[
+      //   gameDetails.currentRoom
+      // ].doors.indexOf(String(gameDetails.lastCurrentRoom)))
 
 
 
       gameDetails.currentDoors = lexicalMapper();
-      console.log("Move - "+ gameDetails.currentDoors)
+      //console.log("Move - "+ gameDetails.currentDoors)
       // i know we're closing this immediately.  but _maybe_ we need it somehow...
       gameDetails.currentOpenDoor = gameDetails.currentEntry;
 
@@ -402,28 +431,34 @@ async function play(game, initGame = false) {
   }
 
   function gravitron(
+    
     room = gameDetails.currentRoom,
     entry = gameDetails.currentEntry
   ) {
+    try{
     // since gravity is room specific we'll count on the description to clarify
     // weirdness comes across
+    //console.log("room: "+room)
     switch (rooms[room].gravity.type) {
-      case "fixed":
+      case "Fixed":
         // it's always pinned in a direction
         return rooms[room].gravity.gravity;
-      case "random":
+      case "Random":
         // every entry to this room will (potentially) be different
         return Math.floor(Math.random() * 6);
-      case "same":
+      case "Match":
         // every entry to this room will (potentially) be different gravity, but it matches the previous room
         // except special, because that's well, special  visited rooms off the opportunity to bring this into the narrative
         return gameDetails.gravity >= 0 ? gameDetails.gravity : 0;
-      case "special":
+      case "Special":
         // we can't set details gravity to a string, we need numeric for orientation
         return -1;
       default:
         return rooms[room].gravity.gravity;
     }
+  }catch(e){
+    console.log("ROOM: "+room)
+  }
   }
 
   function trace(count = 20000, checkVisited = false) {
@@ -685,7 +720,7 @@ async function play(game, initGame = false) {
         door.title += "  (EXIT!!!)";
       }
 
-      door.title += `         {c:${nextCell},r:${nextRoom}}`;
+      door.title += `         {${nextRoom} - ${rooms[nextRoom].name}}`;
       door.title = chalk[cells[nextCell].color](door.title);
       return door;
     });

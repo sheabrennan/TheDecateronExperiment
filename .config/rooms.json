@@ -1,576 +1,484 @@
 {
   "roomList": {
     "0": {
-      "name": "Will'o,what?",
-      "size": [500, 500, 500],
-      "description": "An almost impercepibly pale glow (of color) eminates sourcelessly in this room.  Try as you might, your eyes find no contrast, no texture to the space.  The darkness seems almost to consume the light streaming in from the open door.  Even the faint sounds around you seem to disapper in the dark.  Briefly, a bright point of light appears some indederminent distance away and wiggles an irregular path before blinking out again.  Waiting, you see another distant light appear, drift, and wink out again.  Exploring the room, the floor is littered with broken furniture and dust.  The walls are solid, mortarless stone construction, of not specific stonemason tradition.",
-      "mechanics": "The will-o'-wisp(s) here are _also_ blinded by the darkness.  They are trapped, against their will, and will fight to survive but could be convinced the party will aid them (Persuasion/Intimidaiton DC14+#of wisps).  Sound draws them in (Stealth DC11+# of wisps or magic to negate), they single move only, attacking first with incorporeal movement, to ensure the target is both real and vulnerable.",
-      "gravity": {
-        "type": "random",
-        "gravity": 2
-      },
-      "badguys": "https://roll20.net/compendium/dnd5e/Will-o'-Wisp#content",
-      "key": false,
-      "exit": false
+      "name": "Entrance",
+      "badguys": "",
+      "key": 9,
+      "size": [25, 200, 0],
+      "resting": "Safe",
+      "description": "A soft, milk white liminal space surrounds you. A smooth, grey cobblestone path extends to the horizon in both directions.  In every other direction is a vertigo inducing featureless blank.  A soft, cool breeze blows across the path.  Nearby a round hatchlike door is inset in the center of the path.  A textured handle sits flush in the center of the hatch, but no lock, mechanism or hinges are visible.",
+      "mechanics": "The room is functionally a ring, go far enough in either direction and you'll come back to your origin. Nothing can move more than ~10' from the path in any direction.  There is no barrier, you just can't go past it.  Thrown/shot objects stay aloft the normal time, and the heigh above ground is correct for the duration, they just don't go farther.  Size the 'length' of the room such that everyone is staggered evenly throughout the circumfrence of the room.",
+      "start": true,
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "1": {
-      "name": "No, Not that way!",
-      "size": [1000, 10, 1],
-      "description": "A pristine ebony cobblestone, 5 feet wide path extends as far as you can see in either direction, flanking the path is a disturbingly uninterrupted field of {color} tinted light, so pure it may very well be perfect walls 1 foot or 1 mile from the pathway.. An eirey tingle creeps across your skin. Staring after the cobblestone path, you can see it extend impossibly far, but it appears straight and uninterrupted in both directions.  Inset into the cobblestone, a few steps away, is a large wooden hatch.  The wood and iron appear in good repair, almost new. ",
-      "mechanics": "~20' from any door they see another door on the horizon.  Any attempt to move 'off' the cobblestone is fruitless.  Nothing (no magic, no ammunition, etc) goes past the cobblestone edge.  Things hurled, propelled, thrown, don't break/explode/travel.  It's as though they were simply 'set' at the edge of the path.  Randomn start door is fine because there's no context.  'up'(re: 2d) doors should be offset from the start for impact.",
-      "gravity": {
-        "type": "special",
-        "gravity": 3,
-        "desc": "Gravity is 'down' always.  As room is '2d', doors are only up(2) or down(4)."
-      },
-      "start": true
+      "name": "Mirror Boggles",
+      "badguys": "5 Boggles",
+      "key": 10,
+      "size": [120, 120, 300],
+      "resting": "Boggles respawn after 1d4 hours",
+      "description": "Chaotic piles of framed mirrors, mostly broken, block visibilty in all directions. A narrow, meandering path wends through the chaos; the floor littered with broken glass. The ceiling is lost in darkness.",
+      "mechanics": "On entering the room, the 'door' occupies the full frame of an inocuous window frame.One of the boggles possess an amulet, glowing with the cell's color, it's a key!.  The boggles are simply mad here, harrasing players, fleeing through portals only to reemerge and attack.  Boggle count is player count.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "2": {
-      "name": "Are you Chicken?",
-      "size": [60, 60, 60],
-      "description": "Daylight streams through 4 huge glass paned windows into a large, oppulant bed chamber.  A huge 4-poster bed draped in sheer {color} cloth occupies one corner, in another a large fireplace is flanked by 2 large {color} chairs and a small table. Every surface of the room is covered with a manajery of chickens.  The heavy wooden rafters, the small bookshelves on the wall, floor, desk, windowsills all bare chickens.  They seem normal, if out of place, and healthy.",
-      "mechanics": "Nothing much. There's probably a magic item here?",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 2
-      }
+      "name": "Tiny Planet",
+      "badguys": "",
+      "key": "",
+      "size": [80, 80, 80],
+      "resting": "1d6 per hour.  on a 1, hit a player, 1d6 dmg.  on a 2-3, hit near the camp.",
+      "description": "Staring through the door you see an unfamilar sky brimming with celestial objects.  You emerge onto a barren, lifeless landscape dotted with craters and immediately notice reduced gravity and no sound.  Whats more, the surface appears to curve away to a horizon not 100' away.  Near the horzion a small meteor smashes into the surface sending rocks and dust into the air.",
+      "mechanics": "It's a tiny planet. 6 doors evenly(ish) spaced around the surface.  Gravity goes to the surface of the planet, is approximately 1/2.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "3": {
-      "name": "Boggles the mind",
-      "size": [100, 100, 100],
-      "description": "",
-      "mechanics": "The boggles hide",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "https://jsigvard.com/dnd/monster.php?m=Boggle",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Reversing Gravity",
+      "badguys": "",
+      "key": "",
+      "size": [60, 60, 20],
+      "resting": "Unsafe",
+      "description": "Small piles of sand are scattered everywhere across a rough, uneven floor. The air is dusty.",
+      "mechanics": "Gravity reverses periodically in the room, 1d4 rounds after each time.  We can't actually account for this is the game, but it doesn't matter.  DC 12 Dex save or 1d6 dmg, save for half.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Match", "gravity": 0 }
     },
     "4": {
-      "name": "Room 4",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "random",
-        "gravity": 0,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Dangerous",
+      "badguys": "Animated Armor",
+      "key": 1,
+      "size": [70, 70, 70],
+      "resting": "Armor reassembles after 1d4 hours",
+      "description": "A large, pristine, cubic room.  The walls, floor, and ceiling appear identical reflections, constructed of a barely opaque pale green glass like material. Standing at its center is an extremely corroded and rusted set of plate mail, around it's neck hangs a glowing orniment.",
+      "mechanics": "Animated armor activates when the key is retrieved.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "5": {
-      "name": "Room 5",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "No Bones About it",
+      "badguys": "2 Skeletons and a swarm of beetles",
+      "key": "",
+      "size": [120, 120, 35],
+      "resting": "Repsawns after 1d4 hours",
+      "description": "Bleached white bones blanket they floor of this room as far as your vision reaches.  The ceiling is 15 ft above the uneven surface that makes for a floor.  To the left and right the walls appear to curve towards eachother in an arc.",
+      "mechanics": "Difficult terrain everywhere.The depth of the bones is really really deep DC 15 Investigation suggests it's over 100'. 1 Skeleton rises at the first contact with the bones.  The swarm 'forms' another in 1d4 rounds.  Damage to the swarm skeleton is split between the 2 before any resistance/vulnerabilities.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Match", "gravity": 0 }
     },
     "6": {
-      "name": "Room 6",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 4,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Sticky Acid Zero-G Sphere",
+      "badguys": "",
+      "key": "",
+      "size": [60, 60, 60],
+      "resting": "Unsafe",
+      "description": "The door opens to the interior of a dimly lit sphere. A door opposes you across the sphere.  2 more similarly opposing sets sit at right angles from these, evenly spaced across the interior surface of the sphere.",
+      "mechanics": "No gravity.  DC 12 Perception to notice the sticky ooze eminating from the surface. Contact with the walls deals Acid dmg every round.  1d6+1 DC 13 save for half. On a faild save, 1/2 dmg again next round.  DC 13 Acrobatics check to launch to another door.  Fail means off track.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "7": {
-      "name": "Room 7",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "same",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Echoic Chamber",
+      "badguys": "Shriker + 3 or 4 grimlocks",
+      "key": 2,
+      "size": [250, 250, 50],
+      "resting": "Shriker respawns 1d4 hours (no grimlocks)",
+      "description": "A dark, damp cavern opens up in all directions.  Thick lichen covers the floor and giant mushrooms, 8-10' tall, create a fungal forest with narrow, single person paths winding between them.",
+      "mechanics": "Any light or group (or ind) stealth DC 13. Failure makes the shrieker start to scream.  DC 10 Con save vs d4+rounds dmg.  Increases DC and dmg +1 per round.  After 5 rounds, failure is deafened.   Shrieker has the key.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "8": {
-      "name": "Room 8",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "random",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Jehova map",
+      "badguys": "Gibbering Mouther",
+      "key": "",
+      "size": [45, 45, 15],
+      "resting": "Unsafe",
+      "description": "The floor and ceiling of this rooom is covered with 5' square glyphs.  They depict crude animal shapes deeply carved in rough, well worn stone.  Looming near the center is a horrible aberration.  A pile of skinless flesh, inumerable eyes and mouths bobs mindlessly",
+      "mechanics": "This will be disabled by default so long as the players wear the bracelet. The mouther is functionally grappled.  Cannot move even if it's not disabled.  if they don't, any square has 1d4 chance of being fake (on a 1 they fall through).  DC 12 Investigation to detect.  If you fail, DC 13 Dex save or you fall through.  You emerge from a random square in the ceiling and fall to the ground.  Repeat the 1d4 chance and the DC13 Dex save, repeat.  Take Xd6 damage, where x is the number of times you fell.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 1 }
     },
     "9": {
-      "name": "Room 9",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 0,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Chult Map Room",
+      "badguys": "",
+      "key": "",
+      "size": [30, 30, 15],
+      "resting": "Unsafe",
+      "description": "An opulantly decorated, heavily guilded room is filled will excessively humid stale air.  Clerastory stained glass windows cast fragmented, multicolored light on all surfaces.  The centerpoint of the room is a giant table with some kind of model occupying most of it's surface.",
+      "mechanics": "It's an animated model of Chuult.  It's *not* the current Chult (Merzo is still there, for instance) but spending 2 hours studying this gives +5 on Survival checks to navigate in the jungle. After 2 hours, the peaks of flame errupt and fill the room with acrid smoke.  Zero visibility, can't breath. Must leave",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "10": {
-      "name": "Room 10",
-      "size": [150, 150, 150],
-      "description": "Doors",
+      "name": "Plane of Fire",
+      "badguys": "Fire Snake",
+      "key": "",
+      "size": "",
+      "resting": "DC12 Con save after 1 hour for 1d6 Fire dmg, none on save. DC increases +1 every hour.",
+      "description": "A 5'",
       "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 5,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": true,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "11": {
-      "name": "Room 11",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Ice",
+      "badguys": "3 Ice Mephits",
+      "key": "",
+      "size": "",
+      "resting": "DC12 Con save after 1 hour for 1d6 Cold dmg, none on save. DC increases +1 every hour.",
+      "description": "A broken, icy landscape is barely visible through blowing snow. A cold wind howls throughout.",
+      "mechanics": "The ground is icy and intermittently broken.  Difficult terrain everywhere and lightly obscured in the snow. (Disadv on perception).",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "12": {
-      "name": "Room 12",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "special",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Earth",
+      "badguys": "10 Chwinga",
+      "key": "",
+      "size": [250, 250, 1000],
+      "resting": "Safe",
+      "description": "A barren rocky landscape leads out in all directions. Above a pale green cloudless, sunless sky evokes late summer dusk light.  A cool, gentle breeze seems always to be blowing at you, regardless of your orientation.",
+      "mechanics": "If the party rests here, they're visited by a Chwinga and each recieve a charm.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Match", "gravity": 0 }
     },
     "13": {
-      "name": "Room 13",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 4,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Water",
+      "badguys": "1 or 2 Octopi & 1 Giant Octopus",
+      "key": 3,
+      "size": [60, 60, 60],
+      "resting": "Unsafe",
+      "description": "Beyond the open door is a wall of crystal clear water.  Thick kelp grows in all directions.",
+      "mechanics": "The Giant squid has a key!  The baby octopus runs and hides as soon as it takes any damage.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "14": {
-      "name": "Room 14",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Negative Energy (not in roll20)",
+      "badguys": "",
+      "key": "",
+      "size": [25, 25, 25],
+      "resting": "Safe",
+      "description": "Absolute, impenitrable blackness.",
+      "mechanics": "No light eminates at all. No dark vision. No Magic on detect magic.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "15": {
-      "name": "Room 15",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "special",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Fey",
+      "badguys": "1 Niblog riding a Blinkdog",
+      "key": 6,
+      "size": [100, 100, 1000],
+      "resting": "Safe",
+      "description": "A shady grove of huge trees dressed in soft filtered sunlight opens before you.  The floor is covered with a lush pale green moss.  A faint laughter echos through the trees.",
+      "mechanics": "Niblog rides the blinkdog around. Somewhate recklessly.  Only speaks goblin and isn't particularly interested in chatting.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "16": {
-      "name": "Room 16",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Death hole",
+      "badguys": "3 zombies",
+      "key": 7,
+      "size": [60, 60, 15],
+      "resting": "Unsafe, zombies *dont* stop",
+      "description": "Damp, dark soil blankets this large open cave-like room.  Near each door, a small whole, perhaps 3' across leaks a black ichor.  The smell of death is persistent.",
+      "mechanics": "The round after a player emerges, 1d3 zombies crawl out.  Next round 3-whatever you rolled come out.  Key is on the 2nd zombie",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "17": {
-      "name": "Room 17",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Kazan's Library",
+      "badguys": "",
+      "key": "",
+      "size": [200, 200, 30],
+      "resting": "",
+      "description": "The door opens into what appears to be a GIGANTIC library.  Huge stone shelves extend in multiple teirs and disappear beyond your vision toward a presumed ceiling.",
+      "mechanics": "Kazan is totally mad.  All the books here are jibberish.  He will mention Acerack, the trickster gods, etc.  But he's just batshit crazy.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Match", "gravity": 0 }
     },
     "18": {
-      "name": "Room 18",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "special",
-        "gravity": 5,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Grung Grung",
+      "badguys": "1 Grung Wildling and 2 Grungs",
+      "key": 8,
+      "size": [60, 60, 60],
+      "resting": "Safe",
+      "description": "A lush, overgrown jungle spreads in both directions. Sounds of life filter through the trees.",
+      "mechanics": "Grung wilding tells the people to leave twice. If they don't it casts plant grown and everyone jumps into the trees.  They have some supplies.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Match", "gravity": 0 }
     },
     "19": {
-      "name": "Room 19",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 5,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Phylactery",
+      "badguys": "",
+      "key": "",
+      "size": [40, 40, 40],
+      "resting": "",
+      "description": "A small oily green orb floats in the center of the room, eminating a slowly pulsating light.  The walls, floor and ceiling of the small room are a polished black stone; entirely contiguous save the holes made by the doors.",
+      "mechanics": "DC 13 Perception, there aren't even seams at the edges.  The orb is one of Acerak's phylactories.  Attacking it unleashes a burst of necrotic energy equal to the dmg delt.  DC 13 Dex save for half.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "20": {
-      "name": "Room 20",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "random",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Batiri Battle Stacks",
+      "badguys": "6 Goblins",
+      "key": 5,
+      "size": [60, 60, 15],
+      "resting": "",
+      "description": "A wooden path weaves between a dense jungle canopy.  Made of rough hewn planks lashed with dried vines, and tied methodically to the surroundnig trees, the suspended walkway looms over a floor lost in darkness.  At a nearby intesection sit several goblin like figures in large wooden masks, their bodies painted with vibrant streaks.  A small fire burns in an elevated pit and their attention seems fixated on it for the time being.  One of the goblin bears a necklace that glows gently.",
+      "mechanics": "They battle stack to 2 groups and are really bad tactically.  Put the",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 2 }
     },
     "21": {
-      "name": "Room 21",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 5,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Clever Girls",
+      "badguys": "4 Velociraptors",
+      "key": "",
+      "size": [120, 120, 1000],
+      "resting": "",
+      "description": "The door opens and you're looking straight into a night sky, the rim of the door tuffted with tall prarie grasses.  Peering through the door you see only grass, 6 feet tall, in all directions.  A predawn warmth hints at one edge of what is presumably the horizon.",
+      "mechanics": "4 Velociraptors, pack tactics. Violence.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "22": {
-      "name": "Room 22",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "random",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Outside the Cube",
+      "badguys": "",
+      "key": "",
+      "size": [60, 60, 60],
+      "resting": "",
+      "description": "Staring through the door you see an unfamilar sky brimming with celestial objects.  You emerge onto a polished metal surface that extends a short distance in all directions.",
+      "mechanics": "Gravity follows the sides.  You're 'pulled' to the side facing you regardless of how far off you are.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "23": {
-      "name": "Room 23",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "random",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Postive Energy",
+      "badguys": "",
+      "key": "",
+      "size": [45, 45, 15],
+      "resting": "Safe",
+      "description": "A soft cloud filtered light permiates every corner of this small room.  The walls and floors appear almost apholstered in an overstuffed coarse linen fabric.",
+      "mechanics": "Gives +2 hp per round, 1 level of exhaustion/minute,any of poison, charm, frightened in 1st minute.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "24": {
-      "name": "Room 24",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Singularity",
+      "badguys": "",
+      "key": 4,
+      "size": [40, 40, 40],
+      "resting": "Unsafe",
+      "description": "Doors open into a spherical room, paths connecting the doors have evenly spaced metal rings set into the surface.  Hovering in the center, 20' away is a roiling black orb, on it's surface rests a glowing charm.",
+      "mechanics": "Gravity is pull to the orb until something touches it, then it reverses.  Momentum is conserved though, so things 'keep going' if they had velocity.  2d6 fall damage.  The charm *doesnt* fall.  DC 14 sleight of hand/acrobatics to grab it.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "25": {
-      "name": "Room 25",
+      "name": "I'm on a boat!",
+      "badguys": "",
+      "key": "",
       "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "special",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "resting": "Safe",
+      "description": "You peer out onto the deck of a a derelict ship.  It's broken masts lay in a chaotic pile across the ship and evidence of char is visible everywhere.",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 2 }
     },
     "26": {
-      "name": "Room 26",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 4,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Almost Empty",
+      "badguys": "1 Giant Spider and 1 swarm of spiders",
+      "key": "",
+      "size": [150, 150, 15],
+      "resting": "Spiders Respawn",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "27": {
-      "name": "Room 27",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "special",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Supply Depot",
+      "badguys": "",
+      "key": "",
+      "size": [150, 150, 15],
+      "resting": "Safe",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "28": {
-      "name": "Room 28",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "random",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Nothing (not in Roll20)",
+      "badguys": "",
+      "key": "",
+      "size": "",
+      "resting": "",
+      "description": "The door opens into absolute blackness.",
+      "mechanics": "No idea what should happen if they just jump in.  That'd be wild.  Dex save to catch the lip of the door?",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Special", "gravity": 0 }
     },
     "29": {
-      "name": "Room 29",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "special",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Plane of Air (not in Roll20)",
+      "badguys": "",
+      "key": "",
+      "size": [5000, 5000, 5000],
+      "resting": "Unsafe",
+      "description": "The door opens into what appears to be just open air. An unseen sun provides dawn-like light to a pale blue sky. Peering down you see clouds perhaps a thousand feet below/above you.",
+      "mechanics": "DC14 Perception to see another door.  They're 1000' away",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 0 }
     },
     "30": {
-      "name": "Room 30",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 5,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Monofilament",
+      "badguys": "",
+      "key": "",
+      "size": [40, 40, 40],
+      "resting": "Unsafe, razor wires of death",
+      "description": "This dull grey cubic room is empty save some small fragments of bones and scraps of cloth.  A faint grid traces 5' squares across the surface of all walls, floor and ceiling.",
+      "mechanics": "DC12 Perception to hear the wire.  \nDC15 Perception to see the clean cuts in the bones etc.\nDC13 Dex vs 2d4 damage.\nEach round determine origin plane 1d3 (1 up/down, 2 left/right, 3 front/back)\n1d8 - square it moves through",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "31": {
-      "name": "Room 31",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 0,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [100, 100, 15],
+      "resting": "Safe",
+      "description": "",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 0 }
     },
     "32": {
-      "name": "Room 32",
-      "size": [150, 150, 150],
-      "description": "Doors",
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [100, 100, 15],
+      "resting": "Safe",
+      "description": "",
       "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 4,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "33": {
-      "name": "Room 33",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "special",
-        "gravity": 0,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [100, 100, 15],
+      "resting": "Safe",
+      "description": "",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 2 }
     },
     "34": {
-      "name": "Room 34",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Vacuum",
+      "badguys": "",
+      "key": "",
+      "size": [60, 60, 60],
+      "resting": "Unsafe, no air",
+      "description": "A sterile white boxy room hums slightly. near each corner, stands a small, 4' tall platform, embedded in the top is an opaque hemisphere that pulses with a soft white light.",
+      "mechanics": "When the door _closes_ pedistal lights turns red.  Air is sucked out of the room. When touched, the light turns green.  Can't open any door until all 4 are green.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 5 }
     },
     "35": {
-      "name": "Room 35",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "random",
-        "gravity": 0,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Almost Empty",
+      "badguys": "1 Giant Spider and 1 swarm of spiders",
+      "key": "",
+      "size": [150, 150, 15],
+      "resting": "Spiders Respawn",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "36": {
-      "name": "Room 36",
-      "size": [150, 150, 150],
-      "description": "Doors",
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [100, 100, 15],
+      "resting": "Safe",
+      "description": "",
       "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 1,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "37": {
-      "name": "Room 37",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 5,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Crowded Coop",
+      "badguys": "4 swarms of chickens (ravens)",
+      "key": "",
+      "size": [50, 20, 10],
+      "resting": "Unsafe, chicken swarms respawn 1d4-1 every hour up to 4.",
+      "description": "An increibly overcrowded chicken coop, with birds roosted from floor to ceiling, lots on the floor.",
+      "mechanics": "2x player rations in eggs. Damaging the chickens provkes them.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Match", "gravity": 0 }
     },
     "38": {
-      "name": "Room 38",
-      "size": [150, 150, 150],
-      "description": "Doors",
-      "mechanics": "",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 3,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Supply Depot",
+      "badguys": "",
+      "key": "",
+      "size": [150, 150, 15],
+      "resting": "Safe",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "gravity": { "type": "Random", "gravity": 0 }
     },
     "39": {
-      "name": "Room 39",
-      "size": [100, 100, 100],
-      "description": "Elements from this array of objects are copied and assigned to individual rooms during construction.  Once 'created' this list is no longer referenced. We'll copy all of the parameters to the room for reference. ",
-      "gravity": {
-        "type": "fixed",
-        "gravity": 2,
-        "desc": "normal values will be unset until a room is entered? previewed? random will be determined each time. special will just have text."
-      },
-      "badguys": "link or other config ref?",
-      "key": true,
-      "exit": false,
-      "color": "maybe we want to pin certain rooms for _theme_?"
+      "name": "Exit! (not in Roll20)",
+      "badguys": "",
+      "key": "",
+      "size": "",
+      "resting": "",
+      "description": "",
+      "mechanics": "Exit into a high level of the beggar's palace in the early afternoon the day they left.",
+      "start": "",
+      "exit": true,
+      "gravity": { "type": "Match", "gravity": 0 }
     }
   }
 }

@@ -61,7 +61,7 @@
     "id": "an index for reference?",
     "name": "don't really need this",
     "color": "ambient light for all rooms in this cell, differentiates same room in different cells",
-    "key": "who has it?, if null, still up for grabs"
+    "key": null
   },
   "cellMap": [
     {
