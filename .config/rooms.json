@@ -10,6 +10,8 @@
       "mechanics": "The room is functionally a ring, go far enough in either direction and you'll come back to your origin. Nothing can move more than ~10' from the path in any direction.  There is no barrier, you just can't go past it.  Thrown/shot objects stay aloft the normal time, and the heigh above ground is correct for the duration, they just don't go farther.  Size the 'length' of the room such that everyone is staggered evenly throughout the circumfrence of the room.",
       "start": true,
       "exit": "",
+      "includeGroup": 1,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "1": {
@@ -22,6 +24,8 @@
       "mechanics": "On entering the room, the 'door' occupies the full frame of an inocuous window frame.One of the boggles possess an amulet, glowing with the cell's color, it's a key!.  The boggles are simply mad here, harrasing players, fleeing through portals only to reemerge and attack.  Boggle count is player count.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "2": {
@@ -34,6 +38,8 @@
       "mechanics": "It's a tiny planet. 6 doors evenly(ish) spaced around the surface.  Gravity goes to the surface of the planet, is approximately 1/2.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "3": {
@@ -46,6 +52,8 @@
       "mechanics": "Gravity reverses periodically in the room, 1d4 rounds after each time.  We can't actually account for this is the game, but it doesn't matter.  DC 12 Dex save or 1d6 dmg, save for half.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     },
     "4": {
@@ -58,6 +66,8 @@
       "mechanics": "Animated armor activates when the key is retrieved.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "5": {
@@ -70,6 +80,8 @@
       "mechanics": "Difficult terrain everywhere.The depth of the bones is really really deep DC 15 Investigation suggests it's over 100'. 1 Skeleton rises at the first contact with the bones.  The swarm 'forms' another in 1d4 rounds.  Damage to the swarm skeleton is split between the 2 before any resistance/vulnerabilities.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     },
     "6": {
@@ -82,6 +94,8 @@
       "mechanics": "No gravity.  DC 12 Perception to notice the sticky ooze eminating from the surface. Contact with the walls deals Acid dmg every round.  1d6+1 DC 13 save for half. On a faild save, 1/2 dmg again next round.  DC 13 Acrobatics check to launch to another door.  Fail means off track.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "7": {
@@ -94,6 +108,8 @@
       "mechanics": "Any light or group (or ind) stealth DC 13. Failure makes the shrieker start to scream.  DC 10 Con save vs d4+rounds dmg.  Increases DC and dmg +1 per round.  After 5 rounds, failure is deafened.   Shrieker has the key.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "8": {
@@ -106,6 +122,8 @@
       "mechanics": "This will be disabled by default so long as the players wear the bracelet. The mouther is functionally grappled.  Cannot move even if it's not disabled.  if they don't, any square has 1d4 chance of being fake (on a 1 they fall through).  DC 12 Investigation to detect.  If you fail, DC 13 Dex save or you fall through.  You emerge from a random square in the ceiling and fall to the ground.  Repeat the 1d4 chance and the DC13 Dex save, repeat.  Take Xd6 damage, where x is the number of times you fell.",
       "start": "",
       "exit": "",
+      "includeGroup": 1,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 1 }
     },
     "9": {
@@ -118,6 +136,8 @@
       "mechanics": "It's an animated model of Chuult.  It's *not* the current Chult (Merzo is still there, for instance) but spending 2 hours studying this gives +5 on Survival checks to navigate in the jungle. After 2 hours, the peaks of flame errupt and fill the room with acrid smoke.  Zero visibility, can't breath. Must leave",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "10": {
@@ -130,6 +150,8 @@
       "mechanics": "",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "11": {
@@ -142,6 +164,8 @@
       "mechanics": "The ground is icy and intermittently broken.  Difficult terrain everywhere and lightly obscured in the snow. (Disadv on perception).",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "12": {
@@ -154,6 +178,8 @@
       "mechanics": "If the party rests here, they're visited by a Chwinga and each recieve a charm.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     },
     "13": {
@@ -166,6 +192,8 @@
       "mechanics": "The Giant squid has a key!  The baby octopus runs and hides as soon as it takes any damage.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "14": {
@@ -178,6 +206,8 @@
       "mechanics": "No light eminates at all. No dark vision. No Magic on detect magic.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "15": {
@@ -190,6 +220,8 @@
       "mechanics": "Niblog rides the blinkdog around. Somewhate recklessly.  Only speaks goblin and isn't particularly interested in chatting.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "16": {
@@ -202,6 +234,8 @@
       "mechanics": "The round after a player emerges, 1d3 zombies crawl out.  Next round 3-whatever you rolled come out.  Key is on the 2nd zombie",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "17": {
@@ -214,6 +248,8 @@
       "mechanics": "Kazan is totally mad.  All the books here are jibberish.  He will mention Acerack, the trickster gods, etc.  But he's just batshit crazy.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     },
     "18": {
@@ -226,6 +262,8 @@
       "mechanics": "Grung wilding tells the people to leave twice. If they don't it casts plant grown and everyone jumps into the trees.  They have some supplies.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     },
     "19": {
@@ -238,6 +276,8 @@
       "mechanics": "DC 13 Perception, there aren't even seams at the edges.  The orb is one of Acerak's phylactories.  Attacking it unleashes a burst of necrotic energy equal to the dmg delt.  DC 13 Dex save for half.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "20": {
@@ -250,6 +290,8 @@
       "mechanics": "They battle stack to 2 groups and are really bad tactically.  Put the",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 2 }
     },
     "21": {
@@ -262,6 +304,8 @@
       "mechanics": "4 Velociraptors, pack tactics. Violence.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "22": {
@@ -274,6 +318,8 @@
       "mechanics": "Gravity follows the sides.  You're 'pulled' to the side facing you regardless of how far off you are.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "23": {
@@ -286,6 +332,8 @@
       "mechanics": "Gives +2 hp per round, 1 level of exhaustion/minute,any of poison, charm, frightened in 1st minute.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "24": {
@@ -298,6 +346,8 @@
       "mechanics": "Gravity is pull to the orb until something touches it, then it reverses.  Momentum is conserved though, so things 'keep going' if they had velocity.  2d6 fall damage.  The charm *doesnt* fall.  DC 14 sleight of hand/acrobatics to grab it.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "25": {
@@ -310,6 +360,8 @@
       "mechanics": "",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 2 }
     },
     "26": {
@@ -322,6 +374,8 @@
       "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "27": {
@@ -334,6 +388,8 @@
       "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "28": {
@@ -346,6 +402,8 @@
       "mechanics": "No idea what should happen if they just jump in.  That'd be wild.  Dex save to catch the lip of the door?",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Special", "gravity": 0 }
     },
     "29": {
@@ -358,6 +416,8 @@
       "mechanics": "DC14 Perception to see another door.  They're 1000' away",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 0 }
     },
     "30": {
@@ -370,6 +430,8 @@
       "mechanics": "DC12 Perception to hear the wire.  \nDC15 Perception to see the clean cuts in the bones etc.\nDC13 Dex vs 2d4 damage.\nEach round determine origin plane 1d3 (1 up/down, 2 left/right, 3 front/back)\n1d8 - square it moves through",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "31": {
@@ -382,6 +444,8 @@
       "mechanics": "",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 0 }
     },
     "32": {
@@ -394,6 +458,8 @@
       "mechanics": "",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 3 }
     },
     "33": {
@@ -406,6 +472,8 @@
       "mechanics": "",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 2 }
     },
     "34": {
@@ -418,6 +486,8 @@
       "mechanics": "When the door _closes_ pedistal lights turns red.  Air is sucked out of the room. When touched, the light turns green.  Can't open any door until all 4 are green.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 5 }
     },
     "35": {
@@ -430,6 +500,8 @@
       "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "36": {
@@ -442,6 +514,8 @@
       "mechanics": "",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Fixed", "gravity": 4 }
     },
     "37": {
@@ -454,6 +528,8 @@
       "mechanics": "2x player rations in eggs. Damaging the chickens provkes them.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     },
     "38": {
@@ -466,6 +542,8 @@
       "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
       "start": "",
       "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Random", "gravity": 0 }
     },
     "39": {
@@ -478,6 +556,8 @@
       "mechanics": "Exit into a high level of the beggar's palace in the early afternoon the day they left.",
       "start": "",
       "exit": true,
+      "includeGroup": null,
+      "excludeGroup": null,
       "gravity": { "type": "Match", "gravity": 0 }
     }
   }
