@@ -12,7 +12,8 @@ import prompts from "prompts";
 import chalk from "chalk";
 import yargs from "yargs";
 import process from "process";
-
+import convert from "color-convert";
+console.log(yargs)
 prompts.override(yargs.argv);
 
 // First, let's define our command types
@@ -61,13 +62,13 @@ class GameState {
     //if(gameDetails.notes[gameDetails.currentRoom])
 
     console.log(`
-        ${chalk[color](
+        ${chalk.hex(color)(
           "Name:" +
             room.name +
             "  (" +
             gameDetails.currentCell +
             " - " +
-            color +
+            convert.hex.keyword(color) +
             ")"
         )}
         Size: ${room.size ? room.size.join(" x ") : "see Roll20"}
@@ -85,7 +86,7 @@ class GameState {
     console.log("Notes: " + gameDetails.notes[gameDetails.currentRoom]);
     //console.log("Display open doors -"+gameDetails.currentDoors)
     console.log(
-      chalk[color](`
+      chalk.hex(color)(`
                              ${(
                                "Up " +
                                (gameDetails.currentEntry ==
@@ -179,7 +180,7 @@ class GameState {
       gameDetails.currentRoom == gameDetails.exitRoom
     ) {
       console.log(
-        `${chalk[color]("\n\n\nT  h  e      E   x   i   t   !   !")}`
+        `${chalk.hex(color)("\n\n\nT  h  e      E   x   i   t   !   !")}`
       );
     }
     return true;
@@ -359,7 +360,7 @@ class GameState {
       door.title += `         {${nextRoom} - ${rooms[nextRoom].name} ${
         cells[nextCell].key == nextRoom ? "<Has Key>" : ""
       }}`;
-      door.title = chalk[cells[nextCell].color](door.title);
+      door.title = chalk.hex(cells[nextCell].color)(door.title);
       return door;
     });
 
@@ -516,7 +517,7 @@ class GameState {
       this.display();
 
       console.log(
-        chalk[cells[nextCell].color](`
+        chalk.hex(cells[nextCell].color)(`
                          ${(
                            (gameDetails.currentOpenDoorGravity == 3
                              ? "(G)"

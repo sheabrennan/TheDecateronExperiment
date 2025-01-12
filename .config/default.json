@@ -42,16 +42,16 @@
     "BOTTOM"
   ],
   "keyList": {
-    "red": null,
-    "grey": null,
-    "yellow": null,
-    "green": null,
-    "cyan": null,
-    "blue": null,
-    "white": null,
-    "magenta": null,
-    "yellowBright": null,
-    "redBright": null
+    "#FF0000": null,
+    "#00FF00": null,
+    "#FFFF00": null,
+    "#0000FF": null,
+    "#FF00FF": null,
+    "#00FFFF": null,
+    "#FFFFFF": null,
+    "#FF69B4": null,
+    "#ADD8E6": null,
+    "#FFA500": null
   },
   "cellCount": 10,
   "roomCount": 40,
