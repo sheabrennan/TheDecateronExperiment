@@ -1,0 +1,2429 @@
+{
+  "cells": {
+    "0": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#FF0000",
+      "key": "7",
+      "cellRooms": {
+        "7": {
+          "position": "North",
+          "doors": [
+            "19",
+            "34",
+            "23",
+            "17",
+            "18",
+            "26"
+          ],
+          "otherCell": "4"
+        },
+        "8": {
+          "position": "South",
+          "doors": [
+            "23",
+            "34",
+            "19",
+            "17",
+            "18",
+            "26"
+          ],
+          "otherCell": "6"
+        },
+        "17": {
+          "position": "East",
+          "doors": [
+            "8",
+            "19",
+            "7",
+            "23",
+            "18",
+            "26"
+          ],
+          "otherCell": "4"
+        },
+        "18": {
+          "position": "Bottom",
+          "doors": [
+            "8",
+            "34",
+            "7",
+            "17",
+            "23",
+            "19"
+          ],
+          "otherCell": "2"
+        },
+        "19": {
+          "position": "Inner",
+          "doors": [
+            "8",
+            "34",
+            "7",
+            "17",
+            "18",
+            "26"
+          ],
+          "otherCell": "3"
+        },
+        "23": {
+          "position": "Outer",
+          "doors": [
+            "7",
+            "17",
+            "8",
+            "34",
+            "26",
+            "18"
+          ],
+          "otherCell": "5"
+        },
+        "26": {
+          "position": "Top",
+          "doors": [
+            "8",
+            "34",
+            "7",
+            "17",
+            "19",
+            "23"
+          ],
+          "otherCell": "1"
+        },
+        "34": {
+          "position": "West",
+          "doors": [
+            "8",
+            "23",
+            "7",
+            "19",
+            "18",
+            "26"
+          ],
+          "otherCell": "2"
+        }
+      },
+      "otherKeyCell": "4"
+    },
+    "1": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#00FF00",
+      "key": "15",
+      "cellRooms": {
+        "6": {
+          "position": "Outer",
+          "doors": [
+            "15",
+            "14",
+            "11",
+            "35",
+            "26",
+            "16"
+          ],
+          "otherCell": "2"
+        },
+        "11": {
+          "position": "South",
+          "doors": [
+            "6",
+            "35",
+            "32",
+            "14",
+            "16",
+            "26"
+          ],
+          "otherCell": "3"
+        },
+        "14": {
+          "position": "East",
+          "doors": [
+            "11",
+            "32",
+            "15",
+            "6",
+            "16",
+            "26"
+          ],
+          "otherCell": "9"
+        },
+        "15": {
+          "position": "North",
+          "doors": [
+            "32",
+            "35",
+            "6",
+            "14",
+            "16",
+            "26"
+          ],
+          "otherCell": "3"
+        },
+        "16": {
+          "position": "Bottom",
+          "doors": [
+            "11",
+            "35",
+            "15",
+            "14",
+            "6",
+            "32"
+          ],
+          "otherCell": "4"
+        },
+        "26": {
+          "position": "Top",
+          "doors": [
+            "11",
+            "35",
+            "15",
+            "14",
+            "32",
+            "6"
+          ],
+          "otherCell": "0"
+        },
+        "32": {
+          "position": "Inner",
+          "doors": [
+            "11",
+            "35",
+            "15",
+            "14",
+            "16",
+            "26"
+          ],
+          "otherCell": "8"
+        },
+        "35": {
+          "position": "West",
+          "doors": [
+            "11",
+            "6",
+            "15",
+            "32",
+            "16",
+            "26"
+          ],
+          "otherCell": "7"
+        }
+      },
+      "otherKeyCell": "3"
+    },
+    "2": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#FFFFFF",
+      "key": "18",
+      "cellRooms": {
+        "4": {
+          "position": "Bottom",
+          "doors": [
+            "5",
+            "6",
+            "18",
+            "28",
+            "36",
+            "21"
+          ],
+          "otherCell": "8"
+        },
+        "5": {
+          "position": "South",
+          "doors": [
+            "36",
+            "6",
+            "21",
+            "28",
+            "4",
+            "34"
+          ],
+          "otherCell": "7"
+        },
+        "6": {
+          "position": "West",
+          "doors": [
+            "5",
+            "36",
+            "18",
+            "21",
+            "4",
+            "34"
+          ],
+          "otherCell": "1"
+        },
+        "18": {
+          "position": "North",
+          "doors": [
+            "21",
+            "6",
+            "36",
+            "28",
+            "4",
+            "34"
+          ],
+          "otherCell": "0"
+        },
+        "21": {
+          "position": "Inner",
+          "doors": [
+            "5",
+            "6",
+            "18",
+            "28",
+            "4",
+            "34"
+          ],
+          "otherCell": "4"
+        },
+        "28": {
+          "position": "East",
+          "doors": [
+            "5",
+            "21",
+            "18",
+            "36",
+            "4",
+            "34"
+          ],
+          "otherCell": "5"
+        },
+        "34": {
+          "position": "Top",
+          "doors": [
+            "5",
+            "6",
+            "18",
+            "28",
+            "21",
+            "36"
+          ],
+          "otherCell": "0"
+        },
+        "36": {
+          "position": "Outer",
+          "doors": [
+            "18",
+            "28",
+            "5",
+            "6",
+            "34",
+            "4"
+          ],
+          "otherCell": "6"
+        }
+      },
+      "otherKeyCell": "0"
+    },
+    "3": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#8A2BE2",
+      "key": "1",
+      "cellRooms": {
+        "1": {
+          "position": "North",
+          "doors": [
+            "33",
+            "11",
+            "2",
+            "31",
+            "15",
+            "19"
+          ],
+          "otherCell": "9"
+        },
+        "2": {
+          "position": "Outer",
+          "doors": [
+            "1",
+            "31",
+            "37",
+            "11",
+            "19",
+            "15"
+          ],
+          "otherCell": "4"
+        },
+        "11": {
+          "position": "West",
+          "doors": [
+            "37",
+            "2",
+            "1",
+            "33",
+            "15",
+            "19"
+          ],
+          "otherCell": "1"
+        },
+        "15": {
+          "position": "Bottom",
+          "doors": [
+            "37",
+            "11",
+            "1",
+            "31",
+            "2",
+            "33"
+          ],
+          "otherCell": "1"
+        },
+        "19": {
+          "position": "Top",
+          "doors": [
+            "37",
+            "11",
+            "1",
+            "31",
+            "33",
+            "2"
+          ],
+          "otherCell": "0"
+        },
+        "31": {
+          "position": "East",
+          "doors": [
+            "37",
+            "33",
+            "1",
+            "2",
+            "15",
+            "19"
+          ],
+          "otherCell": "9"
+        },
+        "33": {
+          "position": "Inner",
+          "doors": [
+            "37",
+            "11",
+            "1",
+            "31",
+            "15",
+            "19"
+          ],
+          "otherCell": "8"
+        },
+        "37": {
+          "position": "South",
+          "doors": [
+            "2",
+            "11",
+            "33",
+            "31",
+            "15",
+            "19"
+          ],
+          "otherCell": "5"
+        }
+      },
+      "otherKeyCell": "9"
+    },
+    "4": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#FF00FF",
+      "key": "16",
+      "cellRooms": {
+        "2": {
+          "position": "Inner",
+          "doors": [
+            "27",
+            "21",
+            "16",
+            "12",
+            "7",
+            "17"
+          ],
+          "otherCell": "3"
+        },
+        "7": {
+          "position": "Bottom",
+          "doors": [
+            "27",
+            "21",
+            "16",
+            "12",
+            "39",
+            "2"
+          ],
+          "otherCell": "0"
+        },
+        "12": {
+          "position": "East",
+          "doors": [
+            "27",
+            "2",
+            "16",
+            "39",
+            "7",
+            "17"
+          ],
+          "otherCell": "6"
+        },
+        "16": {
+          "position": "North",
+          "doors": [
+            "2",
+            "21",
+            "39",
+            "12",
+            "7",
+            "17"
+          ],
+          "otherCell": "1"
+        },
+        "17": {
+          "position": "Top",
+          "doors": [
+            "27",
+            "21",
+            "16",
+            "12",
+            "2",
+            "39"
+          ],
+          "otherCell": "0"
+        },
+        "21": {
+          "position": "West",
+          "doors": [
+            "27",
+            "39",
+            "16",
+            "2",
+            "7",
+            "17"
+          ],
+          "otherCell": "2"
+        },
+        "27": {
+          "position": "South",
+          "doors": [
+            "39",
+            "21",
+            "2",
+            "12",
+            "7",
+            "17"
+          ],
+          "otherCell": "8"
+        },
+        "39": {
+          "position": "Outer",
+          "doors": [
+            "16",
+            "12",
+            "27",
+            "21",
+            "17",
+            "7"
+          ],
+          "otherCell": "7"
+        }
+      },
+      "otherKeyCell": "1"
+    },
+    "5": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#FFFF00",
+      "key": "13",
+      "cellRooms": {
+        "0": {
+          "position": "Bottom",
+          "doors": [
+            "38",
+            "28",
+            "13",
+            "25",
+            "22",
+            "37"
+          ],
+          "otherCell": "6"
+        },
+        "13": {
+          "position": "North",
+          "doors": [
+            "37",
+            "28",
+            "22",
+            "25",
+            "0",
+            "23"
+          ],
+          "otherCell": "7"
+        },
+        "22": {
+          "position": "Outer",
+          "doors": [
+            "13",
+            "25",
+            "38",
+            "28",
+            "23",
+            "0"
+          ],
+          "otherCell": "6"
+        },
+        "23": {
+          "position": "Top",
+          "doors": [
+            "38",
+            "28",
+            "13",
+            "25",
+            "37",
+            "22"
+          ],
+          "otherCell": "0"
+        },
+        "25": {
+          "position": "East",
+          "doors": [
+            "38",
+            "37",
+            "13",
+            "22",
+            "0",
+            "23"
+          ],
+          "otherCell": "9"
+        },
+        "28": {
+          "position": "West",
+          "doors": [
+            "38",
+            "22",
+            "13",
+            "37",
+            "0",
+            "23"
+          ],
+          "otherCell": "2"
+        },
+        "37": {
+          "position": "Inner",
+          "doors": [
+            "38",
+            "28",
+            "13",
+            "25",
+            "0",
+            "23"
+          ],
+          "otherCell": "3"
+        },
+        "38": {
+          "position": "South",
+          "doors": [
+            "22",
+            "28",
+            "37",
+            "25",
+            "0",
+            "23"
+          ],
+          "otherCell": "7"
+        }
+      },
+      "otherKeyCell": "7"
+    },
+    "6": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#00FFFF",
+      "key": "0",
+      "cellRooms": {
+        "0": {
+          "position": "North",
+          "doors": [
+            "12",
+            "36",
+            "9",
+            "22",
+            "20",
+            "8"
+          ],
+          "otherCell": "5"
+        },
+        "8": {
+          "position": "Top",
+          "doors": [
+            "30",
+            "36",
+            "0",
+            "22",
+            "12",
+            "9"
+          ],
+          "otherCell": "0"
+        },
+        "9": {
+          "position": "Outer",
+          "doors": [
+            "0",
+            "22",
+            "30",
+            "36",
+            "8",
+            "20"
+          ],
+          "otherCell": "8"
+        },
+        "12": {
+          "position": "Inner",
+          "doors": [
+            "30",
+            "36",
+            "0",
+            "22",
+            "20",
+            "8"
+          ],
+          "otherCell": "4"
+        },
+        "20": {
+          "position": "Bottom",
+          "doors": [
+            "30",
+            "36",
+            "0",
+            "22",
+            "9",
+            "12"
+          ],
+          "otherCell": "7"
+        },
+        "22": {
+          "position": "East",
+          "doors": [
+            "30",
+            "12",
+            "0",
+            "9",
+            "20",
+            "8"
+          ],
+          "otherCell": "5"
+        },
+        "30": {
+          "position": "South",
+          "doors": [
+            "9",
+            "36",
+            "12",
+            "22",
+            "20",
+            "8"
+          ],
+          "otherCell": "9"
+        },
+        "36": {
+          "position": "West",
+          "doors": [
+            "30",
+            "9",
+            "0",
+            "12",
+            "20",
+            "8"
+          ],
+          "otherCell": "2"
+        }
+      },
+      "otherKeyCell": "5"
+    },
+    "7": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#f0a8ad",
+      "key": "20",
+      "cellRooms": {
+        "3": {
+          "position": "Outer",
+          "doors": [
+            "20",
+            "38",
+            "10",
+            "5",
+            "35",
+            "13"
+          ],
+          "otherCell": "8"
+        },
+        "5": {
+          "position": "West",
+          "doors": [
+            "10",
+            "3",
+            "20",
+            "39",
+            "13",
+            "35"
+          ],
+          "otherCell": "2"
+        },
+        "10": {
+          "position": "South",
+          "doors": [
+            "3",
+            "5",
+            "39",
+            "38",
+            "13",
+            "35"
+          ],
+          "otherCell": "9"
+        },
+        "13": {
+          "position": "Bottom",
+          "doors": [
+            "10",
+            "5",
+            "20",
+            "38",
+            "3",
+            "39"
+          ],
+          "otherCell": "5"
+        },
+        "20": {
+          "position": "North",
+          "doors": [
+            "39",
+            "5",
+            "3",
+            "38",
+            "13",
+            "35"
+          ],
+          "otherCell": "6"
+        },
+        "35": {
+          "position": "Top",
+          "doors": [
+            "10",
+            "5",
+            "20",
+            "38",
+            "39",
+            "3"
+          ],
+          "otherCell": "1"
+        },
+        "38": {
+          "position": "East",
+          "doors": [
+            "10",
+            "39",
+            "20",
+            "3",
+            "13",
+            "35"
+          ],
+          "otherCell": "5"
+        },
+        "39": {
+          "position": "Inner",
+          "doors": [
+            "10",
+            "5",
+            "20",
+            "38",
+            "13",
+            "35"
+          ],
+          "otherCell": "4"
+        }
+      },
+      "otherKeyCell": "6"
+    },
+    "8": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#105e81",
+      "key": "4",
+      "cellRooms": {
+        "3": {
+          "position": "Outer",
+          "doors": [
+            "4",
+            "9",
+            "29",
+            "33",
+            "32",
+            "24"
+          ],
+          "otherCell": "7"
+        },
+        "4": {
+          "position": "North",
+          "doors": [
+            "27",
+            "33",
+            "3",
+            "9",
+            "24",
+            "32"
+          ],
+          "otherCell": "2"
+        },
+        "9": {
+          "position": "East",
+          "doors": [
+            "29",
+            "27",
+            "4",
+            "3",
+            "24",
+            "32"
+          ],
+          "otherCell": "6"
+        },
+        "24": {
+          "position": "Bottom",
+          "doors": [
+            "29",
+            "33",
+            "4",
+            "9",
+            "3",
+            "27"
+          ],
+          "otherCell": "9"
+        },
+        "27": {
+          "position": "Inner",
+          "doors": [
+            "29",
+            "33",
+            "4",
+            "9",
+            "24",
+            "32"
+          ],
+          "otherCell": "4"
+        },
+        "29": {
+          "position": "South",
+          "doors": [
+            "3",
+            "33",
+            "27",
+            "9",
+            "24",
+            "32"
+          ],
+          "otherCell": "9"
+        },
+        "32": {
+          "position": "Top",
+          "doors": [
+            "29",
+            "33",
+            "4",
+            "9",
+            "27",
+            "3"
+          ],
+          "otherCell": "1"
+        },
+        "33": {
+          "position": "West",
+          "doors": [
+            "29",
+            "3",
+            "4",
+            "27",
+            "24",
+            "32"
+          ],
+          "otherCell": "3"
+        }
+      },
+      "otherKeyCell": "2"
+    },
+    "9": {
+      "id": "an index for reference?",
+      "name": "don't really need this",
+      "color": "#FFA500",
+      "key": "24",
+      "cellRooms": {
+        "1": {
+          "position": "Bottom",
+          "doors": [
+            "29",
+            "31",
+            "24",
+            "30",
+            "10",
+            "25"
+          ],
+          "otherCell": "3"
+        },
+        "10": {
+          "position": "Outer",
+          "doors": [
+            "24",
+            "30",
+            "29",
+            "31",
+            "14",
+            "1"
+          ],
+          "otherCell": "7"
+        },
+        "14": {
+          "position": "Top",
+          "doors": [
+            "29",
+            "31",
+            "24",
+            "30",
+            "25",
+            "10"
+          ],
+          "otherCell": "1"
+        },
+        "24": {
+          "position": "North",
+          "doors": [
+            "25",
+            "31",
+            "10",
+            "30",
+            "1",
+            "14"
+          ],
+          "otherCell": "8"
+        },
+        "25": {
+          "position": "Inner",
+          "doors": [
+            "29",
+            "31",
+            "24",
+            "30",
+            "1",
+            "14"
+          ],
+          "otherCell": "5"
+        },
+        "29": {
+          "position": "South",
+          "doors": [
+            "10",
+            "31",
+            "25",
+            "30",
+            "1",
+            "14"
+          ],
+          "otherCell": "8"
+        },
+        "30": {
+          "position": "East",
+          "doors": [
+            "29",
+            "25",
+            "24",
+            "10",
+            "1",
+            "14"
+          ],
+          "otherCell": "6"
+        },
+        "31": {
+          "position": "West",
+          "doors": [
+            "29",
+            "10",
+            "24",
+            "25",
+            "1",
+            "14"
+          ],
+          "otherCell": "3"
+        }
+      },
+      "otherKeyCell": "8"
+    }
+  },
+  "rooms": {
+    "0": {
+      "name": "Entrance",
+      "badguys": "",
+      "key": 9,
+      "size": [
+        25,
+        200,
+        0
+      ],
+      "resting": "Safe",
+      "description": "A soft, milk white liminal space surrounds you. A smooth, grey cobblestone path extends to the horizon in both directions.  In every other direction is a vertigo inducing featureless blank.  A soft, cool breeze blows across the path.  Nearby a round hatchlike door is inset in the center of the path.  A textured handle sits flush in the center of the hatch, but no lock, mechanism or hinges are visible.",
+      "mechanics": "The room is functionally a ring, go far enough in either direction and you'll come back to your origin. Nothing can move more than ~10' from the path in any direction.  There is no barrier, you just can't go past it.  Thrown/shot objects stay aloft the normal time, and the heigh above ground is correct for the duration, they just don't go farther.  Size the 'length' of the room such that everyone is staggered evenly throughout the circumfrence of the room.",
+      "start": true,
+      "exit": "",
+      "includeGroup": 1,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 3
+      }
+    },
+    "1": {
+      "name": "Mirror Boggles",
+      "badguys": "5 Boggles",
+      "key": 10,
+      "size": [
+        120,
+        120,
+        300
+      ],
+      "resting": "Boggles respawn after 1d4 hours",
+      "description": "Chaotic piles of framed mirrors, mostly broken, block visibilty in all directions. A narrow, meandering path wends through the chaos; the floor littered with broken glass. The ceiling is lost in darkness.",
+      "mechanics": "On entering the room, the 'door' occupies the full frame of an inocuous window frame.One of the boggles possess an amulet, glowing with the cell's color, it's a key!.  The boggles are simply mad here, harrasing players, fleeing through portals only to reemerge and attack.  Boggle count is player count.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 4
+      }
+    },
+    "2": {
+      "name": "Tiny Planet",
+      "badguys": "",
+      "key": "",
+      "size": [
+        80,
+        80,
+        80
+      ],
+      "resting": "1d6 per hour.  on a 1, hit a player, 1d6 dmg.  on a 2-3, hit near the camp.",
+      "description": "Staring through the door you see an unfamilar sky brimming with celestial objects.  You emerge onto a barren, lifeless landscape dotted with craters and immediately notice reduced gravity and no sound.  Whats more, the surface appears to curve away to a horizon not 100' away.  Near the horzion a small meteor smashes into the surface sending rocks and dust into the air.",
+      "mechanics": "It's a tiny planet. 6 doors evenly(ish) spaced around the surface.  Gravity goes to the surface of the planet, is approximately 1/2.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "3": {
+      "name": "Reversing Gravity",
+      "badguys": "",
+      "key": "",
+      "size": [
+        60,
+        60,
+        20
+      ],
+      "resting": "Unsafe",
+      "description": "Small piles of sand are scattered everywhere across a rough, uneven floor. The air is dusty.",
+      "mechanics": "Gravity reverses periodically in the room, 1d4 rounds after each time.  We can't actually account for this is the game, but it doesn't matter.  DC 12 Dex save or 1d6 dmg, save for half.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    },
+    "4": {
+      "name": "Dangerous",
+      "badguys": "Animated Armor",
+      "key": 1,
+      "size": [
+        70,
+        70,
+        70
+      ],
+      "resting": "Armor reassembles after 1d4 hours",
+      "description": "A large, pristine, cubic room.  The walls, floor, and ceiling appear identical reflections, constructed of a barely opaque pale green glass like material. Standing at its center is an extremely corroded and rusted set of plate mail, around it's neck hangs a glowing orniment.",
+      "mechanics": "Animated armor activates when the key is retrieved.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "5": {
+      "name": "No Bones About it",
+      "badguys": "2 Skeletons and a swarm of beetles",
+      "key": "",
+      "size": [
+        120,
+        120,
+        35
+      ],
+      "resting": "Repsawns after 1d4 hours",
+      "description": "Bleached white bones blanket they floor of this room as far as your vision reaches.  The ceiling is 15 ft above the uneven surface that makes for a floor.  To the left and right the walls appear to curve towards eachother in an arc.",
+      "mechanics": "Difficult terrain everywhere.The depth of the bones is really really deep DC 15 Investigation suggests it's over 100'. 1 Skeleton rises at the first contact with the bones.  The swarm 'forms' another in 1d4 rounds.  Damage to the swarm skeleton is split between the 2 before any resistance/vulnerabilities.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    },
+    "6": {
+      "name": "Sticky Acid Zero-G Sphere",
+      "badguys": "",
+      "key": "",
+      "size": [
+        60,
+        60,
+        60
+      ],
+      "resting": "Unsafe",
+      "description": "The door opens to the interior of a dimly lit sphere. A door opposes you across the sphere.  2 more similarly opposing sets sit at right angles from these, evenly spaced across the interior surface of the sphere.",
+      "mechanics": "No gravity.  DC 12 Perception to notice the sticky ooze eminating from the surface. Contact with the walls deals Acid dmg every round.  1d6+1 DC 13 save for half. On a faild save, 1/2 dmg again next round.  DC 13 Acrobatics check to launch to another door.  Fail means off track.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "7": {
+      "name": "Echoic Chamber",
+      "badguys": "Shriker + 3 or 4 grimlocks",
+      "key": 2,
+      "size": [
+        250,
+        250,
+        50
+      ],
+      "resting": "Shriker respawns 1d4 hours (no grimlocks)",
+      "description": "A dark, damp cavern opens up in all directions.  Thick lichen covers the floor and giant mushrooms, 8-10' tall, create a fungal forest with narrow, single person paths winding between them.",
+      "mechanics": "Any light or group (or ind) stealth DC 13. Failure makes the shrieker start to scream.  DC 10 Con save vs d4+rounds dmg.  Increases DC and dmg +1 per round.  After 5 rounds, failure is deafened.   Shrieker has the key.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 4
+      }
+    },
+    "8": {
+      "name": "Jehova map",
+      "badguys": "Gibbering Mouther",
+      "key": "",
+      "size": [
+        45,
+        45,
+        15
+      ],
+      "resting": "Unsafe",
+      "description": "The floor and ceiling of this rooom is covered with 5' square glyphs.  They depict crude animal shapes deeply carved in rough, well worn stone.  Looming near the center is a horrible aberration.  A pile of skinless flesh, inumerable eyes and mouths bobs mindlessly",
+      "mechanics": "This will be disabled by default so long as the players wear the bracelet. The mouther is functionally grappled.  Cannot move even if it's not disabled.  if they don't, any square has 1d4 chance of being fake (on a 1 they fall through).  DC 12 Investigation to detect.  If you fail, DC 13 Dex save or you fall through.  You emerge from a random square in the ceiling and fall to the ground.  Repeat the 1d4 chance and the DC13 Dex save, repeat.  Take Xd6 damage, where x is the number of times you fell.",
+      "start": "",
+      "exit": "",
+      "includeGroup": 1,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 1
+      }
+    },
+    "9": {
+      "name": "Chult Map Room",
+      "badguys": "",
+      "key": "",
+      "size": [
+        30,
+        30,
+        15
+      ],
+      "resting": "Unsafe",
+      "description": "An opulantly decorated, heavily guilded room is filled will excessively humid stale air.  Clerastory stained glass windows cast fragmented, multicolored light on all surfaces.  The centerpoint of the room is a giant table with some kind of model occupying most of it's surface.",
+      "mechanics": "It's an animated model of Chuult.  It's *not* the current Chult (Merzo is still there, for instance) but spending 2 hours studying this gives +5 on Survival checks to navigate in the jungle. After 2 hours, the peaks of flame errupt and fill the room with acrid smoke.  Zero visibility, can't breath. Must leave",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 4
+      }
+    },
+    "10": {
+      "name": "Plane of Fire",
+      "badguys": "Fire Snake",
+      "key": "",
+      "size": "",
+      "resting": "DC12 Con save after 1 hour for 1d6 Fire dmg, none on save. DC increases +1 every hour.",
+      "description": "A 5'",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 4
+      }
+    },
+    "11": {
+      "name": "Plane of Ice",
+      "badguys": "3 Ice Mephits",
+      "key": "",
+      "size": "",
+      "resting": "DC12 Con save after 1 hour for 1d6 Cold dmg, none on save. DC increases +1 every hour.",
+      "description": "A broken, icy landscape is barely visible through blowing snow. A cold wind howls throughout.",
+      "mechanics": "The ground is icy and intermittently broken.  Difficult terrain everywhere and lightly obscured in the snow. (Disadv on perception).",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 3
+      }
+    },
+    "12": {
+      "name": "Plane of Earth",
+      "badguys": "10 Chwinga",
+      "key": "",
+      "size": [
+        250,
+        250,
+        1000
+      ],
+      "resting": "Safe",
+      "description": "A barren rocky landscape leads out in all directions. Above a pale green cloudless, sunless sky evokes late summer dusk light.  A cool, gentle breeze seems always to be blowing at you, regardless of your orientation.",
+      "mechanics": "If the party rests here, they're visited by a Chwinga and each recieve a charm.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    },
+    "13": {
+      "name": "Plane of Water",
+      "badguys": "1 or 2 Octopi & 1 Giant Octopus",
+      "key": 3,
+      "size": [
+        60,
+        60,
+        60
+      ],
+      "resting": "Unsafe",
+      "description": "Beyond the open door is a wall of crystal clear water.  Thick kelp grows in all directions.",
+      "mechanics": "The Giant squid has a key!  The baby octopus runs and hides as soon as it takes any damage.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "14": {
+      "name": "Plane of Negative Energy (not in roll20)",
+      "badguys": "",
+      "key": "",
+      "size": [
+        25,
+        25,
+        25
+      ],
+      "resting": "Safe",
+      "description": "Absolute, impenitrable blackness.",
+      "mechanics": "No light eminates at all. No dark vision. No Magic on detect magic.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 3
+      }
+    },
+    "15": {
+      "name": "Plane of Fey",
+      "badguys": "1 Niblog riding a Blinkdog",
+      "key": 6,
+      "size": [
+        100,
+        100,
+        1000
+      ],
+      "resting": "Safe",
+      "description": "A shady grove of huge trees dressed in soft filtered sunlight opens before you.  The floor is covered with a lush pale green moss.  A faint laughter echos through the trees.",
+      "mechanics": "Niblog rides the blinkdog around. Somewhate recklessly.  Only speaks goblin and isn't particularly interested in chatting.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 4
+      }
+    },
+    "16": {
+      "name": "Death hole",
+      "badguys": "3 zombies",
+      "key": 7,
+      "size": [
+        60,
+        60,
+        15
+      ],
+      "resting": "Unsafe, zombies *dont* stop",
+      "description": "Damp, dark soil blankets this large open cave-like room.  Near each door, a small whole, perhaps 3' across leaks a black ichor.  The smell of death is persistent.",
+      "mechanics": "The round after a player emerges, 1d3 zombies crawl out.  Next round 3-whatever you rolled come out.  Key is on the 2nd zombie",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "17": {
+      "name": "Kazan's Library",
+      "badguys": "",
+      "key": "",
+      "size": [
+        200,
+        200,
+        30
+      ],
+      "resting": "",
+      "description": "The door opens into what appears to be a GIGANTIC library.  Huge stone shelves extend in multiple teirs and disappear beyond your vision toward a presumed ceiling.",
+      "mechanics": "Kazan is totally mad.  All the books here are jibberish.  He will mention Acerack, the trickster gods, etc.  But he's just batshit crazy.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    },
+    "18": {
+      "name": "Grung Grung",
+      "badguys": "1 Grung Wildling and 2 Grungs",
+      "key": 8,
+      "size": [
+        60,
+        60,
+        60
+      ],
+      "resting": "Safe",
+      "description": "A lush, overgrown jungle spreads in both directions. Sounds of life filter through the trees.",
+      "mechanics": "Grung wilding tells the people to leave twice. If they don't it casts plant grown and everyone jumps into the trees.  They have some supplies.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    },
+    "19": {
+      "name": "Phylactery",
+      "badguys": "",
+      "key": "",
+      "size": [
+        40,
+        40,
+        40
+      ],
+      "resting": "",
+      "description": "A small oily green orb floats in the center of the room, eminating a slowly pulsating light.  The walls, floor and ceiling of the small room are a polished black stone; entirely contiguous save the holes made by the doors.",
+      "mechanics": "DC 13 Perception, there aren't even seams at the edges.  The orb is one of Acerak's phylactories.  Attacking it unleashes a burst of necrotic energy equal to the dmg delt.  DC 13 Dex save for half.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "20": {
+      "name": "Batiri Battle Stacks",
+      "badguys": "6 Goblins",
+      "key": 5,
+      "size": [
+        60,
+        60,
+        15
+      ],
+      "resting": "",
+      "description": "A wooden path weaves between a dense jungle canopy.  Made of rough hewn planks lashed with dried vines, and tied methodically to the surroundnig trees, the suspended walkway looms over a floor lost in darkness.  At a nearby intesection sit several goblin like figures in large wooden masks, their bodies painted with vibrant streaks.  A small fire burns in an elevated pit and their attention seems fixated on it for the time being.  One of the goblin bears a necklace that glows gently.",
+      "mechanics": "They battle stack to 2 groups and are really bad tactically.  Put the",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 2
+      }
+    },
+    "21": {
+      "name": "Clever Girls",
+      "badguys": "4 Velociraptors",
+      "key": "",
+      "size": [
+        120,
+        120,
+        1000
+      ],
+      "resting": "",
+      "description": "The door opens and you're looking straight into a night sky, the rim of the door tuffted with tall prarie grasses.  Peering through the door you see only grass, 6 feet tall, in all directions.  A predawn warmth hints at one edge of what is presumably the horizon.",
+      "mechanics": "4 Velociraptors, pack tactics. Violence.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "22": {
+      "name": "Outside the Cube",
+      "badguys": "",
+      "key": "",
+      "size": [
+        60,
+        60,
+        60
+      ],
+      "resting": "",
+      "description": "Staring through the door you see an unfamilar sky brimming with celestial objects.  You emerge onto a polished metal surface that extends a short distance in all directions.",
+      "mechanics": "Gravity follows the sides.  You're 'pulled' to the side facing you regardless of how far off you are.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "23": {
+      "name": "Plane of Postive Energy",
+      "badguys": "",
+      "key": "",
+      "size": [
+        45,
+        45,
+        15
+      ],
+      "resting": "Safe",
+      "description": "A soft cloud filtered light permiates every corner of this small room.  The walls and floors appear almost apholstered in an overstuffed coarse linen fabric.",
+      "mechanics": "Gives +2 hp per round, 1 level of exhaustion/minute,any of poison, charm, frightened in 1st minute.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "24": {
+      "name": "Singularity",
+      "badguys": "",
+      "key": 4,
+      "size": [
+        40,
+        40,
+        40
+      ],
+      "resting": "Unsafe",
+      "description": "Doors open into a spherical room, paths connecting the doors have evenly spaced metal rings set into the surface.  Hovering in the center, 20' away is a roiling black orb, on it's surface rests a glowing charm.",
+      "mechanics": "Gravity is pull to the orb until something touches it, then it reverses.  Momentum is conserved though, so things 'keep going' if they had velocity.  2d6 fall damage.  The charm *doesnt* fall.  DC 14 sleight of hand/acrobatics to grab it.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "25": {
+      "name": "I'm on a boat!",
+      "badguys": "",
+      "key": "",
+      "size": [
+        100,
+        100,
+        100
+      ],
+      "resting": "Safe",
+      "description": "You peer out onto the deck of a a derelict ship.  It's broken masts lay in a chaotic pile across the ship and evidence of char is visible everywhere.",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 2
+      }
+    },
+    "26": {
+      "name": "Almost Empty",
+      "badguys": "1 Giant Spider and 1 swarm of spiders",
+      "key": "",
+      "size": [
+        150,
+        150,
+        15
+      ],
+      "resting": "Spiders Respawn",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "27": {
+      "name": "Supply Depot",
+      "badguys": "",
+      "key": "",
+      "size": [
+        150,
+        150,
+        15
+      ],
+      "resting": "Safe",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "28": {
+      "name": "Nothing (not in Roll20)",
+      "badguys": "",
+      "key": "",
+      "size": "",
+      "resting": "",
+      "description": "The door opens into absolute blackness.",
+      "mechanics": "No idea what should happen if they just jump in.  That'd be wild.  Dex save to catch the lip of the door?",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Special",
+        "gravity": 0
+      }
+    },
+    "29": {
+      "name": "Plane of Air (not in Roll20)",
+      "badguys": "",
+      "key": "",
+      "size": [
+        5000,
+        5000,
+        5000
+      ],
+      "resting": "Unsafe",
+      "description": "The door opens into what appears to be just open air. An unseen sun provides dawn-like light to a pale blue sky. Peering down you see clouds perhaps a thousand feet below/above you.",
+      "mechanics": "DC14 Perception to see another door.  They're 1000' away",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 0
+      }
+    },
+    "30": {
+      "name": "Monofilament",
+      "badguys": "",
+      "key": "",
+      "size": [
+        40,
+        40,
+        40
+      ],
+      "resting": "Unsafe, razor wires of death",
+      "description": "This dull grey cubic room is empty save some small fragments of bones and scraps of cloth.  A faint grid traces 5' squares across the surface of all walls, floor and ceiling.",
+      "mechanics": "DC12 Perception to hear the wire.  \nDC15 Perception to see the clean cuts in the bones etc.\nDC13 Dex vs 2d4 damage.\nEach round determine origin plane 1d3 (1 up/down, 2 left/right, 3 front/back)\n1d8 - square it moves through",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "31": {
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [
+        100,
+        100,
+        15
+      ],
+      "resting": "Safe",
+      "description": "",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 0
+      }
+    },
+    "32": {
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [
+        100,
+        100,
+        15
+      ],
+      "resting": "Safe",
+      "description": "",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 3
+      }
+    },
+    "33": {
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [
+        100,
+        100,
+        15
+      ],
+      "resting": "Safe",
+      "description": "",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 2
+      }
+    },
+    "34": {
+      "name": "Vacuum",
+      "badguys": "",
+      "key": "",
+      "size": [
+        60,
+        60,
+        60
+      ],
+      "resting": "Unsafe, no air",
+      "description": "A sterile white boxy room hums slightly. near each corner, stands a small, 4' tall platform, embedded in the top is an opaque hemisphere that pulses with a soft white light.",
+      "mechanics": "When the door _closes_ pedistal lights turns red.  Air is sucked out of the room. When touched, the light turns green.  Can't open any door until all 4 are green.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 5
+      }
+    },
+    "35": {
+      "name": "Almost Empty",
+      "badguys": "1 Giant Spider and 1 swarm of spiders",
+      "key": "",
+      "size": [
+        150,
+        150,
+        15
+      ],
+      "resting": "Spiders Respawn",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "36": {
+      "name": "Empty",
+      "badguys": "",
+      "key": "",
+      "size": [
+        100,
+        100,
+        15
+      ],
+      "resting": "Safe",
+      "description": "",
+      "mechanics": "",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Fixed",
+        "gravity": 4
+      }
+    },
+    "37": {
+      "name": "Crowded Coop",
+      "badguys": "4 swarms of chickens (ravens)",
+      "key": "",
+      "size": [
+        50,
+        20,
+        10
+      ],
+      "resting": "Unsafe, chicken swarms respawn 1d4-1 every hour up to 4.",
+      "description": "An increibly overcrowded chicken coop, with birds roosted from floor to ceiling, lots on the floor.",
+      "mechanics": "2x player rations in eggs. Damaging the chickens provkes them.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    },
+    "38": {
+      "name": "Supply Depot",
+      "badguys": "",
+      "key": "",
+      "size": [
+        150,
+        150,
+        15
+      ],
+      "resting": "Safe",
+      "description": "A large dusty room thick with cobwebs. but otherwise a huge store room piled high with crates, baskets and barrels.",
+      "mechanics": "20x Player rations, player x wine skins, player x2 water skins.",
+      "start": "",
+      "exit": "",
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Random",
+        "gravity": 0
+      }
+    },
+    "39": {
+      "name": "Exit! (not in Roll20)",
+      "badguys": "",
+      "key": "",
+      "size": "",
+      "resting": "",
+      "description": "",
+      "mechanics": "Exit into a high level of the beggar's palace in the early afternoon the day they left.",
+      "start": "",
+      "exit": true,
+      "includeGroup": null,
+      "excludeGroup": null,
+      "gravity": {
+        "type": "Match",
+        "gravity": 0
+      }
+    }
+  },
+  "name": "6",
+  "gameDetails": {
+    "currentCell": "6",
+    "currentRoom": "9",
+    "currentEntry": 3,
+    "currentOpenDoorRoom": -1,
+    "currentOpenDoorCell": -1,
+    "currentDoors": [
+      "Front",
+      "Up",
+      "Right",
+      "Back",
+      "Down",
+      "Left"
+    ],
+    "doorCounter": 24,
+    "rested": false,
+    "steps": 0,
+    "lastCurrentCell": "6",
+    "lastCurrentRoom": "36",
+    "startCell": "6",
+    "startRoom": "0",
+    "exitCell": "7",
+    "exitRoom": "39",
+    "ticks": 84,
+    "gameLog": [
+      {
+        "currentCell": "6",
+        "currentRoom": "36",
+        "currentEntry": 3,
+        "gravity": 4,
+        "doorCounter": 24
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "12",
+        "currentEntry": 4,
+        "gravity": 2,
+        "doorCounter": 20
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "20",
+        "currentEntry": 0,
+        "gravity": 2,
+        "doorCounter": 16
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "30",
+        "currentEntry": 5,
+        "gravity": 5,
+        "doorCounter": 13
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "8",
+        "currentEntry": 5,
+        "gravity": 1,
+        "doorCounter": 12
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "9",
+        "currentEntry": 1,
+        "gravity": 4,
+        "doorCounter": 11
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "22",
+        "currentEntry": 5,
+        "gravity": -1,
+        "doorCounter": 10
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "8",
+        "currentEntry": 2,
+        "gravity": 1,
+        "doorCounter": 7
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "0",
+        "currentEntry": 0,
+        "gravity": 3,
+        "doorCounter": 3
+      }
+    ],
+    "shortestPath": [
+      {
+        "currentCell": "7",
+        "currentRoom": "39",
+        "currentEntry": 0,
+        "gravity": 2,
+        "doorCounter": 24
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "20",
+        "currentEntry": 5,
+        "gravity": 2,
+        "doorCounter": 24
+      }
+    ],
+    "lexicalMap": {
+      "entryGravityTuple": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "orientations": [
+        [
+          "Down",
+          "Left",
+          "Front",
+          "Up",
+          "Right",
+          "Back"
+        ],
+        [
+          "Back",
+          "Down",
+          "Right",
+          "Front",
+          "Up",
+          "Left"
+        ],
+        [
+          "Back",
+          "Left",
+          "Down",
+          "Front",
+          "Right",
+          "Up"
+        ],
+        [
+          "Up",
+          "Right",
+          "Front",
+          "Down",
+          "Left",
+          "Back"
+        ],
+        [
+          "Back",
+          "Up",
+          "Left",
+          "Front",
+          "Down",
+          "Right"
+        ],
+        [
+          "Back",
+          "Right",
+          "Up",
+          "Front",
+          "Left",
+          "Down"
+        ],
+        [
+          "Down",
+          "Back",
+          "Left",
+          "Up",
+          "Front",
+          "Right"
+        ],
+        [
+          "Back",
+          "Down",
+          "Right",
+          "Front",
+          "Up",
+          "Left"
+        ],
+        [
+          "Right",
+          "Back",
+          "Down",
+          "Left",
+          "Front",
+          "Up"
+        ],
+        [
+          "Up",
+          "Back",
+          "Right",
+          "Down",
+          "Front",
+          "Left"
+        ],
+        [
+          "Back",
+          "Up",
+          "Left",
+          "Front",
+          "Down",
+          "Right"
+        ],
+        [
+          "Left",
+          "Back",
+          "Up",
+          "Right",
+          "Front",
+          "Down"
+        ],
+        [
+          "Down",
+          "Right",
+          "Back",
+          "Up",
+          "Left",
+          "Front"
+        ],
+        [
+          "Left",
+          "Down",
+          "Back",
+          "Right",
+          "Up",
+          "Front"
+        ],
+        [
+          "Right",
+          "Back",
+          "Down",
+          "Left",
+          "Front",
+          "Up"
+        ],
+        [
+          "Up",
+          "Left",
+          "Back",
+          "Down",
+          "Right",
+          "Front"
+        ],
+        [
+          "Right",
+          "Up",
+          "Back",
+          "Left",
+          "Down",
+          "Front"
+        ],
+        [
+          "Left",
+          "Back",
+          "Up",
+          "Right",
+          "Front",
+          "Down"
+        ],
+        [
+          "Down",
+          "Right",
+          "Back",
+          "Up",
+          "Left",
+          "Front"
+        ],
+        [
+          "Front",
+          "Down",
+          "Left",
+          "Back",
+          "Up",
+          "Right"
+        ],
+        [
+          "Front",
+          "Right",
+          "Down",
+          "Back",
+          "Left",
+          "Up"
+        ],
+        [
+          "Up",
+          "Left",
+          "Back",
+          "Down",
+          "Right",
+          "Front"
+        ],
+        [
+          "Front",
+          "Up",
+          "Right",
+          "Back",
+          "Down",
+          "Left"
+        ],
+        [
+          "Front",
+          "Left",
+          "Up",
+          "Back",
+          "Right",
+          "Down"
+        ],
+        [
+          "Down",
+          "Front",
+          "Right",
+          "Up",
+          "Back",
+          "Left"
+        ],
+        [
+          "Front",
+          "Down",
+          "Left",
+          "Back",
+          "Up",
+          "Right"
+        ],
+        [
+          "Left",
+          "Front",
+          "Down",
+          "Right",
+          "Back",
+          "Up"
+        ],
+        [
+          "Up",
+          "Front",
+          "Left",
+          "Down",
+          "Back",
+          "Right"
+        ],
+        [
+          "Front",
+          "Up",
+          "Right",
+          "Back",
+          "Down",
+          "Left"
+        ],
+        [
+          "Right",
+          "Front",
+          "Up",
+          "Left",
+          "Back",
+          "Down"
+        ],
+        [
+          "Down",
+          "Left",
+          "Front",
+          "Up",
+          "Right",
+          "Back"
+        ],
+        [
+          "Right",
+          "Down",
+          "Front",
+          "Left",
+          "Up",
+          "Back"
+        ],
+        [
+          "Left",
+          "Front",
+          "Down",
+          "Right",
+          "Back",
+          "Up"
+        ],
+        [
+          "Up",
+          "Right",
+          "Front",
+          "Down",
+          "Left",
+          "Back"
+        ],
+        [
+          "Left",
+          "Up",
+          "Front",
+          "Right",
+          "Down",
+          "Back"
+        ],
+        [
+          "Right",
+          "Front",
+          "Up",
+          "Left",
+          "Back",
+          "Down"
+        ]
+      ]
+    },
+    "notes": {},
+    "gravity": 4,
+    "currentOpenDoor": -1,
+    "currentOpenDoorGravity": -1
+  }
+}

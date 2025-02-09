@@ -363,7 +363,7 @@ class GameState {
       door.title = chalk.hex(cells[nextCell].color)(door.title);
       return door;
     });
-
+    console.log(chalk.hex(cells[nextCell].color)(`Cell Color: ${convert.hex.keyword(cells[nextCell].color)}`))
     const door = await GameInputHandler.getDoorPreview([
       {
         type: "select",
