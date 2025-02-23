@@ -1879,30 +1879,44 @@
   },
   "name": "6",
   "gameDetails": {
-    "currentCell": "6",
-    "currentRoom": "9",
-    "currentEntry": 3,
+    "currentCell": "1",
+    "currentRoom": "15",
+    "currentEntry": 0,
     "currentOpenDoorRoom": -1,
     "currentOpenDoorCell": -1,
     "currentDoors": [
-      "Front",
-      "Up",
-      "Right",
       "Back",
+      "Up",
+      "Left",
+      "Front",
       "Down",
-      "Left"
+      "Right"
     ],
-    "doorCounter": 24,
+    "doorCounter": 33,
     "rested": false,
     "steps": 0,
-    "lastCurrentCell": "6",
-    "lastCurrentRoom": "36",
+    "lastCurrentCell": "8",
+    "lastCurrentRoom": "32",
     "startCell": "6",
     "startRoom": "0",
     "exitCell": "7",
     "exitRoom": "39",
-    "ticks": 84,
+    "ticks": 351,
     "gameLog": [
+      {
+        "currentCell": "8",
+        "currentRoom": "32",
+        "currentEntry": 3,
+        "gravity": 3,
+        "doorCounter": 33
+      },
+      {
+        "currentCell": "6",
+        "currentRoom": "9",
+        "currentEntry": 3,
+        "gravity": 4,
+        "doorCounter": 29
+      },
       {
         "currentCell": "6",
         "currentRoom": "36",
@@ -1971,16 +1985,16 @@
       {
         "currentCell": "7",
         "currentRoom": "39",
-        "currentEntry": 0,
+        "currentEntry": 4,
         "gravity": 2,
-        "doorCounter": 24
+        "doorCounter": 33
       },
       {
-        "currentCell": "6",
-        "currentRoom": "20",
-        "currentEntry": 5,
+        "currentCell": "1",
+        "currentRoom": "35",
+        "currentEntry": 1,
         "gravity": 2,
-        "doorCounter": 24
+        "doorCounter": 33
       }
     ],
     "lexicalMap": {
