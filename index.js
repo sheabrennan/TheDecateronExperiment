@@ -4,6 +4,35 @@
  *  Every room exists in 2 different cells.
  *   Defeating a trap or enemy in 1 cell doesn't mean the other cell's version is clear.
  *  Posessing the 'key' to a cell disables all traps/tricks in all of that cells rooms.
+ *
+ * // TODO
+      A major playtest issue is consistentcy in orientation description.
+      This is _especially_ true for rooms which have some readily perceptible non-symmetry.
+      preview needs to resolve a consistent set of descriptors for orientation
+      but accurately describing non-symmetry means we can't just always pretend
+      the entry door is back in display.
+        players want to label doors with an orientation and having entry as 'south' frustrates them
+      0) we probably need to set orientation at generate and a better way to rerender
+      1) In preview, Gravity and entry plane are fine
+            but we have 3ish 'sides' of the door that may be approached prior to opening.  Gravity _may_
+            suggest one orientation (ie regular door on a wall) but floor/ceiling doors and any non-standard
+            gravities are confounding to describe consistently.
+
+      Another major playtest issue is map transitions.  In playtest we used discrete maps
+      per room (cell agnostic). The _easiest_ solution is TotM 100%. In person, printed map/minature solutions _could_ work
+      For VTTs, when players open a door they should be able to 'see'
+        VTT specific solutions might exist  Roll20 API (requires pro) could theoretically facilitate
+        foundry has 'map layers' that could be used to have the different connected cell-rooms.
+        An external solution affords the greatest flexibility but likely the least satisfaction
+
+      Misc Issues
+      0) Decouple presentation already.
+      1) Doors should be optionally impassable.  Ideally in a stateful way that can be updated in-game.
+            You shouldn't be able go through the exit door in the non-exit cell probably
+              (you can work around this by never letting this door 'preview' to that cell but it's annoying)
+            You might want a party to find a key or enforce some cell-specific mission goal before certain
+            doors are operable
+
  */
 
 import Store from 'data-store'
@@ -53,10 +82,10 @@ class GameState {
     const room = this.rooms[gameDetails.currentRoom]
 
     // Room Details:
-    //    Description - Narative of the room.  short, descriptive and 'enough'
+    //    Description - Narrative of the room.  short, descriptive and 'enough'
     //    Size/Shape  - ToTM style rough estimates
     //    Mechanics   - This is the special secret stuff about the room.
-    //    Key/Item    - Probably doesn't need to be seperate from mechanics, but can be.
+    //    Key/Item    - Probably doesn't need to be separate from mechanics, but can be.
     //    Bad Guys    - just a quick url link to the things. TODO: roll20?!?
     //    Exit        - We need to show this when they're in the right room.  the Mechanics will explain, but this is _the warning_
     // if(gameDetails.notes[gameDetails.currentRoom])
@@ -293,6 +322,15 @@ class GameState {
   }
 
   async preview () {
+    // TODO:
+    //    In our playtesting, preventing multiple doors from being open seemed like a reasonable constraint,
+    //    but having the _option_ to allow additionals requires considerations.
+    //    0) If a door is *open*, preview should lock that door into the cell currently reviewed
+    //        this is _mostly_ for the DM, as it's annoying to repreview until you get the 'right' cell(s)
+    //    1) In playtest we introduced an item that allows door opener to dictate target cell destination
+    //          we should implement that functionality.
+    //    2) If we allow multiple open doors, preview should generate each doors destination cell individually
+
     const gameDetails = this.gameDetails
     const cells = this.cells
     const rooms = this.rooms
@@ -305,6 +343,8 @@ class GameState {
     ])
     const nextCell = cellsToPickFrom.pop()
     const otherCell = cellsToPickFrom.pop()
+
+    const otherCellHasShortestPath = gameDetails.currentDoors.map((d, i) => cells[otherCell].cellRooms[gameDetails.currentRoom].doors[i])
 
     const respChoices = gameDetails.currentDoors.map((d, i) => {
       const door = {
@@ -348,6 +388,12 @@ class GameState {
           .currentRoom == nextRoom
       ) {
         door.title += ` ---> [${gameDetails.shortestPath.length}]`
+      } else if (gameDetails.shortestPath[gameDetails.shortestPath.length - 1] &&
+        gameDetails.shortestPath[gameDetails.shortestPath.length - 1]
+          .currentCell == otherCell &&
+        gameDetails.shortestPath[gameDetails.shortestPath.length - 1]
+          .currentRoom == otherCellHasShortestPath[i]) {
+        door.title += ' ---> [OC]'
       }
 
       if (
