@@ -1,0 +1,49 @@
+site_name: The Decateron Experiment
+site_description: A behind-the-GM-screen tool for running a penteract-shaped dungeon.
+site_url: https://thedecateronexperiment.com/docs/
+repo_url: https://github.com/sheabrennan/TheDecateronExperiment
+repo_name: TheDecateronExperiment
+edit_uri: edit/master/docs/
+
+docs_dir: docs
+site_dir: web/dist/docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+
+markdown_extensions:
+  - tables
+  - fenced_code
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Using the app: using-the-app.md
+  - Pack builder:
+      - Building and editing packs: pack-builder/index.md
+      - Field reference: pack-builder/reference.md
+  - Developers:
+      - Running from source: dev/running-from-source.md
+      - Architecture notes: dev/architecture.md

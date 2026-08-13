@@ -1,0 +1,38 @@
+Copyright (c) 2026 Shea Brennan
+
+The Decateron Experiment — application, engine, and documentation in this
+repository — is licensed under the Creative Commons Attribution-NonCommercial
+4.0 International License (CC BY-NC 4.0).
+
+You are free to:
+
+  - Share — copy and redistribute the material in any medium or format
+  - Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+
+  - Attribution — You must give appropriate credit to Shea Brennan / The
+    Decateron Experiment, provide a link to this license, and indicate if
+    changes were made. You may do so in any reasonable manner, but not in
+    any way that suggests the licensor endorses you or your use.
+  - NonCommercial — You may not use the material for commercial purposes.
+  - No additional restrictions — You may not apply legal terms or
+    technological measures that legally restrict others from doing
+    anything the license permits.
+
+No warranties are given. The license may not give you all of the
+permissions necessary for your intended use. For example, other rights
+such as publicity, privacy, or moral rights may limit how you use the
+material.
+
+Full legal text: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by-nc/4.0/
+
+---
+
+Scope: this license covers the application, engine, and documentation —
+everything in this repository except the contents of packs/. An individual
+content pack declares its own license in its manifest (manifest.license),
+which governs that pack's content and takes precedence over this file for
+it. As of this writing, the bundled "Field Reference Example" pack
+(packs/example/pack.json) is CC0-1.0 (public domain).

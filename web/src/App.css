@@ -1,0 +1,1470 @@
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Both themes drive the same variable names, so every rule below is written
+   once. --cell-color is set at runtime from the tesseract the party is in. */
+:root {
+  --bg:          #070710;
+  --surface:     #0c0c1e;
+  --raised:      #12122a;
+  --border:      #16162c;
+  --text:        #dde0f2;
+  --muted:       #6a6a90;
+  --dim:         #22223a;
+  --cell-color:  #6666cc;
+  --success:     #3cd67a;
+  --danger:      #ff6b6b;
+  --seen:        #5ab0ff;
+  --tint:        6%;
+  --glow:        4%;
+  --shade:       rgba(0, 0, 0, 0.5);
+  /* The cube is drawn with inline styles, so its surfaces come through here
+     rather than from a stylesheet rule. */
+  --cube-face:      rgba(10, 10, 22, 0.92);
+  --cube-edge:      rgba(255, 255, 255, 0.09);
+  --cube-label:     #99aacc;
+  --cube-label-on:  #ffffff;
+  --cube-sublabel:  rgba(180, 180, 210, 0.7);
+  --cube-hint:      rgba(255, 255, 255, 0.25);
+  color-scheme: dark;
+  font-synthesis: none;
+}
+
+/* Light is not the dark palette inverted -- that is how it ended up illegible.
+   Surfaces step *up* toward white as they come forward, borders carry the
+   structure that glow carries in the dark theme, and text sits near-black so
+   the terminal density stays readable at 11-12px. */
+:root[data-theme="light"] {
+  --bg:          #f4f5f9;
+  --surface:     #ffffff;
+  --raised:      #eaecf4;
+  --border:      #d3d6e4;
+  --text:        #14141f;
+  --muted:       #55586e;
+  --dim:         #e4e7f0;
+  --success:     #0f6d33;
+  --danger:      #b3231f;
+  --seen:        #0f5aa8;
+  --tint:        13%;
+  --glow:        0%;
+  --shade:       rgba(20, 20, 40, 0.13);
+  --cube-face:      #ffffff;
+  --cube-edge:      rgba(30, 34, 70, 0.28);
+  --cube-label:     #3d4058;
+  --cube-label-on:  #ffffff;
+  --cube-sublabel:  rgba(40, 44, 78, 0.75);
+  --cube-hint:      rgba(40, 44, 78, 0.45);
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  /* No webfont: the Google Fonts link was the app's only external request, and
+     a tool meant to run at a table with bad wifi should not need the network to
+     render. Uses JetBrains Mono when the GM already has it, else the platform's
+     own mono, which is a good face on every target. */
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono',
+    Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Shell ───────────────────────────────────────────────────────────────── */
+.app-shell {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Ambient glow from cell color — very subtle */
+  background: radial-gradient(ellipse 80% 50% at 50% 30%,
+    color-mix(in srgb, var(--cell-ink, var(--cell-color)) var(--glow), var(--bg)) 0%,
+    var(--bg) 100%
+  );
+}
+
+/* ── Game selector ───────────────────────────────────────────────────────── */
+.game-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  gap: 24px;
+}
+.game-selector h1 {
+  color: var(--cell-ink, var(--cell-color));
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+.game-selector form { display: flex; gap: 8px; }
+.game-selector input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  width: 220px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.game-selector input:focus { border-color: var(--cell-color); }
+.game-selector .hint { color: var(--muted); font-size: 11px; letter-spacing: 0.5px; }
+.game-selector .error { color: var(--danger); font-size: 12px; }
+
+/* ── Breadcrumb bar ──────────────────────────────────────────────────────── */
+.breadcrumb-bar {
+  height: 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.crumb-scroll {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  padding: 0 12px;
+  height: 100%;
+  gap: 0;
+  scrollbar-width: none;
+}
+.crumb-scroll::-webkit-scrollbar { display: none; }
+
+.crumb-btn {
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 5px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  transition: color 0.12s;
+  border-radius: 2px;
+}
+.crumb-item { display: inline-flex; align-items: center; }
+.crumb-btn { transition: color 0.12s, opacity 0.12s, background 0.12s; }
+.crumb-btn:hover { color: var(--text); background: var(--dim); opacity: 1 !important; }
+.crumb-btn.active { color: var(--text); background: var(--dim); }
+.crumb-current {
+  font-size: 11px;
+  color: var(--cell-ink, var(--cell-color));
+  font-weight: 500;
+  padding: 2px 5px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+.crumb-sep {
+  color: var(--muted);
+  font-size: 10px;
+  opacity: 0.35;
+  padding: 0 2px;
+  user-select: none;
+}
+
+/* Crumb popover */
+.crumb-popover {
+  position: fixed;
+  top: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  min-width: 190px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.crumb-popover-name {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.crumb-popover-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.crumb-popover-rewind {
+  margin-top: 10px;
+  width: 100%;
+  padding: 5px 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+  letter-spacing: 0.5px;
+}
+.crumb-popover-rewind:hover {
+  border-color: var(--cell-color);
+  background: var(--dim);
+}
+
+/* Door list — one row per door, one column per tesseract.
+   The layout *is* the explanation: same six doors, two different sets of
+   rooms behind them. */
+.doors { display: grid; gap: 2px; }
+.doors.is-revealed { grid-template-columns: 92px 1fr 1fr; }
+.doors.is-blind { grid-template-columns: 92px 1fr; }
+
+.doors-head, .door-row { display: contents; }
+.nav-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.doors-head .nav-label { align-self: center; }
+.doors-col-head {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 0 6px 3px;
+  border-bottom: 1px solid var(--border);
+}
+.doors-col-head.muted { color: var(--muted); }
+
+.door-dir {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cell-ink, var(--cell-color));
+  padding: 0 6px;
+}
+.door-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  border-radius: 2px;
+  padding: 1px 4px;
+  line-height: 1.3;
+}
+.door-badge.is-entry {
+  /* Inverted on a fill, so the fill has to be the derived colour: a raw pack
+     hex like #FF00FF leaves near-white text at 2.9:1. --cell-ink is already
+     guaranteed against --bg, so using --bg as the text colour inverts cleanly
+     in both themes. */
+  color: var(--bg);
+  background: var(--cell-ink, var(--cell-color));
+}
+.door-badge.is-gravity {
+  color: var(--text);
+  border: 1px solid currentColor;
+}
+
+.door-dest {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 4px 8px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background: color-mix(in srgb, var(--dest-color, var(--cell-color)) 5%, transparent);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+.door-dest:hover {
+  background: color-mix(in srgb, var(--dest-color, var(--cell-color)) 14%, transparent);
+  border-color: var(--dest-color, var(--cell-color));
+}
+/* The door lit by contact: the destination tesseract's colour, which is the
+   tell the players see in the fiction. */
+.door-dest.is-open {
+  border-color: var(--dest-color, var(--cell-color));
+  background: color-mix(in srgb, var(--dest-color, var(--cell-color)) 22%, transparent);
+}
+.door-dest.is-exit { border-color: var(--success); }
+.door-dest.is-visited .door-dest-name { color: var(--muted); }
+.door-dest.is-exit {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+}
+.door-dest.is-blind { justify-content: center; color: var(--muted); letter-spacing: 1px; }
+
+.door-swatch {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.door-dest-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.door-flag { font-size: 12px; font-weight: 700; flex-shrink: 0; line-height: 1; }
+.door-flag.key { color: var(--cell-ink, var(--cell-color)); }
+.door-flag.exit { color: var(--success); }
+.door-flag.path { color: var(--text); }
+.door-flag.seen { color: var(--seen); font-size: 11px; }
+.door-flag.seen.faint { opacity: 0.75; font-weight: 400; }
+
+.action-row {
+  display: flex;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.btn {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--dim);
+  color: var(--text);
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.1s, border-color 0.1s, opacity 0.1s;
+  white-space: nowrap;
+}
+.btn:hover:not(:disabled) { background: #2a2a48; border-color: var(--muted); }
+.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn.primary {
+  border-color: var(--cell-color);
+  color: var(--cell-ink, var(--cell-color));
+}
+.btn.primary:hover:not(:disabled) { background: color-mix(in srgb, var(--cell-color) 12%, transparent); }
+.btn.ml-auto { margin-left: auto; }
+.error-text { color: var(--danger); font-size: 11px; margin-left: 8px; align-self: center; }
+
+/* ── App bar ─────────────────────────────────────────────────────────────── */
+.app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.app-title { font-size: 12px; letter-spacing: 1px; font-weight: 500; }
+.app-bar-actions { display: flex; align-items: center; gap: 8px; }
+
+.app-menu { position: relative; }
+.menu-trigger { font-size: 14px; line-height: 1; padding: 3px 9px; }
+.menu-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 250px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 10px 34px var(--shade);
+  z-index: 300;
+  overflow: hidden;
+}
+.menu-section { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+.menu-section:last-child { border-bottom: none; padding: 5px 0; }
+.menu-heading {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+.menu-meta { font-size: 12px; margin-top: 4px; }
+.menu-meta.dim { color: var(--muted); font-size: 11px; }
+.menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  margin-top: 7px;
+}
+.menu-row select {
+  background: var(--raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+.menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.menu-item:hover { background: var(--dim); }
+
+/* ── Room panels ─────────────────────────────────────────────────────────── */
+/* The room text and its orientation get the screen; the doors are a drawer. */
+.rooms {
+  flex: 1;
+  /* A floor, not zero. `min-height: 0` let the door drawer squeeze the room text
+     out of existence on a short screen -- and a rule setting this further up the
+     file lost to source order, which is why it has to live here. */
+  min-height: 170px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--border);
+  overflow: hidden;
+}
+.rooms.has-preview { grid-template-columns: 1fr 1fr; }
+
+.room-panel {
+  background: var(--bg);
+  overflow-y: auto;
+  padding: 10px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.room-panel.is-preview {
+  background: color-mix(in srgb, var(--panel-color) 3%, var(--bg));
+}
+
+.rp-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.rp-name { font-size: 15px; font-weight: 500; letter-spacing: 0.3px; }
+.rp-cell { font-size: 11px; }
+
+.rp-chip {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+.rp-chip.key { color: var(--cell-ink, var(--cell-color)); }
+.rp-chip.exit { color: var(--success); }
+.rp-chip.muted { color: var(--muted); }
+
+.rp-cube { display: flex; justify-content: center; padding: 4px 0; }
+.rp-orient {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 11px;
+}
+.rp-summary {
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel-color) var(--tint), transparent);
+  border-left: 2px solid var(--panel-color);
+  padding: 7px 10px;
+  border-radius: 0 3px 3px 0;
+}
+
+.rp-body { display: flex; flex-direction: column; gap: 9px; }
+.rp-field { display: flex; flex-direction: column; gap: 2px; }
+.rp-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+.rp-value { font-size: 12px; line-height: 1.55; }
+.rp-danger { color: var(--danger); }
+
+.rp-toggles { display: flex; gap: 6px; flex-wrap: wrap; }
+.rp-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 4px 9px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--raised);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+}
+.rp-toggle:hover { color: var(--text); border-color: var(--muted); }
+.rp-toggle.is-on { color: var(--text); border-color: currentColor; }
+.rp-toggle.is-on.tone-danger {
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
+.rp-toggle.is-on.tone-key {
+  color: var(--cell-ink, var(--cell-color));
+  background: color-mix(in srgb, var(--cell-color) 14%, transparent);
+}
+.rp-tick { font-size: 10px; }
+.rp-readonly { color: var(--muted); font-size: 11px; }
+
+.rp-otherside {
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--other-color, var(--muted));
+  display: flex;
+  gap: 5px;
+}
+.rp-otherside-arrow { opacity: 0.7; }
+
+.rp-note {
+  font-family: inherit;
+  margin: 0;
+  font-size: 11px;
+  white-space: pre-wrap;
+  color: var(--muted);
+  background: var(--raised);
+  border-radius: 3px;
+  padding: 6px 8px;
+  margin-bottom: 5px;
+}
+.rp-note-form { display: flex; gap: 5px; }
+.rp-note-form input {
+  flex: 1;
+  min-width: 0;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 4px 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  outline: none;
+}
+.rp-note-form input:focus { border-color: var(--cell-color); }
+
+/* ── Doors drawer ────────────────────────────────────────────────────────── */
+.doors-drawer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.doors-handle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 6px 14px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  cursor: pointer;
+}
+.doors-handle:hover { background: var(--dim); }
+.doors-handle-cells { display: flex; gap: 12px; font-size: 11px; }
+.doors-handle-cells.muted { color: var(--muted); }
+.doors-chevron { margin-left: auto; color: var(--muted); font-size: 10px; }
+
+/* Collapsed, the drawer is just its handle: the door list is one beat per
+   turn, and the room text is what the GM reads for the minutes in between. */
+.doors-drawer .doors {
+  display: none;
+  gap: 2px;
+  padding: 0 14px 12px;
+}
+.doors-drawer.is-open .doors { display: grid; }
+/* Six doors x two tesseracts is tall. On a short screen the list scrolls rather
+   than pushing the room text off the top. */
+.doors-drawer .doors { max-height: 42vh; overflow-y: auto; }
+.doors.is-revealed { grid-template-columns: 92px 1fr 1fr; }
+.doors.is-blind { grid-template-columns: 92px 1fr; }
+
+/* ── Game library ────────────────────────────────────────────────────────── */
+/* The old build had a single text input and no list: the only way back to a
+   saved game was to retype its exact name, and a typo generated a new dungeon
+   instead of resuming. */
+
+.library { max-width: 640px; width: 100%; margin: 0 auto; padding: 0 20px; }
+.library form { flex-wrap: wrap; }
+.library select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 3px;
+}
+.library select:focus { border-color: var(--cell-color); outline: none; }
+
+.game-list {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 42vh;
+  overflow-y: auto;
+}
+.game-list li { display: flex; align-items: stretch; gap: 4px; }
+
+.game-row {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: inherit;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+.game-row:hover:not(:disabled) { border-color: var(--cell-color); }
+.game-row:disabled { opacity: 0.4; cursor: not-allowed; }
+.game-name { font-size: 13px; }
+.game-meta { color: var(--muted); font-size: 11px; }
+
+.btn.ghost { background: transparent; border-color: var(--dim); color: var(--muted); }
+.btn.ghost:hover:not(:disabled) { color: var(--text); border-color: var(--muted); background: transparent; }
+
+.library-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+/* ── Catalog ─────────────────────────────────────────────────────────────── */
+/* Both tesseract versions of the current room at once. Ported from the CLI,
+   where it was the richest GM-facing view in the app. */
+
+.catalog-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3vh 2vw;
+  z-index: 50;
+}
+.catalog {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  width: min(1100px, 100%);
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.catalog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.catalog-head h2 { font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+
+.catalog-cells {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  overflow-y: auto;
+}
+.catalog-cell { background: var(--surface); padding: 12px 14px; }
+.catalog-cell header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.catalog-position { color: var(--muted); font-size: 11px; margin-left: auto; }
+
+.catalog-doors { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.catalog-doors li {
+  border-left: 2px solid var(--dim);
+  padding-left: 10px;
+}
+.catalog-doors li.is-entry { border-left-color: var(--cell-color); }
+
+.catalog-door-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.catalog-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  min-width: 44px;
+}
+.catalog-name { font-size: 12px; }
+.catalog-desc { color: var(--muted); font-size: 11px; line-height: 1.5; margin-top: 3px; }
+.catalog-danger { color: var(--danger); font-size: 11px; margin-top: 3px; }
+
+.chip {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 1px solid var(--dim);
+  border-radius: 2px;
+  padding: 1px 5px;
+  color: var(--muted);
+}
+.chip.key { color: var(--cell-ink, var(--cell-color)); border-color: currentColor; }
+.chip.muted { opacity: 0.55; }
+
+/* ── Breadcrumb status ───────────────────────────────────────────────────── */
+.crumb-status { margin-top: 7px; display: flex; flex-direction: column; gap: 3px; font-size: 11px; }
+.crumb-status .is-open { color: var(--danger); }
+.crumb-status .is-done { color: var(--success); }
+.crumb-note {
+  font-family: inherit;
+  font-size: 10.5px;
+  white-space: pre-wrap;
+  color: var(--muted);
+  background: var(--raised);
+  border-radius: 3px;
+  padding: 5px 7px;
+  margin-top: 6px;
+  max-width: 260px;
+}
+.action-sep { flex: 1; }
+
+/* ── Segmented controls ──────────────────────────────────────────────────── */
+/* Native selects for two-value settings read as a form, not a control panel. */
+.seg {
+  display: inline-flex;
+  background: var(--dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px;
+  gap: 2px;
+}
+.seg button {
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  padding: 3px 10px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
+}
+.seg button:hover { color: var(--text); }
+.seg button.is-on {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 2px var(--shade);
+}
+
+.switch {
+  appearance: none;
+  width: 34px;
+  height: 19px;
+  border-radius: 999px;
+  background: var(--dim);
+  border: 1px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: transform 0.15s, background 0.15s;
+}
+.switch:checked {
+  background: color-mix(in srgb, var(--cell-ink, var(--cell-color)) 30%, var(--dim));
+  border-color: var(--cell-ink, var(--cell-color));
+}
+.switch:checked::after {
+  transform: translateX(15px);
+  background: var(--cell-ink, var(--cell-color));
+}
+
+/* Swatches carry the pack's true colour; text nearby uses the derived one.
+   The border is what keeps a white or pale swatch visible on light. */
+.door-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  border: 1px solid var(--shade);
+  flex-shrink: 0;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+.doors-col-head, .doors-handle-cells > span, .catalog-cell > header, .rp-cell {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── Door plane ──────────────────────────────────────────────────────────── */
+/* One doorway seen face-on, for the room behind or the one being previewed.
+   Laid out literally: the door labelled Down sits at the bottom. */
+.door-plane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /* Without this the centring parent shrinks the grid to its content and the
+     side columns lose the width the room names need. */
+  width: 100%;
+}
+
+.plane-grid {
+  display: grid;
+  /* Equal, bounded side columns. Letting them size to content pushed a long
+     room name under the centre face, where overflow clipped it mid-word. */
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    '.    top    .'
+    'left face  right'
+    '.    bottom .';
+  align-items: center;
+  justify-items: center;
+  gap: 5px 10px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.plane-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+}
+.plane-slot.is-top { grid-area: top; }
+.plane-slot.is-bottom { grid-area: bottom; }
+.plane-slot.is-left { grid-area: left; }
+.plane-slot.is-right { grid-area: right; }
+
+.plane-dir {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.plane-slot.is-gravity .plane-dir { color: var(--cell-ink, var(--cell-color)); }
+.plane-grav { font-size: 8px; }
+.plane-room {
+  color: var(--text);
+  font-size: 10.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  width: 100%;
+}
+.plane-slot.is-visited .plane-room { color: var(--muted); }
+
+.plane-face {
+  grid-area: face;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 92px;
+  height: 56px;
+  padding: 5px;
+  border: 2px solid var(--face-color);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--face-color) 16%, transparent);
+}
+/* Looking back through a door already behind you reads as an opening, not a
+   destination. */
+.plane-face.is-behind {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--face-color) 9%, transparent);
+}
+.plane-face-dir {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--face-color);
+}
+
+.plane-note {
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  text-align: center;
+  max-width: 260px;
+}
+/* Special gravity: direction names are nominal, so they read as labels rather
+   than as facts about which way is down. */
+.plane-grid.is-nominal .plane-dir { font-style: italic; opacity: 0.75; }
+
+/* ── v2 room content ─────────────────────────────────────────────────────── */
+/* Read-aloud is set apart because it is the only text safe to speak verbatim;
+   everything else is the GM's to paraphrase or keep. */
+.rp-read {
+  font-size: 12.5px;
+  line-height: 1.6;
+  border-left: 2px solid var(--panel-color, var(--cell-ink));
+  background: color-mix(in srgb, var(--panel-color, var(--cell-color)) var(--tint), transparent);
+  padding: 8px 11px;
+  border-radius: 0 3px 3px 0;
+}
+
+.rp-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.rp-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font-size: 12px; }
+.rp-list-note { color: var(--muted); font-size: 11px; }
+.rp-list-ref {
+  font-size: 10px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0 4px;
+}
+.rp-feature-name { font-size: 12px; }
+.rp-kind {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1px 4px;
+}
+.rp-kind.is-hazard { color: var(--danger); border-color: currentColor; }
+.rp-kind.is-key { color: var(--cell-ink, var(--cell-color)); border-color: currentColor; }
+.rp-kind.is-treasure { color: var(--success); border-color: currentColor; }
+
+.rp-safety {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-radius: 2px;
+  padding: 1px 5px;
+  border: 1px solid currentColor;
+}
+.rp-safety.is-safe { color: var(--success); }
+.rp-safety.is-unsafe { color: var(--danger); }
+.rp-safety.is-special { color: var(--cell-ink, var(--cell-color)); }
+
+.rp-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.rp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+.rp-link:hover { border-color: var(--cell-ink, var(--cell-color)); }
+
+/* ── Party bar ───────────────────────────────────────────────────────────── */
+/* Always present, even with one group: the chip is where the roster lives, and
+   a roster is not room content. */
+.party-bar { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; position: relative; }
+
+.party-chip {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--raised);
+  padding: 1px 2px;
+  transition: border-color 0.12s, background 0.12s;
+}
+/* The group the GM is currently running, tinted with the tesseract it stands in. */
+.party-chip.is-active {
+  border-color: var(--party-color);
+  background: color-mix(in srgb, var(--party-color) 14%, transparent);
+}
+.party-chip.is-open { border-color: var(--party-color); }
+
+.party-pick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  min-width: 0;
+}
+.party-chip.is-active .party-pick { color: var(--text); }
+.party-pick:hover { color: var(--text); }
+
+.party-swatch { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--shade); flex-shrink: 0; }
+.party-name { white-space: nowrap; }
+.party-has-notes { font-size: 7px; opacity: 0.7; }
+
+.party-keys { display: inline-flex; align-items: center; gap: 2px; font-size: 10px; }
+.party-key { width: 5px; height: 5px; border-radius: 1px; border: 1px solid var(--shade); }
+
+/* ── Party detail ────────────────────────────────────────────────────────── */
+.party-detail {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 7px);
+  width: min(320px, 90vw);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 10px 34px var(--shade);
+  padding: 10px 12px 12px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  text-align: left;
+}
+.party-detail-head { display: flex; align-items: center; gap: 8px; }
+.party-detail-name {
+  flex: 1;
+  min-width: 0;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 4px 8px;
+  outline: none;
+}
+.party-detail-name:focus { border-color: var(--cell-ink, var(--cell-color)); }
+.party-detail-where { display: flex; align-items: center; font-size: 11px; color: var(--muted); }
+.party-detail-field { display: flex; flex-direction: column; gap: 3px; }
+.party-detail-keys { display: flex; flex-wrap: wrap; gap: 6px; }
+.party-detail-key { display: inline-flex; align-items: center; font-size: 11px; }
+.party-detail-actions { display: flex; flex-direction: column; gap: 5px; }
+.party-detail-actions .btn { text-align: left; }
+
+.rp-party-notes {
+  width: 100%;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 6px 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11.5px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+}
+.rp-party-notes:focus { border-color: var(--cell-ink, var(--cell-color)); }
+
+/* ── Session log ─────────────────────────────────────────────────────────── */
+.log-panel { max-width: 620px; }
+.log-empty { padding: 18px 16px; color: var(--muted); font-size: 12px; }
+.log-list { list-style: none; overflow-y: auto; padding: 8px 4px 12px; }
+.log-entry {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.log-entry:last-child { border-bottom: none; }
+.log-icon { text-align: center; color: var(--muted); }
+.log-entry.is-reset .log-icon { color: var(--seen); }
+.log-entry.is-key .log-icon { color: var(--cell-ink, var(--cell-color)); }
+.log-entry.is-split .log-icon,
+.log-entry.is-merge .log-icon { color: var(--success); }
+.log-when { color: var(--muted); font-size: 10px; white-space: nowrap; }
+.log-items { list-style: none; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
+.log-items li { font-size: 11px; color: var(--muted); display: flex; gap: 8px; }
+.log-where { opacity: 0.75; }
+
+/* ── Pack builder ────────────────────────────────────────────────────────── */
+
+.builder-landing { max-width: 640px; }
+.pack-list { max-height: none; }
+
+.builder-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 16px 20px;
+  gap: 12px;
+}
+
+.builder-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+.builder-title { font-size: 14px; color: var(--cell-ink, var(--text)); }
+.builder-bar-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+
+.builder-shell {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* Collapsible, drag-resizable side columns. Width is set inline from
+   PackEditor's layout state (persisted to localStorage); collapsed just
+   drops to the toggle button's width so nothing needs remeasuring. */
+.builder-side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 0 10px;
+}
+.builder-side.is-collapsed { width: 28px !important; padding: 0 4px; overflow: visible; }
+
+.builder-panel-toggle {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+.builder-panel-toggle:hover { color: var(--text); border-color: var(--muted); background: var(--dim); }
+
+.builder-resize-handle {
+  width: 7px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  position: relative;
+}
+.builder-resize-handle::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.builder-resize-handle:hover::after, .builder-resize-handle:active::after { background: var(--cell-color); }
+
+.builder-room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+.builder-nav-row {
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.builder-nav-row:hover { color: var(--text); background: var(--dim); }
+.builder-nav-row.active { color: var(--text); background: var(--dim); border-color: var(--border); }
+
+.builder-room-group { margin-top: 8px; }
+.builder-group-heading {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 8px 2px;
+}
+.builder-room-rows { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.builder-room-rows li { display: flex; align-items: stretch; gap: 2px; min-width: 0; }
+.builder-room-row {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.builder-room-row:hover { background: var(--dim); }
+.builder-room-row.active { background: var(--dim); border-color: var(--border); }
+.builder-room-label { display: flex; align-items: center; gap: 5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.builder-role-icon { color: var(--success); flex: none; }
+
+.builder-add-form { display: flex; gap: 4px; padding: 4px 8px 0; }
+.builder-add-form input {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 5px 7px;
+  border-radius: 3px;
+}
+.builder-add-form input:focus { border-color: var(--cell-color); outline: none; }
+.builder-add-form button { font-size: 11px; padding: 5px 8px; }
+
+.builder-detail { flex: 1; min-width: 0; overflow-y: auto; padding: 0 6px; }
+.builder-room-detail { display: flex; flex-direction: column; gap: 14px; max-width: 640px; }
+
+.builder-field-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.builder-field-row.column { flex-direction: column; align-items: stretch; }
+.builder-field-row label {
+  color: var(--muted);
+  font-size: 11px;
+  min-width: 160px;
+}
+.builder-field-row.column label { min-width: 0; }
+.builder-field-row input,
+.builder-field-row select,
+.builder-field-row textarea {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 3px;
+}
+/* Height is set from scrollHeight in JS (see AutoTextarea in shared.jsx) so
+   the box always shows its full contents on render -- no scrolling, no manual
+   resize needed to see what's already there. */
+.builder-field-row textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 2.4em;
+  line-height: 1.5;
+}
+.builder-field-row input:focus,
+.builder-field-row select:focus,
+.builder-field-row textarea:focus { border-color: var(--cell-color); outline: none; }
+.builder-narrow { flex: none !important; width: 70px; }
+.builder-field-error { color: var(--danger); font-size: 11px; width: 100%; }
+.builder-inline-check { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text); }
+
+.builder-slug-edit { flex: 1; display: flex; gap: 6px; }
+
+.builder-chip-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip.toggle { cursor: pointer; background: transparent; font-family: inherit; }
+.chip.toggle.active { color: var(--cell-ink, var(--cell-color)); border-color: currentColor; }
+.chip.danger { color: var(--danger); border-color: currentColor; }
+.chip.ok { color: var(--success); border-color: currentColor; }
+.chip.small { padding: 0 4px; }
+
+.builder-sub-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.builder-list-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 6px 8px;
+  flex-wrap: wrap;
+}
+.builder-list-row input,
+.builder-list-row select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 5px 7px;
+  border-radius: 3px;
+}
+.builder-row-actions { display: flex; gap: 4px; margin-left: auto; }
+
+.builder-validation {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.builder-findings { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.builder-finding-row {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 5px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.builder-finding-row:hover:not(:disabled) { background: var(--dim); }
+.builder-finding-row:disabled { cursor: default; }
+.builder-finding.danger .builder-finding-message { color: var(--danger); }
+.builder-finding.warn .builder-finding-message { color: var(--text); }
+.builder-finding-path { color: var(--muted); font-size: 10px; }
+
+.builder-explainer {
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin-bottom: 4px;
+  max-width: 640px;
+}
+.builder-explainer p { font-size: 12px; line-height: 1.6; color: var(--text); }
+.builder-explainer p + p { margin-top: 8px; }
+.builder-explainer .hint { font-size: 11px; }
+.builder-explainer code {
+  font-family: inherit;
+  background: var(--dim);
+  border-radius: 2px;
+  padding: 1px 4px;
+  color: var(--cell-ink, var(--cell-color));
+}
+
+/* ── Fast tooltips ───────────────────────────────────────────────────────── */
+/* Native `title` tooltips have a browser-controlled ~1s delay that feels
+   sluggish when scanning a form full of them. `data-tip` gets a custom one
+   instead, with a short, deliberate delay -- fast enough to feel responsive,
+   not so fast that it flashes on every incidental mouse pass. Attribute
+   selector, no extra class needed at every call site. Doesn't render on
+   replaced elements (input/select/textarea) in most browsers -- those few
+   fields fall back to no tooltip rather than a broken one. */
+[data-tip] { position: relative; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  padding: 6px 9px;
+  border-radius: 4px;
+  width: max-content;
+  max-width: 320px;
+  white-space: normal;
+  z-index: 500;
+  box-shadow: 0 6px 20px var(--shade);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease-out 0.35s;
+}
+[data-tip]:hover::after { opacity: 1; }
+
+/* ── Filler config sections ─────────────────────────────────────────────── */
+/* A distinct card per concern (strategy, reuse pool, templates, weights) so
+   the panel reads as separate decisions rather than one long unbroken list
+   of chip rows running into each other. */
+.builder-filler { max-width: 760px; }
+.builder-panel-section {
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.builder-panel-section .builder-field-row { flex-wrap: wrap; }
+.builder-section-heading {
+  color: var(--muted);
+  font-size: 11px;
+  display: block;
+}
+
+.builder-weight-rows { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.builder-weight-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 5px 8px;
+}
+.builder-weight-name { flex: 1; font-size: 12px; }
+
+/* ── Action rows (pack-level actions, room action overrides) ───────────── */
+/* A card per action rather than a single dense line: id + label + resetsOn
+   chips (which can run long once a pack declares custom reset events) don't
+   fit shoulder to shoulder without wrapping into an unreadable ragged edge. */
+.builder-action-rows { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.builder-action-row {
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.builder-action-row-top { display: flex; gap: 6px; align-items: center; }
+.builder-action-id { flex: 0 0 130px; }
+.builder-action-label { flex: 1; min-width: 0; }

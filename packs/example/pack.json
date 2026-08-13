@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "manifest": {
+    "id": "example",
+    "name": "Field Reference Example",
+    "version": "1.0.0",
+    "authors": ["The Decateron Experiment"],
+    "license": "CC0-1.0",
+    "attribution": "",
+    "description": "A small demonstration pack exercising every field the pack format supports -- rooms, filler, variants, groups, custom reset events, and template vars. Ships with the repo as a safe default and as the source for documentation screenshots.",
+    "systemTag": "system-agnostic",
+    "minEngineSchema": 1
+  },
+  "cells": {
+    "colors": [
+      { "hex": "#C0392B", "name": "Crimson" },
+      { "hex": "#27AE60", "name": "Verdant" },
+      { "hex": "#F1C40F", "name": "Amber" },
+      { "hex": "#2980B9", "name": "Indigo" },
+      { "hex": "#8E44AD", "name": "Violet" },
+      { "hex": "#16A085", "name": "Teal" },
+      { "hex": "#ECF0F1", "name": "Bone" },
+      { "hex": "#E91E8C", "name": "Rose" },
+      { "hex": "#85C1E9", "name": "Frost" },
+      { "hex": "#E67E22", "name": "Ember" }
+    ]
+  },
+  "resetEvents": [
+    { "id": "eclipse", "label": "Eclipse" }
+  ],
+  "templateVars": [
+    { "key": "wardenName", "label": "The warden's name" }
+  ],
+  "actions": [
+    { "id": "searched", "label": "searched", "resetsOn": [] },
+    { "id": "mapped", "label": "mapped", "resetsOn": ["shuffle"] }
+  ],
+  "rooms": {
+    "arrival": {
+      "name": "Arrival",
+      "role": "start",
+      "keyEligible": true,
+      "gravity": { "type": "Fixed", "gravity": 3 },
+      "read": "A ring of pale light traces the edge of a perfectly round chamber, tinted {{cellColor}} by the tesseract you've entered through. A single door stands opposite the one you came through.",
+      "detail": "The light comes from nowhere in particular -- the walls themselves seem to glow faintly.",
+      "gm": "This is the demo pack's start room. {{wardenName}} is referenced here so you can see a pack-defined template var resolve alongside the built-in {{cellColor}}.",
+      "orientation": "Every door in this pack is a plain rectangle unless a room says otherwise -- orientation text is where you'd describe anything stranger.",
+      "features": [
+        { "id": "plaque", "name": "Engraved plaque", "kind": "lore", "detail": "\"Here begins the Field Reference. Ask nothing of it; it answers nothing back.\"", "resetsOn": [] }
+      ],
+      "rest": { "safety": "safe", "effect": "" },
+      "links": [
+        { "kind": "doc", "label": "GM primer", "url": "#" }
+      ]
+    },
+    "twin-vault-a": {
+      "name": "Twin Vault",
+      "includeGroup": "twin-vaults",
+      "keyEligible": true,
+      "maxInstances": 2,
+      "gravity": { "type": "Random" },
+      "read": "Two identical vault doors face each other across a narrow room lined in dull metal panels.",
+      "detail": "Faint scratches on the floor suggest something heavy is dragged between the doors periodically.",
+      "gm": "includeGroup pairs this room with twin-vault-b so both always share a tesseract. maxInstances 2 lets this room repeat once via filler.reusePool -- open the second copy to see the (II) label and the variant text below.",
+      "orientation": "",
+      "variants": [
+        { "id": "sealed", "text": "This copy's vault door is sealed shut, welded at the seams." },
+        { "id": "open", "text": "This copy's vault door hangs open on one hinge." }
+      ],
+      "onKey": {
+        "read": "With the tesseract's key in hand, both vault doors ease open on their own.",
+        "detail": "",
+        "gm": "Key-gated content: this only shows once the party holds this cell's key."
+      },
+      "features": [
+        { "id": "strongbox", "name": "Dented strongbox", "kind": "treasure", "detail": "A handful of coin and a folded map.", "resetsOn": ["long-rest"] },
+        { "id": "release-lever", "name": "Release lever", "kind": "lever", "detail": "Opens both vault doors at once.", "resetsOn": [] }
+      ],
+      "creatures": [
+        { "id": "sentry", "name": "Patchwork sentry", "count": 1, "notes": "Wakes if the strongbox is touched.", "resetsOn": ["long-rest"] }
+      ],
+      "rest": { "safety": "unsafe", "effect": "The sentry stirs if anyone tries to rest here." }
+    },
+    "twin-vault-b": {
+      "name": "Twin Vault (other side)",
+      "includeGroup": "twin-vaults",
+      "gravity": { "type": "Match" },
+      "read": "The far half of the twin vault: a mirror of the room across from it, down to the scuffed floor panels.",
+      "gm": "Second member of the twin-vaults includeGroup -- the generator guarantees this room and twin-vault-a always land in the same tesseract.",
+      "features": [
+        { "id": "trip-plate", "name": "Pressure plate", "kind": "hazard", "detail": "Triggers a loud alarm bell, nothing worse.", "resetsOn": ["doors"] },
+        { "id": "spare-key", "name": "Spare key, on a hook", "kind": "key", "detail": "A plain, unremarkable key. To what, nobody's said.", "resetsOn": [] }
+      ],
+      "rest": { "safety": "special", "effect": "Safe only once the alarm bell has been silenced." },
+      "links": [
+        { "kind": "map", "label": "Vault floor plan", "url": "#" }
+      ]
+    },
+    "watch-post-alpha": {
+      "name": "Watch Post Alpha",
+      "excludeGroup": "watch-posts",
+      "gravity": { "type": "Special" },
+      "read": "A narrow gantry clings to the inside of a curved wall, gravity pulling sideways toward the surface underfoot.",
+      "gm": "excludeGroup pairs this with watch-post-omega so the two can never share a tesseract -- useful for content that shouldn't be found twice in one visit.",
+      "creatures": [
+        { "id": "drifter", "name": "Drifting watcher", "count": 1, "notes": "", "resetsOn": ["short-rest"] }
+      ],
+      "rest": { "safety": "unsafe", "effect": "" },
+      "links": [
+        { "kind": "vtt", "label": "VTT scene link", "url": "#" }
+      ]
+    },
+    "watch-post-omega": {
+      "name": "Watch Post Omega",
+      "excludeGroup": "watch-posts",
+      "gravity": { "type": "Special" },
+      "read": "Identical in layout to its twin, but the gantry here runs the opposite direction.",
+      "gm": "Second member of the watch-posts excludeGroup.",
+      "creatures": [
+        { "id": "drifter", "name": "Drifting watcher", "count": 1, "notes": "", "resetsOn": ["short-rest"] }
+      ],
+      "rest": { "safety": "unsafe", "effect": "" },
+      "links": [
+        { "kind": "image", "label": "Concept sketch", "url": "#" }
+      ]
+    },
+    "archive": {
+      "name": "Archive",
+      "gravity": { "type": "Fixed", "gravity": 1 },
+      "read": "Shelves of loose pages spiral up into the dark, none of them quite reachable.",
+      "gm": "This room's custodian resets on \"eclipse\" -- a pack-defined event (see resetEvents at the top level), not one of the built-ins. It needs a GM menu trigger to actually fire.",
+      "features": [
+        { "id": "index", "name": "Card index", "kind": "lore", "detail": "Cross-referenced, in a hand nobody recognizes.", "resetsOn": [] }
+      ],
+      "creatures": [
+        { "id": "custodian", "name": "Indexing construct", "count": 1, "notes": "Reshelves anything left on the floor.", "resetsOn": ["eclipse"] }
+      ],
+      "actions": [
+        { "id": "catalogued", "label": "catalogued", "resetsOn": ["long-rest"] }
+      ],
+      "rest": { "safety": "safe", "effect": "" },
+      "links": [
+        { "kind": "statblock", "label": "Custodian stats", "url": "#" },
+        { "kind": "other", "label": "Miscellaneous notes", "url": "#" }
+      ]
+    },
+    "threshold": {
+      "name": "Threshold",
+      "role": "exit",
+      "gravity": { "type": "Match" },
+      "read": "The far door here doesn't match the others -- plain wood, out of place, faint light under it.",
+      "gm": "This pack's exit room.",
+      "features": [
+        { "id": "loose-step", "name": "Loose floor panel", "kind": "hazard", "detail": "Minor stumble, nothing more.", "resetsOn": ["shuffle"] }
+      ]
+    }
+  },
+  "fillerRooms": {
+    "drift-cell": {
+      "name": "Drift Cell",
+      "keyEligible": true,
+      "gravity": { "type": "Random" },
+      "read": "A bare cell, gravity settled in whatever direction it last landed. {{variant}}",
+      "gm": "Filler template drawn by filler.templates. The {{variant}} marker in `read` is where each variant's text gets substituted in place, rather than appended.",
+      "variants": [
+        { "id": "dust", "text": "Dust has drifted into one corner, held there by nothing you can see." },
+        { "id": "frost", "text": "A thin rime of frost coats the lower half of every wall." },
+        { "id": "empty", "text": "It is, otherwise, completely empty." }
+      ],
+      "features": [
+        { "id": "loose-panel", "name": "Loose wall panel", "kind": "hazard", "detail": "Swings open without warning.", "resetsOn": ["doors"] }
+      ]
+    },
+    "quiet-cell": {
+      "name": "Quiet Cell",
+      "gravity": { "type": "Fixed", "gravity": 2 },
+      "read": "A small, unremarkable room. Nothing about it asks for a second look.",
+      "gm": "Second filler template. This room's variant text has no {{variant}} marker, so the load code appends it as a trailing paragraph instead -- compare with drift-cell.",
+      "variants": [
+        { "id": "echo", "text": "A faint echo lingers a beat too long after every sound." }
+      ],
+      "rest": { "safety": "safe", "effect": "" }
+    }
+  },
+  "filler": {
+    "strategy": "mixed",
+    "templates": ["drift-cell", "quiet-cell"],
+    "reusePool": ["twin-vault-a"],
+    "weights": { "drift-cell": 2, "quiet-cell": 1, "twin-vault-a": 1 },
+    "distribution": "spread"
+  }
+}
